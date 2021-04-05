@@ -30,6 +30,7 @@
                             <th>YAYINEVİ</th>
                             <th>BASIM YILI</th>
                             <th>KÜTÜPHANE</th>
+                            <th>STOK ADEDİ</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -47,6 +48,7 @@
                                         <td>{{$kitap->book_publisher}}</td>
                                         <td>{{$kitap->formatted_date}}</td>
                                         <td>{{$kitap->library['libraries_name']}}</td>
+                                        <td>{{$kitap->book_stok}}</td>
 
                                         <td width="5">
                                             <a href="{{route('books.edit',$kitap->bookId)}}" alt="Düzenle">

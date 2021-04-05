@@ -119,6 +119,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label>Stok Adedi</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="number" name="book_stok" value="1" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <script>
                             CKEDITOR.replace('editor1');
                         </script>

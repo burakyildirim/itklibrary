@@ -134,6 +134,15 @@
 
                         <input type="hidden" name="old_file" value="{{$books->blog_file}}">
 
+                        <div class="form-group">
+                            <label>Stok Adedi</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="number" name="book_stok" value="{{$books->book_stok}}" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <script>
                             CKEDITOR.replace('editor1');
                         </script>
