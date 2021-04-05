@@ -16,7 +16,7 @@
         <h1 class="display-4"><strong>İTK E-Library</strong>'e hoşgeldiniz!</h1>
         <p class="lead">Aradığınız kitabın hangi kütüphanelerimizde olduğunu öğrenmek için hızlı ve etkili bir araç.
             İstediğiniz kitap için rezervasyon yaptırabilir ve ilgili kütüphanemizden ödünç alabilirsiniz. Kitap
-            okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüllerimiz sizleri bekliyor! <span style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i class="fas fa-book-reader"></i></span></p>
+            okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüller sizleri bekliyor! <span style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i class="fas fa-book-reader"></i></span></p>
     </div>
 
     <div class="col-lg-12">
