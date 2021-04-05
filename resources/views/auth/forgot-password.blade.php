@@ -28,7 +28,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <x-button>
-                    {{ __('Email Password Reset Link') }}
+                    {{ __('PAROLA SIFIRLAMA LİNKİNİ GÖNDER') }}
                 </x-button>
             </div>
         </form>
