@@ -84,7 +84,6 @@
 
 
 <div class="container">
-
     @yield('content')
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
@@ -96,6 +95,10 @@
         </div>
     </footer>
 </div>
+
+<!-- jQuery -->
+
+<script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
 
 </body>
 
