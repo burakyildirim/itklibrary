@@ -4,16 +4,17 @@
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row" style="margin-top:30px;">
-
-        @if($tarafimcaRezerve)
-            <div class="col-lg-12">
-                <div class="alert alert-warning" role="alert">
-                    Bu kitap için rezervasyonunuz var!<br/>
-                    <strong>Rezervasyon Durumu: </strong> {{\App\Models\Rents::RentStatuses[$myrentdetails->rent_status]}}<br/>
-                    <strong>Son Teslim Tarihi: </strong> {{date('d.m.Y',strtotime($myrentdetails->rentEndDate))}}<br/>
+        @auth
+            @if($tarafimcaRezerve)
+                <div class="col-lg-12">
+                    <div class="alert alert-warning" role="alert">
+                        Bu kitap için rezervasyonunuz var!<br/>
+                        <strong>Rezervasyon Durumu: </strong> {{\App\Models\Rents::RentStatuses[$myrentdetails->rent_status]}}<br/>
+                        <strong>Son Teslim Tarihi: </strong> {{date('d.m.Y',strtotime($myrentdetails->rentEndDate))}}<br/>
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
+        @endauth
 
         <div class="col-lg-3 col-sm-12" style="text-align: center;">
             <img
