@@ -28,7 +28,7 @@
         }
     </style>
 
-    <!-- Custom styles for this template -->
+    <!-- Temanın varsayılan stil dosyaları -->
     <link href="{{asset('frontend/dist/css/pricing.css')}}" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/47521f488e.js" crossorigin="anonymous"></script>
