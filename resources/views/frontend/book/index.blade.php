@@ -23,7 +23,8 @@
                 alt="" class="img-thumbnail">
             <hr>
             @auth
-                @if($kitapDetay->book_rentStatus==1)
+
+                @if($kitapDetay->book_rentStatus==1 && !Rents::where('books_id',$kitapDetay->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2'])->exists()))
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
                     <hr>
                     <form method="POST">
@@ -36,6 +37,7 @@
                         Bu kitap şuanda rezervasyon için uygun değil!
                     </div>
                 @endif
+
             @endauth
         </div>
 
