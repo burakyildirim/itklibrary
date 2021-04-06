@@ -16,12 +16,20 @@ class BookController extends Controller
             ->with('library')
             ->first();
 
-        $myrents = Rents::where('books_id',$id)->orderby('rentEndDate','DESC')->get();
+        $isReservatedByMe = Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
+
+        $reservation =  Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->select('rentEndDate','rent_status')->first();
+
+        $allrents = Rents::where('books_id',$id)->orderby('rentEndDate','DESC')->get();
 
         if ($kitap==null){
             return back();
         }else{
-            return view('frontend.book.index')->with('kitapDetay', $kitap)->with('myrents', $myrents);
+            return view('frontend.book.index')
+                ->with('kitapDetay', $kitap)
+                ->with('myrents', $allrents)
+                ->with('tarafimcaRezerve', $isReservatedByMe)
+                ->with('myrentdetails', $reservation);
         }
     }
 

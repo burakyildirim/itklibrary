@@ -4,20 +4,24 @@
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row" style="margin-top:30px;">
-        {{--        @if($kitapDetay->book_rentStatus!=1)--}}
-        {{--            <div class="col-lg-12">--}}
-        {{--                <div class="alert alert-danger" role="alert">--}}
-        {{--                    Bu kitap şuanda rezervasyon için uygun değil!--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
+
+        @if($tarafimcaRezerve)
+            <div class="col-lg-12">
+                <div class="alert alert-warning" role="alert">
+                    Bu kitap için rezervasyonunuz var!<br/>
+                    <strong>Rezervasyon Durumu: </strong> {{\App\Models\Rents::RentStatuses[$myrentdetails->rent_status]}}<br/>
+                    <strong>Son Teslim Tarihi: </strong> {{date('d.m.Y',strtotime($myrentdetails->rentEndDate))}}<br/>
+                </div>
+            </div>
+        @endif
+
         <div class="col-lg-3 col-sm-12" style="text-align: center;">
             <img
                 src="{{ $kitapDetay->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitapDetay->book_image}}"
                 alt="" class="img-thumbnail">
             <hr>
             @auth
-                @if($kitapDetay->book_rentStatus==1)
+                @if($kitapDetay->book_rentStatus==1 && !$tarafimcaRezerve)
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
                     <hr>
                     <form method="POST">
