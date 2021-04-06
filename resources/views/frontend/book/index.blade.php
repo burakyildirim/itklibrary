@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <div class="alert alert-warning" role="alert">
                         Bu kitap için rezervasyonunuz var!<br/>
-                        <strong>Rezervasyon Durumu: </strong> {{\App\Models\Rents::RentStatuses[$myrentdetails->rent_status]}}<br/>
+                        <strong>Rezerv. Durumu: </strong> {{\App\Models\Rents::RentStatuses[$myrentdetails->rent_status]}}<br/>
                         <strong>Son Teslim Tarihi: </strong> {{date('d.m.Y',strtotime($myrentdetails->rentEndDate))}}<br/>
                     </div>
                 </div>
@@ -28,8 +28,9 @@
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
-                           style="width: 100%;">Rezerve Et</a>
+                        <button id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success" onclick="javascript:void(0)" style="width: 100%;">Rezerve Et</button>
+{{--                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"--}}
+{{--                           style="width: 100%;">Rezerve Et</a>--}}
                     </form>
                     <hr/>
                 @else
@@ -56,32 +57,32 @@
             <hr/>
 
             <div class="col-lg-12">{!!$kitapDetay->book_description!!}</div>
-            @if($myrents!=null)
-                <div class="col-lg-12">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Başl. Tar.</th>
-                            <th scope="col">Bitiş Tar.</th>
-                            <th scope="col">Durumu</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($myrents as $rent)
-                            <tr>
-                                <td>1
-                                </th>
-                                <td>{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
-                                <td>{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
-                                <td>{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
-                            </tr>
-                        @endforeach
+{{--            @if($allrents!=null)--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <table class="table table-striped">--}}
+{{--                        <thead>--}}
+{{--                        <tr>--}}
+{{--                            <th scope="col">#</th>--}}
+{{--                            <th scope="col">Başl. Tar.</th>--}}
+{{--                            <th scope="col">Bitiş Tar.</th>--}}
+{{--                            <th scope="col">Durumu</th>--}}
+{{--                        </tr>--}}
+{{--                        </thead>--}}
+{{--                        <tbody>--}}
+{{--                        @foreach($allrents as $rent)--}}
+{{--                            <tr>--}}
+{{--                                <td>1--}}
+{{--                                </th>--}}
+{{--                                <td>{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>--}}
+{{--                                <td>{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>--}}
+{{--                                <td>{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>--}}
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
 
-                        </tbody>
-                    </table>
-                </div>
-            @endif
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
+{{--            @endif--}}
         </div>
 
     </div>
@@ -101,6 +102,7 @@
                 console.log('butona basıldı');
 
                 var bookId = $(this).attr('value');
+                $(this).prop('disabled',true);
 
                 $.ajax({
                     url: "{{ route('books.Reservation','') }}/" + bookId + "/",
@@ -110,11 +112,12 @@
                         token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (data) {
+
                         alertify.success(data);
 
-                        setTimeout(function () {// wait for 5 secs(2)
-                            location.reload(); // then reload the page.(3)
-                        }, 2000);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1300);
                     },
                     failed: function (data) {
                         alertify.error(data);

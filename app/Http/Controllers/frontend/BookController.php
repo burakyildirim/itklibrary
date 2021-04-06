@@ -27,7 +27,7 @@ class BookController extends Controller
         }else{
             return view('frontend.book.index')
                 ->with('kitapDetay', $kitap)
-                ->with('myrents', $allrents)
+//                ->with('allrents', $allrents)
                 ->with('tarafimcaRezerve', $isReservatedByMe)
                 ->with('myrentdetails', $reservation);
         }
@@ -35,6 +35,11 @@ class BookController extends Controller
 
     public function bookRez($id){
         $kitap = Books::find($id);
+        $myReservation =  Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
+
+        if ($myReservation){
+            return response()->json('Bu kitap için rezervasyonunuz bulunuyor!');
+        }
 
         if ($kitap->book_stok==0){
             return response()->json('Kitabın stok durumu uygun değil!');
