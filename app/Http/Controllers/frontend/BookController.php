@@ -26,6 +26,7 @@ class BookController extends Controller
     }
 
     public function bookRez($id){
+        $kitapStokDurumu = Books::where('id',$id)->first();
 
         $rezerveIstek = DB::table('rents')
             ->insert([
@@ -37,17 +38,30 @@ class BookController extends Controller
                 'rent_status' => 1
             ]);
 
-        if ($rezerveIstek){
-            $kitapRentStatusGuncelle = Books::where('id',$id)->update([
-                'book_rentStatus' => 0
-            ]);
+        // EĞER REZERVASYON İSTEĞİ YAPILAN KİTABIN STOK ADEDİ 1 İSE ARTIK BAŞKALARI TARAFINDAN KİRALANAMAZ!
+        // rentstatus => 0 oluyor.
 
-            return response()->json('Rezervasyon işlemi başarılı!');
+        if ($kitapStokDurumu->book_stok == 1){
+                if ($rezerveIstek) {
+                    $kitapRentStatusGuncelle = Books::where('id', $id)->first();
+
+                    $kitapRentStatusGuncelle->update([
+                        'book_rentStatus' => 0
+                    ]);
+
+                    $kitapRentStatusGuncelle->decrement('book_stok', 1);
+                }
+        }else if($kitapStokDurumu->book_stok > 1){
+                if ($rezerveIstek) {
+                    $kitapRentStatusGuncelle = Books::where('id', $id)->first();
+
+                    $kitapRentStatusGuncelle->decrement('book_stok', 1);
+                }
+
+                return response()->json('Rezervasyon işlemi başarılı!');
         }else{
-            return response()->json('Rezervasyon işlemi başarısız!!!');
+                return response()->json('Rezervasyon işlemi başarısız!!!');
         }
-
-
 
     }
 }

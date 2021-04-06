@@ -23,8 +23,7 @@
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
-                           style="width: 100%;">Rezerve Et</a>
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success">Rezerve Et</a>
                     </form>
                 @else
                     <div class="alert alert-danger" role="alert">
@@ -92,8 +91,6 @@
         $(document).ready(function () {
 
             $('#btnRezerve').click(function () {
-                console.log('butona basıldı');
-
                 var bookId = $(this).attr('value');
 
                 $.ajax({
