@@ -17,7 +17,7 @@
         {{--                </div>--}}
         {{--            </div>--}}
         {{--        @endif--}}
-        <div class="col-lg-3 col-sm-12">
+        <div class="col-lg-3 col-sm-12" style="text-align: center;">
             <img
                 src="{{ $kitapDetay->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitapDetay->book_image}}"
                 alt="" class="img-thumbnail">
