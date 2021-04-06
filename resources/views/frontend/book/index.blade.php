@@ -2,6 +2,12 @@
 
 
 @section('content')
+    <style>
+        #btnRezerve{
+            color:white;
+        }
+    </style>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row">
         {{--        @if($kitapDetay->book_rentStatus!=1)--}}
@@ -23,7 +29,7 @@
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success form-control">Rezerve Et</a>
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" href="#" class="form-control btn btn-lg btn-success">Rezerve Et</a>
                     </form>
                 @else
                     <div class="alert alert-danger" role="alert">
