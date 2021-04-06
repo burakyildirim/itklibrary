@@ -24,7 +24,7 @@
             <hr>
             @auth
 
-                @if($kitapDetay->book_rentStatus==1 && !Rents::where('books_id',$kitapDetay->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists()))
+                @if($kitapDetay->book_rentStatus==1 && !\App\Models\Rents::where('books_id',$kitapDetay->id)->where('users_id',\Illuminate\Support\Facades\Auth::id())->whereIn('rent_status',['1','2','4'])->exists()))
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
                     <hr>
                     <form method="POST">
