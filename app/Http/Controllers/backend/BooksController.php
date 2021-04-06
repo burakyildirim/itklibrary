@@ -24,9 +24,10 @@ class BooksController extends Controller
     {
         if (Auth::user()->role == 1) {
             $kitaplar = Books::with('library')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok')
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok','book_visStatus')
                 ->orderBy('book_name', 'ASC')
-                ->get();
+                ->Paginate(7);
+
         } else {
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
                 ->select('id')
@@ -34,10 +35,10 @@ class BooksController extends Controller
 
             $kitaplar = Books::
             whereIn('libraries_id', $authUserLibraries)
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok')
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok','book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')
-                ->get();
+                ->paginate(7);
         }
 
         return view('backend.books.index')->with('kitaplar', $kitaplar);

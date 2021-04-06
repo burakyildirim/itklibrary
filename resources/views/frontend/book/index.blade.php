@@ -14,6 +14,15 @@
                     </div>
                 </div>
             @endif
+
+            @if($kitapDetay->book_rentStatus==0 && $mostNearDeliveryDate!=null)
+                <div class="col-lg-12">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Bu kitabın en yakın uygunluk tarihi: </strong> {{ date('d.m.Y',strtotime($mostNearDeliveryDate->rentEndDate)) }}<br/>
+                    </div>
+                </div>
+            @endif
+
         @endauth
 
         <div class="col-lg-3 col-sm-12" style="text-align: center;">

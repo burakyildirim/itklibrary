@@ -30,6 +30,7 @@
                             <th>YAYINEVİ</th>
                             <th>BASIM YILI</th>
                             <th>KÜTÜPHANE</th>
+                            <th>GÖRÜNÜR MÜ?</th>
                             <th>STOK ADEDİ</th>
                             <th></th>
                             <th></th>
@@ -48,6 +49,7 @@
                                         <td>{{$kitap->book_publisher}}</td>
                                         <td>{{$kitap->formatted_date}}</td>
                                         <td>{{$kitap->library['libraries_name']}}</td>
+                                        <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
                                         <td>{{$kitap->book_stok}}</td>
 
                                         <td width="5">
@@ -66,6 +68,11 @@
 
                         </tbody>
                     </table>
+
+                    {{-- Pagination --}}
+                    <div class="d-flex justify-content-center" style="margin-top:20px;">
+                        {!! $kitaplar->links() !!}
+                    </div>
                 </div>
             </div>
 

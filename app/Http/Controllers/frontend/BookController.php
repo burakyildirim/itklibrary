@@ -20,7 +20,11 @@ class BookController extends Controller
 
         $reservation =  Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->select('rentEndDate','rent_status')->first();
 
-        $allrents = Rents::where('books_id',$id)->orderby('rentEndDate','DESC')->get();
+        $mostNearDeliveryDate = Rents::where('books_id',$id)->whereIn('rent_status',['1','2'])->orderBy('rentEndDate','ASC')->first();
+
+//        dd($mostNearDeliveryDate);
+
+//        $allrents = Rents::where('books_id',$id)->orderby('rentEndDate','DESC')->get();
 
         if ($kitap==null){
             return back();
@@ -29,7 +33,8 @@ class BookController extends Controller
                 ->with('kitapDetay', $kitap)
 //                ->with('allrents', $allrents)
                 ->with('tarafimcaRezerve', $isReservatedByMe)
-                ->with('myrentdetails', $reservation);
+                ->with('myrentdetails', $reservation)
+                ->with('mostNearDeliveryDate', $mostNearDeliveryDate);
         }
     }
 

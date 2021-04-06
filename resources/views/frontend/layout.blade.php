@@ -48,7 +48,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-    <h5 class="my-0 mr-md-auto font-weight-normal">İTK E-Library</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a class="brand-link" href="{{route('welcome.Index')}}">E-Library</a></h5>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

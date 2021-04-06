@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\DefaultController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,9 @@ Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeControll
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
 
-Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
+Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->middleware(['auth','verified'])->name('books.DetaySayfa');
 
-Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
+Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->middleware(['auth','verified'])->name('books.Reservation');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DefaultController::class, 'index'])->name('admin.Index')->middleware('KutuphaneYoneticisi');;
@@ -46,7 +47,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('/libraries', App\Http\Controllers\backend\LibrariesController::class)->middleware('admin');;
 
     // Kitap Routing
-    Route::resource('/books', App\Http\Controllers\backend\BooksController::class);
+    Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
 
     // Textbox içerisinde eski yazarları arama Routing
     Route::post('/books/yazarAra', [\App\Http\Controllers\backend\BooksController::class, 'yazarAra'])->name('books.yazarAra')->middleware('KutuphaneYoneticisi');
