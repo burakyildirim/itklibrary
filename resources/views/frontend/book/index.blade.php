@@ -3,7 +3,7 @@
 
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div class="row" style="margin-top:30px;">
+    <div class="row">
         {{--        @if($kitapDetay->book_rentStatus!=1)--}}
         {{--            <div class="col-lg-12">--}}
         {{--                <div class="alert alert-danger" role="alert">--}}
@@ -23,7 +23,7 @@
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success">Rezerve Et</a>
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success form-control">Rezerve Et</a>
                     </form>
                 @else
                     <div class="alert alert-danger" role="alert">
