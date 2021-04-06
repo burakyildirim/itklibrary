@@ -25,8 +25,7 @@
                 <x-label for="tcno" :value="__('TC No')"/>
 
                 <x-input id="tcno" class="block mt-1 w-full"
-                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                         type="number" maxlength="11" name="tcno" :value="old('tcno')" required/>
+                         type="text" maxlength="11" name="tcno" :value="old('tcno')" required/>
             </div>
 
             <!-- Email Address -->
@@ -65,5 +64,11 @@
                 </x-button>
             </div>
         </form>
+
+
+
     </x-auth-card>
+
+
 </x-guest-layout>
+
