@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-lg-12">
-        <form method="post">
+        <form id="bookSearchBox" method="post">
             @csrf
             <div class="form-group row">
                 <label class="sr-only" for="inlineFormInputGroup">Username</label>
@@ -51,6 +51,13 @@
         });
 
         $(document).ready(function() {
+            $('#bookSearchBox').keypress(
+                function(event){
+                    if (event.which == '13') {
+                        event.preventDefault();
+                    }
+                });
+
             $('#book_name').keyup(function () {
                 var query = $(this).val();
                 if (query != '') {
