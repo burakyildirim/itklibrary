@@ -2,14 +2,8 @@
 
 
 @section('content')
-    <style>
-        #btnRezerve{
-            color:white;
-        }
-    </style>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div class="row" style="margin-top:15px;">
+    <div class="row" style="margin-top:30px;">
         {{--        @if($kitapDetay->book_rentStatus!=1)--}}
         {{--            <div class="col-lg-12">--}}
         {{--                <div class="alert alert-danger" role="alert">--}}
@@ -23,21 +17,20 @@
                 alt="" class="img-thumbnail">
             <hr>
             @auth
-
-                @if($kitapDetay->book_rentStatus==1 && !\App\Models\Rents::where('books_id',$kitapDetay->id)->where('users_id',\Illuminate\Support\Facades\Auth::id())->whereIn('rent_status',['1','2','4'])->exists())
+                @if($kitapDetay->book_rentStatus==1)
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
                     <hr>
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success">Rezerve Et</a>
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
+                           style="width: 100%;">Rezerve Et</a>
                     </form>
                 @else
                     <div class="alert alert-danger" role="alert">
                         Bu kitap şuanda rezervasyon için uygun değil!
                     </div>
                 @endif
-
             @endauth
         </div>
 
@@ -99,6 +92,8 @@
         $(document).ready(function () {
 
             $('#btnRezerve').click(function () {
+                console.log('butona basıldı');
+
                 var bookId = $(this).attr('value');
 
                 $.ajax({

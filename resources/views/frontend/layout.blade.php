@@ -34,7 +34,15 @@
 
     <script src="https://kit.fontawesome.com/47521f488e.js" crossorigin="anonymous"></script>
 
+    <!-- jQuery -->
+    <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 
+    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
+
+    <!-- ALERTIFY JS VE CSS DOSYALARI -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 </head>
 <body>
 
@@ -88,20 +96,6 @@
         </div>
     </footer>
 </div>
-
-<!-- jQuery -->
-
-<script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
-
-<!-- jQuery -->
-<script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
-
-<!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
-<script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
-
-<!-- ALERTIFY JS VE CSS DOSYALARI -->
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 
 </body>
 

@@ -26,42 +26,44 @@ class BookController extends Controller
     }
 
     public function bookRez($id){
-        $kitapStokDurumu = Books::where('id',$id)->first();
+        $kitap = Books::find($id);
 
-        $rezerveIstek = DB::table('rents')
-            ->insert([
-                'users_id' => Auth::id(),
-                'books_id' => $id,
-                'rent_auth' => Auth::id(),
-                'rentStartDate' => now(),
-                'rentEndDate' => now()->addWeek(2),
-                'rent_status' => 1
+        if ($kitap->book_stok==0){
+            return response()->json('Kitabın stok durumu uygun değil!');
+        }else if($kitap->book_stok==1){
+            $rentIstek = DB::table('rents')
+                ->insert([
+                    'users_id' => Auth::id(),
+                    'books_id' => $id,
+                    'rent_auth' => Auth::id(),
+                    'rentStartDate' => now(),
+                    'rentEndDate' => now()->addWeek(2),
+                    'rent_status' => 1
+                ]);
+
+            $kitapKiralamaDurumuGuncelle = Books::where('id',$id)->update([
+                'book_rentStatus' => 0
             ]);
 
-        // EĞER REZERVASYON İSTEĞİ YAPILAN KİTABIN STOK ADEDİ 1 İSE ARTIK BAŞKALARI TARAFINDAN KİRALANAMAZ!
-        // rentstatus => 0 oluyor.
+            $kitap->decrement('book_stok',1);
 
-        if ($kitapStokDurumu->book_stok == 1){
-                if ($rezerveIstek) {
-                    $kitapRentStatusGuncelle = Books::where('id', $id)->first();
-
-                    $kitapRentStatusGuncelle->update([
-                        'book_rentStatus' => 0
-                    ]);
-
-                    $kitapRentStatusGuncelle->decrement('book_stok', 1);
-                }
-        }else if($kitapStokDurumu->book_stok > 1){
-                if ($rezerveIstek) {
-                    $kitapRentStatusGuncelle = Books::where('id', $id)->first();
-
-                    $kitapRentStatusGuncelle->decrement('book_stok', 1);
-                }
-
-                return response()->json('Rezervasyon işlemi başarılı!');
+            return response()->json('Rezervasyon işlemi başarılı!');
         }else{
-                return response()->json('Rezervasyon işlemi başarısız!!!');
+            $rentIstek = DB::table('rents')
+                ->insert([
+                    'users_id' => Auth::id(),
+                    'books_id' => $id,
+                    'rent_auth' => Auth::id(),
+                    'rentStartDate' => now(),
+                    'rentEndDate' => now()->addWeek(2),
+                    'rent_status' => 1
+                ]);
+
+            $kitap->decrement('book_stok',1);
+
+            return response()->json('Rezervasyon işlemi başarılı!');
         }
 
+        return response()->json('Rezervasyon işlemi başarısız!');
     }
 }
