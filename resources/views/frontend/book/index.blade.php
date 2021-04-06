@@ -23,13 +23,14 @@
             @auth
                 @if($kitapDetay->book_rentStatus==1 && !$tarafimcaRezerve)
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
-                    <hr>
+                    <hr/>
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
                         <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
                            style="width: 100%;">Rezerve Et</a>
                     </form>
+                    <hr/>
                 @else
                     <div class="alert alert-danger" role="alert">
                         Bu kitap şuanda rezervasyon için uygun değil!
