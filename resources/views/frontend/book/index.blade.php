@@ -9,7 +9,7 @@
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div class="row">
+    <div class="row" style="margin-top:15px;">
         {{--        @if($kitapDetay->book_rentStatus!=1)--}}
         {{--            <div class="col-lg-12">--}}
         {{--                <div class="alert alert-danger" role="alert">--}}
