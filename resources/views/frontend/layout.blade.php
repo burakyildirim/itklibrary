@@ -97,6 +97,9 @@
     </footer>
 </div>
 
+<!-- jQuery -->
+<script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
+
 </body>
 
 
