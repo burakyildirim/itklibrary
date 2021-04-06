@@ -12,7 +12,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" id="kitapArama" onkeyup="kitapAraBox()" placeholder="Kitap adı..">
+                            <input class="form-control" type="text" id="kitapArama" onkeyup="kitapAraBox()"
+                                   placeholder="Kitap adı..">
                         </div>
                         <div class="col-lg-3" align="right">
                             <a href="{{route('books.create')}}">
@@ -20,54 +21,57 @@
                             </a>
                         </div>
                     </div>
-
-                    <table class="table table-striped" id="bookTable">
-                        <thead>
-                        <tr>
-                            <th>KİTAP RESİM</th>
-                            <th>KİTAP ADI</th>
-                            <th>KİTAP YAZARI</th>
-                            <th>YAYINEVİ</th>
-                            <th>BASIM YILI</th>
-                            <th>KÜTÜPHANE</th>
-                            <th>GÖRÜNÜR MÜ?</th>
-                            <th>STOK ADEDİ</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="sortable">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="bookTable">
+                            <thead>
+                            <tr>
+                                <th>KİTAP RESİM</th>
+                                <th>KİTAP ADI</th>
+                                <th>KİTAP YAZARI</th>
+                                <th>YAYINEVİ</th>
+                                <th>BASIM YILI</th>
+                                <th>KÜTÜPHANE</th>
+                                <th>GÖRÜNÜR MÜ?</th>
+                                <th>STOK ADEDİ</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="sortable">
 
                             @foreach($kitaplar as $kitap)
-                                    <tr id="item-{{$kitap->bookId}}">
-                                        <td>
-{{--                                            : echo url('/images/books/').$kitap->book_image--}}
-                                            <img src="{{ $kitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitap->book_image}}" alt="" style="max-width: 70px;">
-                                        </td>
-                                        <td class="sortable">{{$kitap->book_name}}</td>
-                                        <td>{{$kitap->book_author}}</td>
-                                        <td>{{$kitap->book_publisher}}</td>
-                                        <td>{{$kitap->formatted_date}}</td>
-                                        <td>{{$kitap->library['libraries_name']}}</td>
-                                        <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
-                                        <td>{{$kitap->book_stok}}</td>
+                                <tr id="item-{{$kitap->bookId}}">
+                                    <td>
+                                        {{--                                            : echo url('/images/books/').$kitap->book_image--}}
+                                        <img
+                                            src="{{ $kitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitap->book_image}}"
+                                            alt="" style="max-width: 70px;">
+                                    </td>
+                                    <td class="sortable">{{$kitap->book_name}}</td>
+                                    <td>{{$kitap->book_author}}</td>
+                                    <td>{{$kitap->book_publisher}}</td>
+                                    <td>{{$kitap->formatted_date}}</td>
+                                    <td>{{$kitap->library['libraries_name']}}</td>
+                                    <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
+                                    <td>{{$kitap->book_stok}}</td>
 
-                                        <td width="5">
-                                            <a href="{{route('books.edit',$kitap->bookId)}}" alt="Düzenle">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
-                                        </td>
+                                    <td width="5">
+                                        <a href="{{route('books.edit',$kitap->bookId)}}" alt="Düzenle">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                    </td>
 
-                                        <td width="5">
-                                            <a href="javascript:void(0)" alt="Sil">
-                                                <i id="@php echo $kitap->bookId @endphp" class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <td width="5">
+                                        <a href="javascript:void(0)" alt="Sil">
+                                            <i id="@php echo $kitap->bookId @endphp" class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endforeach
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
 
                     {{-- Pagination --}}
                     <div class="d-flex justify-content-center" style="margin-top:20px;">
@@ -103,9 +107,9 @@
                             id: destroy_id,
                             _method: 'DELETE'
                         },
-                        url: "{{ route('books.destroy','') }}/"+destroy_id,
+                        url: "{{ route('books.destroy','') }}/" + destroy_id,
                         success: function (data) {
-                            $("#item-"+destroy_id).remove();
+                            $("#item-" + destroy_id).remove();
                             alertify.success(data);
                             //setTimeout(location.reload.bind(location), 1500);
                         }
