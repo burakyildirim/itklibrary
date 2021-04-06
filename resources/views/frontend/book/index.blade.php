@@ -24,13 +24,13 @@
             <hr>
             @auth
 
-                @if($kitapDetay->book_rentStatus==1 && !\App\Models\Rents::where('books_id',$kitapDetay->id)->where('users_id',\Illuminate\Support\Facades\Auth::id())->whereIn('rent_status',['1','2','4'])->exists()))
+                @if($kitapDetay->book_rentStatus==1 && !\App\Models\Rents::where('books_id',$kitapDetay->id)->where('users_id',\Illuminate\Support\Facades\Auth::id())->whereIn('rent_status',['1','2','4'])->exists())
                     <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
                     <hr>
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <a id="btnRezerve" value="{{$kitapDetay->id}}" href="#" class="form-control btn btn-lg btn-success">Rezerve Et</a>
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" href="#" class="btn btn-lg btn-success">Rezerve Et</a>
                     </form>
                 @else
                     <div class="alert alert-danger" role="alert">
