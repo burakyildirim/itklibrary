@@ -37,9 +37,10 @@
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
-                        <button id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success" onclick="javascript:void(0)" style="width: 100%;">Rezerve Et</button>
-{{--                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"--}}
-{{--                           style="width: 100%;">Rezerve Et</a>--}}
+{{--                        <button id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success" onclick="javascript:void(0)" style="width: 100%;">Rezerve Et</button>--}}
+
+                        <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
+                           style="width: 100%;" href="javascript:void(0)">Rezerve Et</a>
                     </form>
                     <hr/>
                 @else
@@ -109,31 +110,35 @@
         $(document).ready(function () {
 
             $('#btnRezerve').click(function () {
-                console.log('butona basıldı');
 
-                var bookId = $(this).attr('value');
-                $(this).prop('disabled',true);
+                alertify.confirm('Rezervasyon yapmak istediğinize emin misiniz?', 'Bu kitap için rezervasyon yaptırdığınızda 2 haftalık bir ödünç alma sürecini başlatmış olursunuz ve kitabın bulunduğu kütüphanedeki sorumlu personel ile iletişime geçip hem işleminizi onaylatmalı hem de kitabı teslim almalısınız.<br/><br/><p class="text-info">Teslim tarihinizde değişiklik yapmak isterseniz kütüphane görevlisine bilgi vermeyi unutmayınız!</p>',
+                    function () {
+                        var bookId = $(this).attr('value');
+                        $(this).prop('disabled', true);
 
-                $.ajax({
-                    url: "{{ route('books.Reservation','') }}/" + bookId + "/",
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        token: $('meta[name="csrf-token"]').attr('content')
+                        $.ajax({
+                            url: "{{ route('books.Reservation','') }}/" + bookId + "/",
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {
+                                token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+
+                                alertify.success(data);
+
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1300);
+                            },
+                            failed: function (data) {
+                                alertify.error(data);
+                            },
+                        })
                     },
-                    success: function (data) {
-
-                        alertify.success(data);
-
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1300);
-                    },
-                    failed: function (data) {
-                        alertify.error(data);
-                    },
-                })
-
+                    function () {
+                        alertify.error('Rezervasyon işlemi gerçekleştirilmedi!');
+                    }).set('labels', {ok:'Rezerve Et', cancel:'İptal'})
             })
         });
 

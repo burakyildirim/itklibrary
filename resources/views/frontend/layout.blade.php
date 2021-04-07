@@ -43,6 +43,15 @@
     <!-- ALERTIFY JS VE CSS DOSYALARI -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+    <style>
+        .alertify .ajs-footer .ajs-buttons .ajs-button {
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 
@@ -106,6 +115,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
+
 
 </body>
 
