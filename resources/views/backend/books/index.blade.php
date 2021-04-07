@@ -32,7 +32,7 @@
                                 <th>BASIM YILI</th>
                                 <th>KÜTÜPHANE</th>
                                 <th>GÖRÜNÜR MÜ?</th>
-                                <th>STOK ADEDİ</th>
+                                <th style="text-align: center;">STOK ADEDİ</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -53,7 +53,7 @@
                                     <td>{{$kitap->formatted_date}}</td>
                                     <td>{{$kitap->library['libraries_name']}}</td>
                                     <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
-                                    <td>{{$kitap->book_stok}}</td>
+                                    <td style="text-align: center;">{{$kitap->book_stok}}</td>
 
                                     <td width="5">
                                         <a href="{{route('books.edit',$kitap->bookId)}}" alt="Düzenle">

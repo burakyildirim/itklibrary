@@ -49,6 +49,9 @@ Route::prefix('admin')->group(function () {
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
 
+    // Rent Routing
+    Route::resource('/rents', App\Http\Controllers\backend\RentsController::class)->middleware('KutuphaneYoneticisi');
+
     // Textbox içerisinde eski yazarları arama Routing
     Route::post('/books/yazarAra', [\App\Http\Controllers\backend\BooksController::class, 'yazarAra'])->name('books.yazarAra')->middleware('KutuphaneYoneticisi');
 

@@ -20,4 +20,12 @@ class Rents extends Model
     {
         return array_search($status, self::RentStatuses);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'users_id')->select('id', 'name');
+    }
+
+    public function book(){
+        return $this->belongsTo(Books::class, 'books_id')->select('id', 'book_name', 'book_image','book_author','book_stok','book_language');
+    }
 }

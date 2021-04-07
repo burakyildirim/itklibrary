@@ -34,7 +34,7 @@ class BooksController extends Controller
                 ->get();
 
             $kitaplar = Books::
-            whereIn('libraries_id', $authUserLibraries)
+                whereIn('libraries_id', $authUserLibraries)
                 ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok','book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')

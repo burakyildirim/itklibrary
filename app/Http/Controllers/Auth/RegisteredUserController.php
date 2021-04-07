@@ -50,7 +50,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
+
         event(new Registered($user));
+        route('verification.send');
 
         return redirect(RouteServiceProvider::HOME);
     }
