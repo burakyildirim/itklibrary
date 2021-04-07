@@ -74,6 +74,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{route('admin.Index')}}" class="nav-link">Yönetim Anasayfa</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{route('welcome.Index')}}" class="nav-link" target="_blank">Siteyi Gör</a>
+            </li>
 
         </ul>
 
