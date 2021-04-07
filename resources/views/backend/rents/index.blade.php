@@ -121,6 +121,7 @@
                             $("#tdCheckButton-" + onay_id).hide();
                             $(".cop-"+onay_id).hide();
                             $(".kalem-"+onay_id).hide();
+                            $("#tdTeslimAlButton-"+onay_id).show();
                             $("#tdRentStatus-" + onay_id).text('{{\App\Models\Rents::RentStatuses[2]}}');
                             alertify.success(data);
                         }
