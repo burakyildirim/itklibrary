@@ -46,6 +46,7 @@
                     <div class="alert alert-danger" role="alert">
                         Bu kitap şuanda rezervasyon için uygun değil!
                     </div>
+                    <hr/>
                 @endif
             @endauth
         </div>

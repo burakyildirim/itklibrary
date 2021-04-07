@@ -45,7 +45,7 @@
                                         {{--                                            : echo url('/images/books/').$kitap->book_image--}}
                                         <img
                                             src="{{ $kitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitap->book_image}}"
-                                            alt="" style="max-width: 70px;">
+                                            alt="" style="width:50px;">
                                     </td>
                                     <td class="sortable">{{$kitap->book_name}}</td>
                                     <td>{{$kitap->book_author}}</td>
