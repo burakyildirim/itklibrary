@@ -7,6 +7,7 @@
             margin-left:10px;
             list-style-type: none;
         }
+
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -41,6 +42,7 @@
         </div>
     </div>
 
+
     <script>
         $(function(){
             $.ajaxSetup({
@@ -56,6 +58,8 @@
                     if (event.which == '13') {
                         event.preventDefault();
                     }
+
+                    // $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
                 });
 
             $('#book_name').keyup(function () {

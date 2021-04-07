@@ -52,6 +52,7 @@
             border-radius: 5px;
         }
     </style>
+
 </head>
 <body>
 
@@ -96,21 +97,21 @@
 <div class="container">
     @yield('content')
 
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-            <div class="col-12 col-md text-center">
-                    @auth()
-                     @if((Auth::user()->role == 1 || Auth::user()->role == 3))
-                        <a href="{{route('admin.Index')}}" class="btn btn-sm btn-danger">Yönetici Paneli</a>
-                     @endif
-                    @endauth
-                <small class="d-block mb-3 text-muted">&copy; 2021 İTK Bilişim Teknolojileri Bölümü | Powered by
-                    brkyldrm</small>
-            </div>
-        </div>
-    </footer>
+
 </div>
 
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="col-12 col-md text-center">
+            @auth()
+                @if((Auth::user()->role == 1 || Auth::user()->role == 3))
+                    <a href="{{route('admin.Index')}}" class="btn btn-sm btn-danger">Yönetici Paneli</a>
+                    <br><br><br>
+                @endif
+            @endauth
+            <small class="d-block mb-3 text-muted">&copy; 2021 İTK Bilişim Teknolojileri Bölümü | Powered by
+                brkyldrm</small>
+        </div>
+</footer>
 
 
 <!-- jQuery -->
