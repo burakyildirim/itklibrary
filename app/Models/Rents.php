@@ -12,8 +12,8 @@ class Rents extends Model
     public const RentStatuses = [
         1 => 'Kütüphaneci Onayı Bekliyor',
         2 => 'Kitap Alıcıda',
-        3 => 'Kitap Kutuphaneye Teslim Edildi',
-        4 => 'Kitap Kutuphaneye Teslim Edilmedi'
+        3 => 'Kitap Kütüphaneye Teslim Edildi',
+        4 => 'Kitap Kütüphaneye Teslim Edilmedi'
     ];
 
     public static function getRentStatusID($status)
