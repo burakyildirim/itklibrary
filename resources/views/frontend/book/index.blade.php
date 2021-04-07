@@ -113,23 +113,22 @@
 
                 alertify.confirm('Rezervasyon yapmak istediğinize emin misiniz?', 'Bu kitap için rezervasyon yaptırdığınızda 2 haftalık bir ödünç alma sürecini başlatmış olursunuz ve kitabın bulunduğu kütüphanedeki sorumlu personel ile iletişime geçip hem işleminizi onaylatmalı hem de kitabı teslim almalısınız.<br/><br/><p class="text-info">Teslim tarihinizde değişiklik yapmak isterseniz kütüphane görevlisine bilgi vermeyi unutmayınız!</p>',
                     function () {
-                        var bookId = $(this).attr('value');
-                        $(this).prop('disabled', true);
+                        var bookId = $('#btnRezerve').attr('value');
 
                         $.ajax({
                             url: "{{ route('books.Reservation','') }}/" + bookId + "/",
                             type: 'GET',
                             dataType: 'json',
                             data: {
-                                token: $('meta[name="csrf-token"]').attr('content')
+                                token: $('meta[name="csrf-token"]').attr('content'),
                             },
                             success: function (data) {
-
+                                $('#btnRezerve')
                                 alertify.success(data);
 
                                 setTimeout(function () {
                                     location.reload();
-                                }, 1300);
+                                }, 200);
                             },
                             failed: function (data) {
                                 alertify.error(data);

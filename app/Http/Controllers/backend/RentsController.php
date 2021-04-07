@@ -146,8 +146,39 @@ class RentsController extends Controller
      */
     public function destroy($id)
     {
-//        $libraries = Libraries::findOrFail($id)->delete();
-//
-//        return response()->json('Silme işlemi başarılı!');
+        $rent = Rents::find($id);
+        $book = Books::find($rent->books_id);
+
+        Books::where('id',$rent->books_id)->update([
+            'book_rentStatus' => 1
+        ]);
+
+        $book->increment('book_stok',1);
+        $rent->delete();
+
+        return response()->json('Silme işlemi başarılı!');
+    }
+
+    public function check($id)
+    {
+        $rent = Rents::where('id',$id)->update([
+            'rent_status' => 2
+        ]);
+
+        return response()->json('Kitap teslim işlemi başarılı!');
+    }
+
+    // Kütüphaneye kitabı teslim al.
+    public function getbook($id)
+    {
+        $gelenRent = Rents::find($id);
+
+        $guncelleme = Rents::where('id',$id)->update([
+            'rent_status' => 3
+        ]);
+
+        Books::find($gelenRent->books_id)->increment('book_stok',1);
+
+        return response()->json('Kitap teslim işlemi başarılı!');
     }
 }
