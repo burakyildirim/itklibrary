@@ -7,7 +7,7 @@
     <meta name="author" content="İzmir Özel Türk Koleji Bilişim Teknolojileri Bölümü, Burak Yıldırım">
     <meta name="generator" content="brkyldrm">
 
-    <title>İTK-Library | #öncelikeğitim</title>
+    <title>İTK E-Library #öncelikeğitim</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('frontend/dist/css/bootstrap.min.css')}}" rel="stylesheet">
