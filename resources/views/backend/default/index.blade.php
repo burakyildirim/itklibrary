@@ -14,6 +14,22 @@
                             <h5 class="m-0">Kütüphanedeki Kitap Sayısı</h5>
                         </div>
                         <div class="card-body">
+                            <table class="table table-striped" id="userTable">
+                                <thead>
+                                <tr>
+                                    @if(count($data['authUserLibraries'])!=0)
+                                        <th>Kütüphane Adı</th>
+                                        <th>Kitap Sayısı</th>
+                                    @endif
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data['authUserLibraries'] as $library)
+                                        <td>{{$library->libraries_name}}</td>
+                                        <td>{{$library->libraryBooksCount}}</td>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

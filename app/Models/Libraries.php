@@ -13,4 +13,9 @@ class Libraries extends Model
     {
         return $this->belongsTo(User::class,'libraries_auth');
     }
+
+    public function books()
+    {
+        return $this->hasMany(Books::class);
+    }
 }

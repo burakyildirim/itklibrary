@@ -15,9 +15,16 @@ class DefaultController extends Controller
     public function index(){
         if (Auth::user()->role == 1){
             $kitaplar = Books::select('id')->get();
+
+            $authUserLibraries = Libraries::
+                select('libraries.id as id','libraries_name',DB::raw('COUNT(*) as libraryBooksCount'))
+                ->groupBy('libraries_name')
+                ->with('books')
+                ->get();
         }else{
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
-                ->select('id')
+                ->select('id','libraries_name',DB::raw('COUNT(books.*) as libraryBooksCount'))
+                ->with('books')
                 ->get();
 
             $kitaplar = Books::
@@ -26,6 +33,8 @@ class DefaultController extends Controller
                 ->select('id')
                 ->get();
         }
+
+        $data['authUserLibraries'] = $authUserLibraries;
 
         // teslim tarihi yaklaşan kitaplar
         $data['rents'] = Rents::whereIn('books_id',$kitaplar)

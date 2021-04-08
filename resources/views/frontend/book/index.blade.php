@@ -59,6 +59,13 @@
                     <hr/>
                 @endif
             @endauth
+
+            @guest
+                <div class="alert alert-secondary" role="alert">
+                    Bu kitaba rezervasyon oluşturmak için lütfen <a href="{{route('login')}}">giriş</a> yapınız.
+                </div>
+                <hr/>
+            @endguest
         </div>
 
         <div class="col-lg-9">
