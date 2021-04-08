@@ -17,17 +17,19 @@
                             <table class="table table-striped" id="userTable">
                                 <thead>
                                 <tr>
-                                    @if(count($data['authUserLibraries'])!=0)
+                                    @if(count($data['authUserLibrariesBooksCount'])!=0)
                                         <th>Kütüphane Adı</th>
-                                        <th>Kitap Sayısı</th>
+                                        <th class="text-center">Kitap Sayısı</th>
                                     @endif
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($data['authUserLibraries'] as $library)
+                                @foreach($data['authUserLibrariesBooksCount'] as $library)
+                                    <tr>
                                         <td>{{$library->libraries_name}}</td>
-                                        <td>{{$library->libraryBooksCount}}</td>
-                                    @endforeach
+                                        <td class="text-center">{{$library->books_count}}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

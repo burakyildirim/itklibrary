@@ -16,15 +16,12 @@ class DefaultController extends Controller
         if (Auth::user()->role == 1){
             $kitaplar = Books::select('id')->get();
 
-            $authUserLibraries = Libraries::
-                select('libraries.id as id','libraries_name',DB::raw('COUNT(*) as libraryBooksCount'))
-                ->groupBy('libraries_name')
-                ->with('books')
-                ->get();
+            $authUserLibraries = Libraries::orderBy('libraries_name')->select('libraries_name')->withCount('books')->get();
+
         }else{
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
-                ->select('id','libraries_name',DB::raw('COUNT(books.*) as libraryBooksCount'))
-                ->with('books')
+                ->select('id','libraries_name')
+                ->withCount('books')
                 ->get();
 
             $kitaplar = Books::
@@ -34,7 +31,7 @@ class DefaultController extends Controller
                 ->get();
         }
 
-        $data['authUserLibraries'] = $authUserLibraries;
+        $data['authUserLibrariesBooksCount'] = $authUserLibraries;
 
         // teslim tarihi yaklaşan kitaplar
         $data['rents'] = Rents::whereIn('books_id',$kitaplar)
