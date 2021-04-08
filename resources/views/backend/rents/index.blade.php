@@ -29,9 +29,10 @@
                                 <th>RESİM</th>
                                 <th>KİTAP</th>
                                 <th>ALICI</th>
-                                <th>BAŞLANGIÇ TARİHİ</th>
-                                <th>TESLİM TARİHİ</th>
-                                <th>REZERV. DURUMU</th>
+                                <th class="text-center">BAŞLANGIÇ TARİHİ</th>
+                                <th class="text-center">BİTİŞ TARİHİ</th>
+                                <th class="text-center">SON GÜNCELLEME</th>
+                                <th class="text-center">REZERV. DURUMU</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -50,9 +51,10 @@
                                     </td>
                                     <td>{{$rent['book']->book_name}}</td>
                                     <td class="sortable">{{$rent['user']->name}}</td>
-                                    <td>{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
-                                    <td>{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
-                                    <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
+                                    <td class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
+                                    <td class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td class="text-center">{{date('d.m.Y',strtotime($rent->updated_at))}}</td>
+                                    <td id="tdRentStatus-{{$rent->id}}" class="text-center">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">
                                         @if($rent->rent_status==1)
@@ -136,7 +138,7 @@
 
         $(".fa-hand-holding-medical").click(function () {
             teslimAl_id = $(this).attr('id');
-            alertify.confirm('Kitabı teslim almak istediğinize emin misiniz?', 'Bu seçeneği yalnızca alıcıdan kitabı alırken kullanın.',
+            alertify.confirm('Kitabı teslim almak istediğinize emin misiniz?', 'Bu seçeneği yalnızca kitabı alıcıdan teslim alırken kullanın.',
                 function () {
                     $.ajaxSetup({
                         headers: {

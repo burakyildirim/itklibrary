@@ -26,10 +26,11 @@ Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeControll
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
+//->middleware(['auth','verified'])
 
-Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->middleware(['auth','verified'])->name('books.DetaySayfa');
+Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
-Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->middleware(['auth','verified'])->name('books.Reservation');
+Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DefaultController::class, 'index'])->name('admin.Index')->middleware('KutuphaneYoneticisi');;

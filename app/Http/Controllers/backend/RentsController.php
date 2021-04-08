@@ -36,6 +36,7 @@ class RentsController extends Controller
 
         $data['rents'] = Rents::whereIn('books_id',$kitaplar)
             ->select('rents.*')
+            ->orderby('rent_status','ASC')
             ->with('user')
             ->with('book')
             ->Paginate(12);
@@ -163,7 +164,8 @@ class RentsController extends Controller
     public function check($id)
     {
         $rent = Rents::where('id',$id)->update([
-            'rent_status' => 2
+            'rent_status' => 2,
+            'updated_at' => now()
         ]);
 
         return response()->json('Kitap teslim işlemi başarılı!');
@@ -175,8 +177,17 @@ class RentsController extends Controller
         $gelenRent = Rents::find($id);
 
         $guncelleme = Rents::where('id',$id)->update([
-            'rent_status' => 3
+            'rent_status' => 3,
+            'updated_at' => now()
         ]);
+
+        $kitap = Books::find($gelenRent->books_id);
+
+        if ($kitap->book_rentStatus==0) {
+            Books::where('id',$kitap->id)->update([
+                'book_rentStatus' => 1
+            ]);
+        }
 
         Books::find($gelenRent->books_id)->increment('book_stok',1);
         User::find($gelenRent->users_id)->increment('puan',50);
