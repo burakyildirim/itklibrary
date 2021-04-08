@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Books;
 use App\Models\Libraries;
 use App\Models\Rents;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -178,6 +179,7 @@ class RentsController extends Controller
         ]);
 
         Books::find($gelenRent->books_id)->increment('book_stok',1);
+        User::find($gelenRent->users_id)->increment('puan',50);
 
         return response()->json('Kitap teslim işlemi başarılı!');
     }

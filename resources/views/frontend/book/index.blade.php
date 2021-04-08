@@ -2,6 +2,14 @@
 
 
 @section('content')
+    <style>
+        .img-thumbnail{
+            -webkit-box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.46);
+            -moz-box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.46);
+            box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.46);
+        }
+    </style>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row" style="margin-top:30px;">
         @auth
@@ -31,9 +39,10 @@
                 alt="" class="img-thumbnail">
             <hr>
             @auth
+                <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
+                <hr/>
                 @if($kitapDetay->book_rentStatus==1 && !$tarafimcaRezerve)
-                    <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
-                    <hr/>
+
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">

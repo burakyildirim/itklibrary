@@ -8,40 +8,100 @@
             list-style-type: none;
         }
 
+        #book_name{
+            -webkit-box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
+            -moz-box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
+            box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
+        }
+
+        .display-4{
+            height:150px;
+            line-height: 70px;
+        }
+
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <img class="img-fluid" src="{{asset('backend/dist/img/itk_arma.png')}}" style="max-width: 120px;">
-        <h1 class="display-4"><strong>İTK E-Library</strong>'e hoşgeldin!</h1>
+        <h1 class="display-4"><strong>İTK E-Library</strong>'e <span class="typewrite" data-period="2000" data-type='[ "hoşgeldin!" ]'><span class="wrap"></span></span></h1>
         <p class="lead">Aradığınız kitabın hangi kütüphanelerimizde olduğunu öğrenmek için hızlı ve etkili bir araç.
             İstediğiniz kitap için rezervasyon yaptırabilir ve ilgili kütüphanemizden ödünç alabilirsiniz. Kitap
             okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüller sizleri bekliyor! <span style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i class="fas fa-book-reader"></i></span></p>
     </div>
 
-    <div class="col-lg-12">
+    <div class="col-lg-10 offset-lg-1">
         <form id="bookSearchBox" method="post">
             @csrf
             <div class="form-group row">
-                <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                <div class="input-group mb-2 offset-lg-1 col-lg-10">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span style="color:#2684b7;"><i class="fas fa-book"></i></span>
-                        </div>
-                    </div>
-                    <input type="text" id="book_name" name="book_name" autocomplete="off" class="form-control form-control-lg" id="inlineFormInputGroup" placeholder="Kitap adı giriniz">
-
+                <div class="input-group">
+                    <input type="text" id="book_name" name="book_name" autocomplete="off" class="form-control form-control-lg" placeholder="Kitap adı giriniz">
                 </div>
             </div>
         </form>
-        <div class="col-lg-12">
             <div id="bookList">
             </div>
-        </div>
     </div>
 
+    <script>
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 4000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i=0; i<elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+            document.body.appendChild(css);
+        };
+    </script>
 
     <script>
         $(function(){
@@ -83,7 +143,7 @@
                 }
 
                 $('#book_name').on('focusout', function () {
-                    $('#bookList').fadeOut();
+                    // $('#bookList').fadeOut();
                 });
 
                 $(document).on('click', '#bookList li', function () {
