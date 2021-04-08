@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <META http-equiv=content-type content=text/html;charset=x-mac-turkish>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ITK Library | Yönetim Paneli</title>
+    <title>{{config('app.name')}} | Yönetim Paneli</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Brand Logo -->
         <a href="{{route('settings.Index')}}" class="brand-link">
             <img src="{{asset('backend/dist/img/itk_arma.png')}}" class="brand-image elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">ITK Library</span>
+            <span class="brand-text font-weight-light">{{config('app.name')}}</span>
         </a>
 
         <!-- Sidebar -->

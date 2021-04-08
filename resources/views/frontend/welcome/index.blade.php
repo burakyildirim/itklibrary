@@ -24,7 +24,7 @@
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <img class="img-fluid" src="{{asset('backend/dist/img/itk_arma.png')}}" style="max-width: 120px;">
-        <h1 class="display-4"><span class="typewrite" data-period="2000" data-type='["İTK E-Library","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span class="wrap"></span></span></h1>
+        <h1 class="display-4"><span class="typewrite" data-period="2000" data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span class="wrap"></span></span></h1>
         <p class="lead">Aradığınız kitabın hangi kütüphanelerimizde olduğunu öğrenmek için hızlı ve etkili bir araç.
             İstediğiniz kitap için rezervasyon yaptırabilir ve ilgili kütüphanemizden ödünç alabilirsiniz. Kitap
             okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüller sizleri bekliyor! <span style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i class="fas fa-book-reader"></i></span></p>

@@ -5,6 +5,9 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
+        <p class="text-lg text-black font-semibold mb-3 text-center">
+            {{config('app.name')}} Üye Giriş
+        </p>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

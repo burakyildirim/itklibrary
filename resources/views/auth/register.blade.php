@@ -5,6 +5,9 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
             </a>
         </x-slot>
+            <p class="text-lg text-black text-center font-semibold mb-3">
+                {{config('app.name')}} Üye Kayıt
+            </p>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
