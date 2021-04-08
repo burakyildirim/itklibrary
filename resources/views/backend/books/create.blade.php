@@ -46,7 +46,7 @@
                             <label>Kitap Görseli</label>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <input class="form-control" name="book_image" type="file">
+                                    <input class="form-control-file" name="book_image" type="file">
                                 </div>
                             </div>
                         </div>

@@ -2,11 +2,7 @@
 
 @section('content')
     <style>
-        .btn-app{
-            padding-top:15px;
-            margin-right: 0px;
-            margin-left: 0px;
-        }
+
     </style>
 
     <div class="content-header">
@@ -32,7 +28,7 @@
                     {{--                    <h6 class="card-title">Altbaşlık Alanı</h6>--}}
 
                     <p class="card-text">
-                    <div class="table-responsive" style="margin-top:20px;">
+                    <div class="table-responsive table-hover" style="margin-top:20px;">
                         <table class="table table-striped" id="userTable">
                             <thead>
                             <tr>
@@ -42,7 +38,7 @@
                                     <th>ALICI</th>
                                     <th class="text-center">BAŞLANGIÇ TARİHİ</th>
                                     <th class="text-center">BİTİŞ TARİHİ</th>
-                                    <th>REZERV. DURUMU</th>
+                                    <th>DURUM</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -62,36 +58,30 @@
                                             alt="" style="width:30px;">
                                     </td>
                                     <td width="300">{{$rent['book']->book_name}}</td>
-                                    <td class="sortable" width="300">{{$rent['user']->name}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td width="200">{{$rent['user']->name}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
                                     <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">
-                                        @if($rent->rent_status==1)
-                                            <a id="tdCheckButton-{{$rent->id}}" class="btn btn-app" href="javascript:void(0)">
-                                                <i id="@php echo $rent->id @endphp" class="fa fa-check-circle text-success teslimAl-{{$rent->id}}"></i>Onayla
-                                            </a>
-                                        @endif
+                                        <a class="btn btn-app fa-check-circle-{{$rent->id}}" href="javascript:void(0)">
+                                            <i id="@php echo $rent->id @endphp"
+                                               class="fa fa-check-circle text-success teslimAl-{{$rent->id}}"></i>Onayla
+                                        </a>
                                     </td>
                                     <td width="5">
                                         {{--                                    {{route('libraries.edit',$library->id)}}--}}
-                                        @if($rent->rent_status==1)
-                                            <a class="btn btn-app" href="javascript:void(0)">
-                                                <i id="@php echo $rent->id @endphp" class="fa fa-pen text-primary"></i>Düzenle
-                                            </a>
-                                        @endif
+                                        <a class="btn btn-app fa-pen-{{$rent->id}}" href="javascript:void(0)">
+                                            <i id="@php echo $rent->id @endphp" class="fa fa-pen text-primary"></i>Düzenle
+                                        </a>
                                     </td>
 
                                     <td width="5">
-                                        @if($rent->rent_status==1 || $rent->rent_status==4)
-
-                                            <a class="btn btn-app" href="javascript:void(0)">
-                                                <i id="@php echo $rent->id @endphp" class="fa fa-trash text-danger cop-{{$rent->id}}"></i>Sil
-                                            </a>
-
-
-                                        @endif
+                                        <a class="btn btn-app fa-trash-{{$rent->id}}" href="javascript:void(0)">
+                                            <i id="@php echo $rent->id @endphp" class="fa fa-trash text-danger"></i>Sil
+                                        </a>
                                     </td>
 
                                 </tr>
@@ -108,71 +98,6 @@
                 </div>
             </div>
 
-            {{--            Teslim Tarihi Yaklaşan Rezervasyonlar--}}
-            <div class="card card-warning">
-                <div class="card-header">
-                    <h5 class="m-0">Teslim Tarihi Yaklaşan Rezervasyonlar</h5>
-                </div>
-                <div class="card-body">
-                    {{--                    <h6 class="card-title">Altbaşlık Alanı</h6>--}}
-
-                    <p class="card-text">
-                    <div class="table-responsive" style="margin-top:20px;">
-                        <table class="table table-striped" id="userTable">
-                            <thead>
-                            <tr>
-                                @if(count($data['rents'])!=0)
-                                    <th>RESİM</th>
-                                    <th>KİTAP</th>
-                                    <th>ALICI</th>
-                                    <th class="text-center">BAŞLANGIÇ TARİHİ</th>
-                                    <th class="text-center">BİTİŞ TARİHİ</th>
-                                    <th>REZERV. DURUMU</th>
-                                    <th></th>
-                                @endif
-                            </tr>
-                            </thead>
-                            <tbody id="sortable">
-                            @if(count($data['rents'])==0)
-                                Teslim tarihi yaklaşan hiç rezervasyon yok!
-                            @endif
-
-                            @foreach($data['rents'] as $rent)
-                                <tr id="item-{{$rent->id}}">
-                                    <td width="5">
-                                        <img
-                                            src="{{ $rent['book']->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$rent['book']->book_image}}"
-                                            alt="" style="width:30px;">
-                                    </td>
-                                    <td width="300">{{$rent['book']->book_name}}</td>
-                                    <td class="sortable" width="300">{{$rent['user']->name}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
-                                    <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
-
-                                    <td width="5">
-                                        @if($rent->rent_status==2)
-                                            <a id="tdTeslimAlButton-{{$rent->id}}" class="btn btn-app" href="javascript:void(0)">
-                                                <i id="@php echo $rent->id @endphp" class="fa fa-hand-holding-medical text-warning teslimAl-{{$rent->id}}"></i> Teslim Al
-                                            </a>
-                                        @endif
-                                    </td>
-
-
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {{-- Pagination --}}
-                    <div class="d-flex justify-content-center" style="margin-top:20px;">
-                        {!! $data['rents']->links() !!}
-                    </div>
-
-                </div>
-            </div>
-
             {{--            Teslim Tarihi Geçen Rezervasyonlar--}}
             <div class="card card-danger">
                 <div class="card-header">
@@ -183,7 +108,7 @@
 
                     <p class="card-text">
                     <div class="table-responsive" style="margin-top:20px;">
-                        <table class="table table-striped" id="userTable">
+                        <table class="table table-striped table-hover" id="userTable">
                             <thead>
                             <tr>
                                 @if(count($data['rentsOverDate'])!=0)
@@ -192,7 +117,7 @@
                                     <th>ALICI</th>
                                     <th class="text-center">BAŞLANGIÇ TARİHİ</th>
                                     <th class="text-center">BİTİŞ TARİHİ</th>
-                                    <th>REZERV. DURUMU</th>
+                                    <th>REZ. DURUMU</th>
                                     <th></th>
                                 @endif
                             </tr>
@@ -210,19 +135,20 @@
                                             alt="" style="width:30px;">
                                     </td>
                                     <td width="300">{{$rent['book']->book_name}}</td>
-                                    <td class="sortable" width="300">{{$rent['user']->name}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
-                                    <td width="170" class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td width="300">{{$rent['user']->name}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
                                     <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">
-                                        @if($rent->rent_status==2)
-                                            @if($rent->rent_status==2)
-                                                <a id="tdTeslimAlButton-{{$rent->id}}" class="btn btn-app" href="javascript:void(0)">
-                                                    <i id="@php echo $rent->id @endphp" class="fa fa-hand-holding-medical text-warning teslimAl-{{$rent->id}}"></i>Teslim Al
-                                                </a>
-                                            @endif
-                                        @endif
+                                        <a class="btn btn-app fa-hand-holding-medical-{{$rent->id}}"
+                                           href="javascript:void(0)">
+                                            <i id="@php echo $rent->id @endphp"
+                                               class="fa fa-hand-holding-medical text-warning teslimAl-{{$rent->id}}"></i>Teslim
+                                            Al
+                                        </a>
                                     </td>
 
                                 </tr>
@@ -239,6 +165,73 @@
                 </div>
             </div>
 
+            {{--            Teslim Tarihi Yaklaşan Rezervasyonlar--}}
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h5 class="m-0">Teslim Tarihi Yaklaşan Rezervasyonlar</h5>
+                </div>
+                <div class="card-body">
+                    {{--                    <h6 class="card-title">Altbaşlık Alanı</h6>--}}
+
+                    <p class="card-text">
+                    <div class="table-responsive" style="margin-top:20px;">
+                        <table class="table table-striped table-hover" id="userTable">
+                            <thead>
+                            <tr>
+                                @if(count($data['rents'])!=0)
+                                    <th>RESİM</th>
+                                    <th>KİTAP</th>
+                                    <th>ALICI</th>
+                                    <th class="text-center">BAŞLANGIÇ TARİHİ</th>
+                                    <th class="text-center">BİTİŞ TARİHİ</th>
+                                    <th>REZ. DURUMU</th>
+                                    <th></th>
+                                @endif
+                            </tr>
+                            </thead>
+                            <tbody id="sortable">
+                            @if(count($data['rents'])==0)
+                                Teslim tarihi yaklaşan hiç rezervasyon yok!
+                            @endif
+
+                            @foreach($data['rents'] as $rent)
+                                <tr id="item-{{$rent->id}}">
+                                    <td width="5">
+                                        <img
+                                            src="{{ $rent['book']->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$rent['book']->book_image}}"
+                                            alt="" style="width:30px;">
+                                    </td>
+                                    <td width="300">{{$rent['book']->book_name}}</td>
+                                    <td width="300">{{$rent['user']->name}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
+                                    <td width="170"
+                                        class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
+
+                                    <td width="5">
+                                        <a class="btn btn-app fa-hand-holding-medical-{{$rent->id}}"
+                                           href="javascript:void(0)">
+                                            <i id="@php echo $rent->id @endphp"
+                                               class="fa fa-hand-holding-medical text-warning teslimAl-{{$rent->id}}"></i>
+                                            Teslim Al
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- Pagination --}}
+                    <div class="d-flex justify-content-center" style="margin-top:20px;">
+                        {!! $data['rents']->links() !!}
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -263,10 +256,10 @@
                         },
                         url: "{{ route('rents.Check','') }}/" + onay_id,
                         success: function (data) {
-                            $("#tdCheckButton-" + onay_id).hide();
-                            $(".cop-" + onay_id).hide();
-                            $(".kalem-" + onay_id).hide();
-                            $("#tdTeslimAlButton-" + onay_id).show();
+                            $("#fa-check-circle-" + onay_id).hide();
+                            $(".fa-trash-" + onay_id).hide();
+                            $(".fa-pen-" + onay_id).hide();
+
                             $("#tdRentStatus-" + onay_id).text('{{\App\Models\Rents::RentStatuses[2]}}');
                             alertify.success(data);
                             setTimeout(location.reload.bind(location), 1500);
@@ -299,8 +292,7 @@
                         },
                         url: "{{ route('rents.GetBook','') }}/" + teslimAl_id,
                         success: function (data) {
-                            $(".teslimAl-" + teslimAl_id).hide();
-                            $("#tdTeslimAlButton-" + teslimAl_id).hide();
+                            $(".fa-hand-holding-medical-" + teslimAl_id).hide();
                             $("#tdRentStatus-" + teslimAl_id).text('{{\App\Models\Rents::RentStatuses[3]}}');
                             alertify.success(data);
                             setTimeout(location.reload.bind(location), 1500);

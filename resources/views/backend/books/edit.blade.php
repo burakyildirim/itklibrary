@@ -48,7 +48,7 @@
                                 <label>Yüklü Görsel</label>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <img width="100" src="{{url('/images/books')."/".$books->book_image}}" alt="">
+                                        <img width="100" style="padding-left:7px;" src="{{url('/images/books')."/".$books->book_image}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                             <label>Kitap Görseli</label>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <input class="form-control" name="book_image" type="file">
+                                    <input class="form-control-file" style="padding-left:7px;" name="book_image" type="file">
                                 </div>
                             </div>
                         </div>
