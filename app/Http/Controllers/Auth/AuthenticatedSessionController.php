@@ -57,7 +57,7 @@ class AuthenticatedSessionController extends Controller
 
     public function google(){
         // google oauth'a isteği gönderiyorum.
-        return Socialite::driver('google')->stateless()->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function googleRedirect(){
