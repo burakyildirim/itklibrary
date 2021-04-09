@@ -21,14 +21,6 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
                 ->name('login');
 
-Route::get('/login/google', [AuthenticatedSessionController::class, 'google'])
-    ->middleware('guest')
-    ->name('loginGoogle');
-
-Route::get('/login/google/callback', [AuthenticatedSessionController::class, 'googleRedirect'])
-    ->middleware('guest')
-    ->name('loginGoogleRedirect');
-
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
                 ->middleware('guest');
 
