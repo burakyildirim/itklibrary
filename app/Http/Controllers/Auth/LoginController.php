@@ -40,6 +40,7 @@ class LoginController extends Controller
             $newUser->avatar = $user->avatar;
             $newUser->role = 4;
             $newUser->password = Hash::make($user->id);
+            $newUser->email_verified_at = now();
 
             $newUser->save();
             auth()->login($newUser, true);
