@@ -249,7 +249,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -273,7 +272,8 @@
                         },
                         url: "{{ route('rents.Check','') }}/" + onay_id,
                         success: function (data) {
-                            $("#fa-check-circle-" + onay_id).hide();
+
+                            $(".fa-check-circle-" + onay_id).hide();
                             $(".fa-trash-" + onay_id).hide();
                             $(".fa-pen-" + onay_id).hide();
 
