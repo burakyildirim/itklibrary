@@ -63,36 +63,39 @@ class AuthenticatedSessionController extends Controller
     public function googleRedirect(){
         // google dan gelen oauth tepkisini sitede login session yaratmak için kullanıyorum.
 
-        try {
-            $user = Socialite::driver('google')->stateless()->user();
-        } catch (\Exception $e) {
-            return redirect('/login');
-        }
+        $user = Socialite::driver('google')->stateless()->user();
 
-        // sadece itk.k12.tr mail adresiyle gelen kayıtları kabul ediyorum.
-        if(explode("@", $user->getEmail())[1] !== 'itk.k12.tr'){
-            return redirect()->to('/');
-        }
-
-        // böyle bir kullanıcı varsa login page geri yönlendiriyorum.
-        $existingUser = User::where('email', $user->getEmail())->first();
-        if($existingUser){
-            // eğer böyle bir kullanıcı varsa login ettiriyorum.
-            auth()->login($existingUser, true);
-        } else {
-            // yoksa yeni bir kullanıcı kaydı oluşturuyorum.
-            $newUser = new User;
-            $newUser->name = $user->getName();
-            $newUser->email = $user->getEmail();
-            $newUser->google_id = $user->getId();
-            $newUser->avatar = $user->getAvatar();
-            $newUser->password = Hash::make($user->getId());
-            $newUser->puan = 0;
-            $newUser->role = 4;
-            $newUser->save();
-
-            auth()->login($newUser, true);
-        }
-        return redirect()->to('/');
+        dd($user);
+//        try {
+//            $user = Socialite::driver('google')->stateless()->user();
+//        } catch (\Exception $e) {
+//            return redirect('/login');
+//        }
+//
+//        // sadece itk.k12.tr mail adresiyle gelen kayıtları kabul ediyorum.
+//        if(explode("@", $user->getEmail())[1] !== 'itk.k12.tr'){
+//            return redirect()->to('/');
+//        }
+//
+//        // böyle bir kullanıcı varsa login page geri yönlendiriyorum.
+//        $existingUser = User::where('email', $user->getEmail())->first();
+//        if($existingUser){
+//            // eğer böyle bir kullanıcı varsa login ettiriyorum.
+//            auth()->login($existingUser, true);
+//        } else {
+//            // yoksa yeni bir kullanıcı kaydı oluşturuyorum.
+//            $newUser = new User;
+//            $newUser->name = $user->getName();
+//            $newUser->email = $user->getEmail();
+//            $newUser->google_id = $user->getId();
+//            $newUser->avatar = $user->getAvatar();
+//            $newUser->password = Hash::make($user->getId());
+//            $newUser->puan = 0;
+//            $newUser->role = 4;
+//            $newUser->save();
+//
+//            auth()->login($newUser, true);
+//        }
+//        return redirect()->to('/');
     }
 }
