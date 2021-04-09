@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
@@ -69,23 +70,27 @@ class AuthenticatedSessionController extends Controller
         }
 
         // sadece itk.k12.tr mail adresiyle gelen kayıtları kabul ediyorum.
-        if(explode("@", $user->email)[1] !== 'itk.k12.tr'){
+        if(explode("@", $user->getEmail())[1] !== 'itk.k12.tr'){
             return redirect()->to('/');
         }
 
         // böyle bir kullanıcı varsa login page geri yönlendiriyorum.
-        $existingUser = User::where('email', $user->email)->first();
+        $existingUser = User::where('email', $user->getEmail())->first();
         if($existingUser){
             // eğer böyle bir kullanıcı varsa login ettiriyorum.
             auth()->login($existingUser, true);
         } else {
             // yoksa yeni bir kullanıcı kaydı oluşturuyorum.
-            $newUser                  = new User;
-            $newUser->name            = $user->name;
-            $newUser->email           = $user->email;
-            $newUser->google_id       = $user->google_id;
-            $newUser->avatar          = $user->avatar;
+            $newUser = new User;
+            $newUser->name = $user->getName();
+            $newUser->email = $user->getEmail();
+            $newUser->google_id = $user->getId();
+            $newUser->avatar = $user->getAvatar();
+            $newUser->password = Hash::make($user->getId());
+            $newUser->puan = 0;
+            $newUser->role = 4;
             $newUser->save();
+
             auth()->login($newUser, true);
         }
         return redirect()->to('/');
