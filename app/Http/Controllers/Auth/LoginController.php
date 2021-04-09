@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -19,27 +21,30 @@ class LoginController extends Controller
             return redirect('/login');
         }
 
-        dd($user->email);
-        // only allow people with @company.com to login
-        if(explode("@", $user->email)[1] !== 'company.com'){
-            return redirect()->to('/');
-        }
-        // check if they're an existing user
+        // yalnızca @itk.k12.tr
+//        if(explode("@", $user->email)[1] !== 'itk.k12.tr'){
+//            return redirect()->to('/');
+//        }
+
+        // bu isimle kayıtlı bir kullanıcı var mı
         $existingUser = User::where('email', $user->email)->first();
         if($existingUser){
-            // log them in
+            // giriş yap
             auth()->login($existingUser, true);
         } else {
-            // create a new user
-            $newUser                  = new User;
-            $newUser->name            = $user->name;
-            $newUser->email           = $user->email;
-            $newUser->google_id       = $user->id;
-            $newUser->avatar          = $user->avatar;
-            $newUser->avatar_original = $user->avatar_original;
+            // yeni kullanıcı kaydı oluştur
+            $newUser = new User;
+            $newUser->name = $user->name;
+            $newUser->email = $user->email;
+            $newUser->google_id = $user->id;
+            $newUser->avatar = $user->avatar;
+            $newUser->role = 4;
+            $newUser->password = Hash::make($user->id);
+
             $newUser->save();
             auth()->login($newUser, true);
         }
+
         return redirect()->to('/');
     }
 }
