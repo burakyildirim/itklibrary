@@ -64,10 +64,4 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
 
-Route::get('/login/google', [AuthenticatedSessionController::class, 'google'])
-    ->middleware('guest')
-    ->name('loginGoogle');
 
-Route::get('/login/callback/', [AuthenticatedSessionController::class, 'googleRedirect'])
-    ->middleware('guest')
-    ->name('loginGoogleRedirect');

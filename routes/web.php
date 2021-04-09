@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\backend\DefaultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +24,8 @@ Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'
 
 Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeController::class, 'kitapAra'])->name('welcome.kitapAra');
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-//->middleware(['auth','verified'])
+Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
+Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
 
 Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
@@ -67,4 +65,4 @@ Route::prefix('admin')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-//->middleware(['auth'])
+

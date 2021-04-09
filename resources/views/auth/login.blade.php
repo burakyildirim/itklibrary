@@ -46,7 +46,7 @@
                 </label>
             </div>
             <div class="flex items-center mt-2">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('loginGoogle') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="/login/google">
                     {{ __('Google Hesabıyla Oturum Açın') }}
                 </a>
             </div>
