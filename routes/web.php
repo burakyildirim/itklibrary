@@ -68,11 +68,9 @@ Route::prefix('admin')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::get('/login/google', [AuthenticatedSessionController::class, 'google'])
-    ->middleware('guest')
     ->name('loginGoogle');
 
 Route::get('/login/google/callback', [AuthenticatedSessionController::class, 'googleRedirect'])
-    ->middleware('guest')
     ->name('loginGoogleRedirect');
 
 //->middleware(['auth'])

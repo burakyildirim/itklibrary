@@ -67,10 +67,12 @@ class AuthenticatedSessionController extends Controller
         } catch (\Exception $e) {
             return redirect('/login');
         }
+
         // sadece itk.k12.tr mail adresiyle gelen kayıtları kabul ediyorum.
         if(explode("@", $user->email)[1] !== 'itk.k12.tr'){
             return redirect()->to('/');
         }
+
         // böyle bir kullanıcı varsa login page geri yönlendiriyorum.
         $existingUser = User::where('email', $user->email)->first();
         if($existingUser){
