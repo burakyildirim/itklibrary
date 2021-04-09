@@ -71,7 +71,7 @@
         @if (Route::has('login'))
             @auth
                 <span class="navbar-text">
-                    <img style="width: 32px;" class="img-circle" src="@php echo Auth::user()->avatar == null ? asset('images/user_head.png') : Auth::user()->avatar @endphp" alt="">
+                    <img style="width: 32px;" class="rounded-circle" src="@php echo Auth::user()->avatar == null ? asset('images/user_head.png') : Auth::user()->avatar @endphp" alt="">
                     <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Hoşgeldin, {{ Auth::user()->name }}.</a>
                     Kütüphane Puanın <span class="badge badge-primary">{{Auth::user()->puan}}</span>
 
