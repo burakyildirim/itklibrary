@@ -70,7 +70,7 @@ require __DIR__ . '/auth.php';
 Route::get('/login/google', [AuthenticatedSessionController::class, 'google'])
     ->name('loginGoogle');
 
-Route::get('/login/callback', [AuthenticatedSessionController::class, 'googleRedirect'])
+Route::get('/login/callback/', [AuthenticatedSessionController::class, 'googleRedirect'])
     ->name('loginGoogleRedirect');
 
 //->middleware(['auth'])
