@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="PEO-VyAWaKqhbr_mLqA_1Vs7lXn5g8s4x3TWwqP1nnc" />
     <meta name="description" content="İzmir Özel Türk Koleji kütüphanelerinde bulunan kitapları ödünç almak için hızlı ve güçlü bir araç.">
     <meta name="author" content="İzmir Özel Türk Koleji Bilişim Teknolojileri Bölümü, Burak Yıldırım">
     <meta name="generator" content="brkyldrm">
