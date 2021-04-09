@@ -56,16 +56,14 @@ class AuthenticatedSessionController extends Controller
 
     public function google(){
         // google oauth'a isteği gönderiyorum.
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function googleRedirect(){
         // google dan gelen oauth tepkisini sitede login session yaratmak için kullanıyorum.
 
-        return redirect()->to('/');
-
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
             return redirect('/login');
         }
@@ -90,6 +88,6 @@ class AuthenticatedSessionController extends Controller
             $newUser->save();
             auth()->login($newUser, true);
         }
-
+        return redirect()->to('/');
     }
 }
