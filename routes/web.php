@@ -16,16 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('frontend.welcome.index')->name('welcome.Index');
-//});
-
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
 
 Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeController::class, 'kitapAra'])->name('welcome.kitapAra');
 
-Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
-Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
+/* Google Oturum Aç Routing */
+Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('googleLogin');
+Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback'])->name('googleLoginRedirect');
 
 Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
