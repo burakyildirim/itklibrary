@@ -20,6 +20,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        session(['link' => url()->previous()]);
         return view('auth.login');
     }
 
@@ -35,7 +36,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+//        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect(session('link'));
+
+//        return view('auth.login');
     }
 
     /**

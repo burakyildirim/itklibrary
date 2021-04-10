@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index($id){
-        $kitap = Books::where('id','=',$id)->where('book_visStatus','=','1')
+    public function index($id, $slug){
+
+        $kitap = Books::where('id','=',$id)->where('book_slug',$slug)->where('book_visStatus','=','1')
             ->with('library')
             ->first();
 

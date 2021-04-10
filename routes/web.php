@@ -24,7 +24,7 @@ Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeControll
 Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('googleLogin');
 Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback'])->name('googleLoginRedirect');
 
-Route::get('/kitap/{id}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
+Route::get('/kitap/{id}/{slug}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
 Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
 

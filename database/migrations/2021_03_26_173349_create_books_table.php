@@ -28,6 +28,8 @@ class CreateBooksTable extends Migration
             $table->integer('book_language');
             $table->integer('libraries_id');
             $table->integer('book_stok')->default('1');
+            $table->text('book_slug');
+            $table->string('book_isbn');
             $table->integer('book_createdBy');
             $table->integer('book_updatedBy');
         });

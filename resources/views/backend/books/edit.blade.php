@@ -47,7 +47,7 @@
                             <label>ISBN Numarası</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input class="form-control" type="number" name="book_isbn" value="{{$books->book_isbn}}" autocomplete="off" required>
+                                    <input class="form-control" type="number" name="book_isbn" value="{{$books->book_isbn}}" autocomplete="off">
                                 </div>
                             </div>
                         </div>

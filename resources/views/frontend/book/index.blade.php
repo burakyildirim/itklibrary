@@ -74,7 +74,11 @@
 
             </div>
             <hr/>
-            <div class="col-lg-12"><strong>Yazar:</strong> {{$kitapDetay->book_author}}</div>
+            <div class="col-lg-12">
+                <strong>Yazar:</strong>
+                {{$kitapDetay->book_author}}
+            </div>
+            <div class="col-lg-12"><strong>ISBN:</strong> {{$kitapDetay->book_isbn}}</div>
             <div class="col-lg-12"><strong>Basım
                     Yılı:</strong> {{ date('d.m.Y',strtotime($kitapDetay->book_publishDate)) }}</div>
             <div class="col-lg-12"><strong>Yayınevi:</strong> {{$kitapDetay->book_publisher}}</div>
