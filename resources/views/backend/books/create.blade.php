@@ -43,6 +43,15 @@
                         </div>
 
                         <div class="form-group">
+                            <label>ISBN Numarası</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="number" name="book_isbn" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label>Kitap Görseli</label>
                             <div class="row">
                                 <div class="col-xs-12">
@@ -124,6 +133,15 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <input class="form-control" type="number" name="book_stok" value="1" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kitap SLUG</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" name="book_slug" autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>

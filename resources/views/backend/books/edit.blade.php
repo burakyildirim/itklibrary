@@ -43,6 +43,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label>ISBN Numarası</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="number" name="book_isbn" value="{{$books->book_isbn}}" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
                         @isset($books->book_image)
                             <div class="form-group">
                                 <label>Yüklü Görsel</label>
@@ -139,6 +148,16 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <input class="form-control" type="number" name="book_stok" value="{{$books->book_stok}}" autocomplete="off" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kitap SLUG</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" value="{{$books->book_slug}}" name="book_slug" autocomplete="off"
+                                           @php echo Auth::user()->role!=1 ? ' disabled' : '' @endphp>
                                 </div>
                             </div>
                         </div>

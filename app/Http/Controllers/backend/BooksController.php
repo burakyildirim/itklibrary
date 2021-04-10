@@ -9,6 +9,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\Input;
 use Transliterator;
 
@@ -112,6 +113,8 @@ class BooksController extends Controller
                 "book_createdBy" => Auth::id(),
                 "book_updatedBy" => Auth::id(),
                 "book_stok" => $request->book_stok,
+                "book_slug" => Str::slug($request->book_name),
+                "book_isbn" => $request->book_isbn,
                 "created_at" => now(),
                 "updated_at" => now()
             ]
@@ -175,6 +178,10 @@ class BooksController extends Controller
     public function update(Request $request, $id)
     {
         $publishDate = DateTime::createFromFormat('d.m.Y',$request->book_publishDate);
+        $bookSlug = $request->book_slug;
+        if($bookSlug==null){
+            $bookSlug = Str::slug($request->book_name);
+        }
 
         if ($request->hasFile('book_image')) {
             $request->validate([
@@ -197,6 +204,8 @@ class BooksController extends Controller
                     "book_visStatus" => $request->book_visStatus,
                     "book_language" => $request->book_language,
                     "libraries_id" => $request->libraries_id,
+                    "book_slug" => $bookSlug,
+                    "book_isbn" => $request->book_isbn,
                     "book_stok" => $request->book_stok,
                     "book_updatedBy" => Auth::id(),
                     "updated_at" => now()
@@ -225,6 +234,8 @@ class BooksController extends Controller
                     "book_visStatus" => $request->book_visStatus,
                     "book_language" => $request->book_language,
                     "book_stok" => $request->book_stok,
+                    "book_slug" => $bookSlug,
+                    "book_isbn" => $request->book_isbn,
                     "libraries_id" => $request->libraries_id,
                     "book_updatedBy" => Auth::id(),
                     "updated_at" => now()
@@ -236,9 +247,11 @@ class BooksController extends Controller
 
 
         if ($book) {
-            return redirect(route('books.index'))->with('success', 'İşlem Başarılı');
+//            return back()->with('success', 'Güncelleme işlemi başarılı!');
+
+            return redirect(route('books.index'))->with('success', 'Güncelleme işlemi başarılı!');
         }
-        return back()->with('error', 'İşlem Başarısız');
+        return back()->with('error', 'Güncelleme işlemi başarısız!');
     }
 
     /**
