@@ -12,14 +12,28 @@
 
                 </div>
                 <div class="card-body">
-                    <div align="right">
-                        {{--                        <a href="{{route('users.create')}}">--}}
-                        {{--                            <button class="btn btn-warning">Toplu Kullanıcı Ekle</button>--}}
-                        {{--                        </a>--}}
+                    <div class="row" style="margin-bottom:20px;">
+                        <div class="col-lg-9">
+                            <form action="{{route('rents.Search')}}" method="POST" role="search">
+                                {{ csrf_field() }}
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q"
+                                           placeholder="Kitap yada Alıcı Adı Girin">
 
-                        <a href="#">
-                            <button class="btn btn-success">Ekle</button>
-                        </a>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="col-lg-3 text-right">
+                            <a class="btn btn-success btn-md" href="{{route('rents.create')}}">
+                                Yeni Rezervasyon
+                            </a>
+                        </div>
 
                     </div>
                     <div class="table-responsive" style="margin-top:20px;">
@@ -47,7 +61,7 @@
                                     <td>
                                         <img
                                             src="{{ $rent['book']->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$rent['book']->book_image}}"
-                                            alt="" style="width:50px;">
+                                            alt="" style="width:30px;">
                                     </td>
                                     <td>{{$rent['book']->book_name}}</td>
                                     <td class="sortable">{{$rent['user']->name}}</td>
@@ -126,6 +140,7 @@
                             $("#tdTeslimAlButton-"+onay_id).show();
                             $("#tdRentStatus-" + onay_id).text('{{\App\Models\Rents::RentStatuses[2]}}');
                             alertify.success(data);
+                            setTimeout(location.reload.bind(location), 1500);
                         }
                     });
                 },
@@ -159,6 +174,7 @@
                             $("#tdTeslimAlButton-"+teslimAl_id).hide();
                             $("#tdRentStatus-" + teslimAl_id).text('{{\App\Models\Rents::RentStatuses[3]}}');
                             alertify.success(data);
+                            setTimeout(location.reload.bind(location), 1500);
                         }
                     });
                 },
@@ -191,6 +207,7 @@
                         success: function (data) {
                             $("#item-" + destroy_id).remove();
                             alertify.success(data);
+                            setTimeout(location.reload.bind(location), 1500);
                             //setTimeout(location.reload.bind(location), 1500);
                         }
                     });

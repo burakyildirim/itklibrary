@@ -48,16 +48,14 @@ Route::prefix('admin')->group(function () {
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
 
-    Route::any('/books/search/{q?}',[\App\Http\Controllers\backend\BooksController::class, 'index'])->name('books.Search')->middleware('KutuphaneYoneticisi');
+    // Kitap Arama
+    Route::any('/books{q?}',[\App\Http\Controllers\backend\BooksController::class, 'index'])->name('books.Search')->middleware('KutuphaneYoneticisi');
 
-//    Route::post('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'qrcode'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
+    // Rezervasyon Arama
+    Route::post('/rents/search/{q?}',[\App\Http\Controllers\backend\RentsController::class, 'index'])->name('rents.Search')->middleware('KutuphaneYoneticisi');
 
     // Kitap QRCode Routing
     Route::get('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'myqr'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
-
-//    Route::get('/qr-code-image', function () {
-//        return  QrCode::size(250)->format('png')->generate('Semih Duman', public_path('images/qrcodes/qrcode.png'));
-//    });
 
     // Rent Routing
     Route::resource('/rents', App\Http\Controllers\backend\RentsController::class)->middleware('KutuphaneYoneticisi');

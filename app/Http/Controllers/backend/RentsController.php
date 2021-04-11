@@ -18,23 +18,50 @@ class RentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->role == 1){
-            $kitaplar = Books::select('id')->get();
+            if ($request->q != null) {
+                $kitaplar = Books::select('id')->get();
+//                $kitaplar = Books::where('book_name','LIKE','%'.$request->q.'%')->select('id')->get();
+            }else{
+                $kitaplar = Books::select('id')->get();
+            }
         }else{
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
                 ->select('id')
                 ->get();
-
-            $kitaplar = Books::
+            if ($request->q != null) {
+//                $kitaplar = Books::
+//                whereIn('libraries_id', $authUserLibraries)
+//                    ->where('book_name','LIKE','%'.$request->q.'%')
+//                    ->orderBy('book_name', 'ASC')
+//                    ->select('id')
+//                    ->get();
+                $kitaplar = Books::
                 whereIn('libraries_id', $authUserLibraries)
-                ->orderBy('book_name', 'ASC')
-                ->select('id')
-                ->get();
-        }
+                    ->orderBy('book_name', 'ASC')
+                    ->select('id')
+                    ->get();
 
-        $data['rents'] = Rents::whereIn('books_id',$kitaplar)
+            }else{
+                $kitaplar = Books::
+                whereIn('libraries_id', $authUserLibraries)
+                    ->orderBy('book_name', 'ASC')
+                    ->select('id')
+                    ->get();
+            }
+        }
+        $quer = $request->q;
+
+        $data['rents'] = Rents::
+            whereIn('books_id',$kitaplar)
+            ->whereHas('user', function($que) use ($quer){
+                $que->where('name', 'LIKE', '%'.$quer.'%');
+            })
+            ->orWhereHas('book', function($que) use ($quer){
+                $que->where('book_name', 'LIKE', '%'.$quer.'%');
+            })
             ->select('rents.*')
             ->orderby('rent_status','ASC')
             ->with('user')
