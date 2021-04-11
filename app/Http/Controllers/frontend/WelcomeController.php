@@ -38,6 +38,7 @@ class WelcomeController extends Controller
                 })
                 ->select('book_name','id','libraries_id','book_slug','book_author')
                 ->with('library')
+                ->limit(6)
                 ->get();
 
             $output2 = '<ul style="position:relative; font-size:18px;">';
