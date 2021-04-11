@@ -151,8 +151,8 @@
             </div>
         </div>
     </div>
-
-    {!! QrCode::format('png')->size(100)->generate(Request::url()) !!}
+    {{Imagick::getVersion()}}
+{{--    {!! QrCode::format('png')->size(100)->generate(Request::url()) !!}--}}
 
     <script type="text/javascript">
         $(".fa-qrcode").click(function () {
