@@ -41,7 +41,7 @@ class DefaultController extends Controller
             ->orderby(DB::raw('ABS(DATEDIFF(rentEndDate, NOW()))'))
             ->with('user')
             ->with('book')
-            ->Paginate(7);
+            ->Paginate(12);
 
         // teslim tarihi geçen kitaplar
         $data['rentsOverDate'] = Rents::whereIn('books_id',$kitaplar)
@@ -51,7 +51,7 @@ class DefaultController extends Controller
             ->orderby(DB::raw('ABS(DATEDIFF(rentEndDate, NOW()))'))
             ->with('user')
             ->with('book')
-            ->Paginate(7);
+            ->Paginate(12);
 
         // onay bekleyen kitaplar
         $data['rentsWaitingApprove'] = Rents::whereIn('books_id',$kitaplar)
@@ -60,7 +60,7 @@ class DefaultController extends Controller
             ->orderby(DB::raw('ABS(DATEDIFF(rentEndDate, NOW()))'))
             ->with('user')
             ->with('book')
-            ->Paginate(7);
+            ->Paginate(12);
 
 
 //        return view('backend.rents.index', compact('data'));

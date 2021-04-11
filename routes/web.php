@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\DefaultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController:
 
 Route::get('/kitap/{id}/{slug}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
-Route::get('/kitap/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
+Route::get('/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DefaultController::class, 'index'])->name('admin.Index')->middleware('KutuphaneYoneticisi');;
@@ -46,6 +47,9 @@ Route::prefix('admin')->group(function () {
 
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
+
+    Route::any('/books/search/{q?}',[\App\Http\Controllers\backend\BooksController::class, 'index'])->name('books.Search')->middleware('KutuphaneYoneticisi');
+
 //    Route::post('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'qrcode'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
 
     // Kitap QRCode Routing

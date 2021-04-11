@@ -12,16 +12,16 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
     public function index($id, $slug){
-
-        $kitap = Books::where('id','=',$id)->where('book_slug',$slug)->where('book_visStatus','=','1')
+        //->where('book_slug',$slug)
+        $kitap = Books::where('book_slug','=',$slug)->where('id',$id)->where('book_visStatus','=','1')
             ->with('library')
             ->first();
 
-        $isReservatedByMe = Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
+        $isReservatedByMe = Rents::where('books_id',$kitap->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
 
-        $reservation =  Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->select('rentEndDate','rent_status')->first();
+        $reservation =  Rents::where('books_id',$kitap->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->select('rentEndDate','rent_status')->first();
 
-        $mostNearDeliveryDate = Rents::where('books_id',$id)->whereIn('rent_status',['1','2'])->orderBy('rentEndDate','ASC')->first();
+        $mostNearDeliveryDate = Rents::where('books_id',$kitap->id)->whereIn('rent_status',['1','2'])->orderBy('rentEndDate','ASC')->first();
 
 //        dd($mostNearDeliveryDate);
 

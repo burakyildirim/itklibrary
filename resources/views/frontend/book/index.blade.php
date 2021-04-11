@@ -143,15 +143,14 @@
                                 token: $('meta[name="csrf-token"]').attr('content'),
                             },
                             success: function (data) {
-                                $('#btnRezerve')
-                                alertify.success(data);
-
+                                console.log(data);
                                 setTimeout(function () {
                                     location.reload();
                                 }, 200);
                             },
                             failed: function (data) {
                                 alertify.error(data);
+                                console.log(data);
                             },
                         })
                     },

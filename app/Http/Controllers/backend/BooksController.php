@@ -23,25 +23,49 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $paginationNumber = 12;
         if (Auth::user()->role == 1) {
-            $kitaplar = Books::with('library')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
-                ->orderBy('book_name', 'ASC')
-                ->Paginate(7);
+            // Arama kutusundan veri geliyor mu onu kontrol ediyorum. geliyorsa $kitaplar LIKE sorgusu ile dönüyor. For Paginate function
+            if ($request->q != null) {
+                $kitaplar = Books::with('library')
+                    ->where('book_name', 'LIKE', '%'.$request->q.'%')
+                    ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                    ->orderBy('book_name', 'ASC')
+                    ->Paginate($paginationNumber);
 
+                $kitaplar->appends(['q' => $request->q]);
+            } else {
+                $kitaplar = Books::with('library')
+                    ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                    ->orderBy('book_name', 'ASC')
+                    ->Paginate($paginationNumber);
+            }
         } else {
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
                 ->select('id')
                 ->get();
 
-            $kitaplar = Books::
-            whereIn('libraries_id', $authUserLibraries)
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
-                ->orderBy('book_name', 'ASC')
-                ->with('library')
-                ->paginate(7);
+            if ($request->q != null) {
+                $kitaplar = Books::
+                whereIn('libraries_id', $authUserLibraries)
+                    ->where('book_name','LIKE','%'.$request->q.'%')
+                    ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                    ->orderBy('book_name', 'ASC')
+                    ->with('library')
+                    ->paginate($paginationNumber);
+                $kitaplar->appends(['q' => $request->q]);
+
+            } else {
+                $kitaplar = Books::
+                whereIn('libraries_id', $authUserLibraries)
+                    ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                    ->orderBy('book_name', 'ASC')
+                    ->with('library')
+                    ->paginate($paginationNumber);
+            }
+
         }
 
         return view('backend.books.index')->with('kitaplar', $kitaplar);
@@ -324,11 +348,12 @@ class BooksController extends Controller
 //        return response()->json();
 //    }
 
-    public function myqr($id){
+    public function myqr($id)
+    {
         $kitap = Books::find($id);
-        $qrLink = url('/').'/kitap/'.$kitap->id.'/'.$kitap->book_slug;
+        $qrLink = url('/') . '/kitap/' . $kitap->id . '/' . $kitap->book_slug;
         $logoUrl = url('/images/itk_arma.png');
-        $qrKaydet = base64_encode(QrCode::size(250)->format('png')->merge($logoUrl,0.5,true)->errorCorrection('H')->generate($qrLink));
+        $qrKaydet = base64_encode(QrCode::size(400)->format('png')->merge($logoUrl, 0.3, true)->errorCorrection('H')->generate($qrLink));
 //        $qrpath = public_path('images/qrcodes/'.$kitap->id.'.png');
 
         return response()->json($qrKaydet);

@@ -27,9 +27,10 @@ class WelcomeController extends Controller
                 ->get();
 
             $output2 = '<ul style="position:relative; font-size:18px;">';
+            //'/'. $row->id .'' .
 
             foreach ($data2 as $row) {
-                $output2 .= '<li value="publisher" class="yazarLi"><a href="kitap/' . $row->id . '/'. $row->book_slug .'' . '  ">' . $row->book_name . '</a>' . '<span style="">' . ' (' . $row->library['libraries_name'] . ')' . '</span>' . '</li>';
+                $output2 .= '<li value="publisher" class="yazarLi"><a href="kitap/' . $row->id .'/'. $row->book_slug .'' . '">' . $row->book_name . '</a>' . '<span style="">' . ' (' . $row->library['libraries_name'] . ')' . '</span>' . '</li>';
             }
             $output2 .= '</ul>';
 

@@ -10,14 +10,26 @@
 
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row" style="margin-bottom:20px;">
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" id="kitapArama" onkeyup="kitapAraBox()"
-                                   placeholder="Kitap adı..">
+                            <form action="{{route('books.Search')}}" method="POST" role="search">
+                                {{ csrf_field() }}
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q"
+                                           placeholder="Kitap Arama">
+
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+
                         </div>
-                        <div class="col-lg-3" align="right">
-                            <a href="{{route('books.create')}}">
-                                <button class="btn btn-success">Ekle</button>
+                        <div class="col-lg-3 text-right">
+                            <a class="btn btn-success btn-md" href="{{route('books.create')}}">
+                                Yeni Kitap Ekle
                             </a>
                         </div>
                     </div>
@@ -46,7 +58,7 @@
                                         {{--                                            : echo url('/images/books/').$kitap->book_image--}}
                                         <img
                                             src="{{ $kitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitap->book_image}}"
-                                            alt="" style="width:50px;">
+                                            alt="" style="width:30px;">
                                     </td>
                                     <td class="sortable sortable-{{$kitap->bookId}}">{{$kitap->book_name}}</td>
                                     <td>{{$kitap->book_author}}</td>
@@ -86,14 +98,14 @@
                     </div>
 
 
-
                 </div>
             </div>
         </div>
     </div>
 
     <!-- QRCode Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -112,46 +124,47 @@
         </div>
     </div>
 
-{{--    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) !!} ">--}}
+    {{--    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) !!} ">--}}
 
-{{--    {{Imagick::getVersion()}}--}}
-{{--    {!!QrCode::size(250)->format('png')->generate("buraaaaak", public_path('images/qrcodes/deneme.png'))!!}--}}
+    {{--    {{Imagick::getVersion()}}--}}
+    {{--    {!!QrCode::size(250)->format('png')->generate("buraaaaak", public_path('images/qrcodes/deneme.png'))!!}--}}
     <script type="text/javascript" src="{{asset('backend/custom/js/printThis.js')}}"></script>
 
     <script type="text/javascript">
-        function printDiv(){
-            $(".modal-body").printThis();
+        function printDiv() {
+            $(".modal-body").printThis({
+                pageTitle: $('.modal-title').text(),
+            });
         }
 
-
         $(".fa-qrcode").click(function () {
-                qrcode_idSlugUrl = $(this).attr('id');
-                console.log('qr code ala bastın');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+            qrcode_idSlugUrl = $(this).attr('id');
+            console.log('qr code ala bastın');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-                $.ajax({
-                    type: 'GET',
-                    // dataType: 'html',
-                    contentType: "image/png",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        id: qrcode_idSlugUrl,
-                        _method: 'GET'
-                    },
-                    url: "{{ route('books.qrcode','') }}/" + qrcode_idSlugUrl,
-                    success: function (data) {
-                        $('.modal-body').html('<img src="data:image/png;base64, ' + data + '"/>');
+            $.ajax({
+                type: 'GET',
+                // dataType: 'html',
+                contentType: "image/png",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: qrcode_idSlugUrl,
+                    _method: 'GET'
+                },
+                url: "{{ route('books.qrcode','') }}/" + qrcode_idSlugUrl,
+                success: function (data) {
+                    $('.modal-body').html('<img class="img-fluid" style="width:100%;" src="data:image/png;base64, ' + data + '"/>');
 
-                        //ÇALIŞAN
-                        //$('.modal-body').html('<img src="{{url('/images/qrcodes/')}}'+ '/' + qrcode_idSlugUrl + '.png' +'" />');
-                        $('.modal-title').html('<strong>QR Code: </strong>' + $('.sortable-'+qrcode_idSlugUrl).text());
-                        $('#exampleModal').modal('show');
-                    }
-                });
+                    //ÇALIŞAN
+                    //$('.modal-body').html('<img src="{{url('/images/qrcodes/')}}'+ '/' + qrcode_idSlugUrl + '.png' +'" />');
+                    $('.modal-title').html('<strong>QR Kod: </strong>' + $('.sortable-' + qrcode_idSlugUrl).text());
+                    $('#exampleModal').modal('show');
+                }
+            });
         });
 
 
