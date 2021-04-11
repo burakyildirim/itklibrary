@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row" style="margin-bottom:20px;">
                         <div class="col-lg-9">
-                            <form action="{{route('rents.Search')}}" method="POST" role="search">
+                            <form action="{{route('rents.Search')}}" method="GET" role="search">
                                 {{ csrf_field() }}
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="q"
@@ -106,7 +106,7 @@
 
                     {{-- Pagination --}}
                     <div class="d-flex justify-content-center" style="margin-top:20px;">
-                        {!! $data['rents']->links() !!}
+                        {!! $data['rents']->appends(Request::except('_token','page'))->render() !!}
                     </div>
                 </div>
             </div>

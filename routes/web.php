@@ -52,7 +52,7 @@ Route::prefix('admin')->group(function () {
     Route::any('/books{q?}',[\App\Http\Controllers\backend\BooksController::class, 'index'])->name('books.Search')->middleware('KutuphaneYoneticisi');
 
     // Rezervasyon Arama
-    Route::post('/rents/search/{q?}',[\App\Http\Controllers\backend\RentsController::class, 'index'])->name('rents.Search')->middleware('KutuphaneYoneticisi');
+    Route::post('/rents{q?}',[\App\Http\Controllers\backend\RentsController::class, 'index'])->name('rents.Search')->middleware('KutuphaneYoneticisi');
 
     // Kitap QRCode Routing
     Route::get('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'myqr'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
