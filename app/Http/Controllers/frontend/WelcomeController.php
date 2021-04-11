@@ -20,9 +20,23 @@ class WelcomeController extends Controller
 
             $query = $request->get('query');
 
-            $data2 = Books::where('book_name', 'LIKE', "%{$query}%")
-                ->where('book_visStatus','=','1')
-                ->select('book_name','id','libraries_id','book_slug')
+            //ÇALIŞAN
+//            $data2 = Books::where('book_visStatus','=','1')
+//                ->where('book_name','LIKE','%'.$query.'%')
+//                ->orwhere('book_author','LIKE','%'.$query.'%')
+//                ->select('book_name','id','libraries_id','book_slug','book_author')
+//                ->with('library')
+//                ->get();
+
+            // kitap adı yada yazar araması -- visstatus 1 koşulu
+                $data2 = Books::where(function ($query2) use($query) {
+                    $query2->where('book_visStatus','=','1')
+                        ->Where('book_name','LIKE','%'.$query.'%');
+                })->orwhere(function ($query2) use($query) {
+                    $query2->where('book_visStatus','=','1')
+                        ->Where('book_author','LIKE','%'.$query.'%');
+                })
+                ->select('book_name','id','libraries_id','book_slug','book_author')
                 ->with('library')
                 ->get();
 

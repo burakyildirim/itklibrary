@@ -35,7 +35,7 @@
             @csrf
             <div class="form-group row">
                 <div class="input-group">
-                    <input type="text" id="book_name" name="book_name" autocomplete="off" class="form-control form-control-lg" placeholder="Kitap adı giriniz" autofocus>
+                    <input type="text" id="book_name" name="book_name" autocomplete="off" class="form-control form-control-lg" placeholder="Kitap yada yazar adı giriniz" autofocus>
                 </div>
             </div>
         </form>

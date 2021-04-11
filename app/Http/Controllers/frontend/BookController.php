@@ -17,6 +17,8 @@ class BookController extends Controller
             ->with('library')
             ->first();
 
+        if ($kitap==null) return back();
+
         $isReservatedByMe = Rents::where('books_id',$kitap->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
 
         $reservation =  Rents::where('books_id',$kitap->id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->select('rentEndDate','rent_status')->first();
