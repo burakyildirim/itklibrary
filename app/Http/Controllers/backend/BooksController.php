@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Imagick;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Symfony\Component\Console\Input\Input;
 use Transliterator;
@@ -312,12 +313,25 @@ class BooksController extends Controller
         }
     }
 
+    //ÇALIŞAN
+//    public function myqr($id){
+//        $kitap = Books::find($id);
+//        $qrLink = url('/').'/kitap/'.$kitap->id.'/'.$kitap->book_slug;
+//        $logoUrl = url('/images/itk_arma.png');
+//        $qrKaydet = QrCode::size(250)->format('png')->merge($logoUrl,0.5,true)->errorCorrection('H')->generate($qrLink, public_path('images/qrcodes/'.$kitap->id.'.png'));
+////        $qrpath = public_path('images/qrcodes/'.$kitap->id.'.png');
+//
+//        return response()->json();
+//    }
+
     public function myqr($id){
         $kitap = Books::find($id);
         $qrLink = url('/').'/kitap/'.$kitap->id.'/'.$kitap->book_slug;
         $logoUrl = url('/images/itk_arma.png');
+        $qrKaydet = base64_encode(QrCode::size(250)->format('png')->merge($logoUrl,0.5,true)->errorCorrection('H')->generate($qrLink));
+//        $qrpath = public_path('images/qrcodes/'.$kitap->id.'.png');
 
-        return QrCode::generate($qrLink);
+        return response()->json($qrKaydet);
     }
 
 //    public function qrcode($id)

@@ -1,46 +1,6 @@
 @extends('backend.layout')
 
 @section('content')
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .modal-body * {
-                visibility: visible;
-                overflow: visible;
-            }
-
-            .close {
-                visibility: hidden;
-            }
-            .modal-header {
-                visibility: visible;
-                overflow: visible;
-            }
-
-            .main-page *{
-                display: none;
-            }
-
-            .modal {
-                position: absolute;
-                left: 0;
-                top: 0;
-                margin: 0;
-                padding: 0;
-                min-height: 550px;
-                visibility: visible;
-                overflow: visible !important; /* Remove scrollbar for printing. */
-            }
-
-            .modal-dialog {
-                visibility: visible !important;
-                overflow: visible !important; /* Remove scrollbar for printing. */
-            }
-        }
-    </style>
-
     <div class="content-header">
         <div class="container-fluid">
 
@@ -146,17 +106,24 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-primary">Yazdır</button>
+                    <button type="button" class="btn btn-primary" onclick='printDiv();'>Yazdır</button>
                 </div>
             </div>
         </div>
     </div>
 
-{{--    {{Imagick::getVersion()}}--}}
-    {!! QrCode::format('png')->size(100)->generate(Request::url()) !!}
+{{--    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) !!} ">--}}
 
+{{--    {{Imagick::getVersion()}}--}}
+{{--    {!!QrCode::size(250)->format('png')->generate("buraaaaak", public_path('images/qrcodes/deneme.png'))!!}--}}
+    <script type="text/javascript" src="{{asset('backend/custom/js/printThis.js')}}"></script>
 
     <script type="text/javascript">
+        function printDiv(){
+            $(".modal-body").printThis();
+        }
+
+
         $(".fa-qrcode").click(function () {
                 qrcode_idSlugUrl = $(this).attr('id');
                 console.log('qr code ala bastın');
@@ -168,7 +135,8 @@
 
                 $.ajax({
                     type: 'GET',
-                    dataType: 'html',
+                    // dataType: 'html',
+                    contentType: "image/png",
                     data: {
                         _token: $('meta[name="csrf-token"]').attr('content'),
                         id: qrcode_idSlugUrl,
@@ -176,8 +144,10 @@
                     },
                     url: "{{ route('books.qrcode','') }}/" + qrcode_idSlugUrl,
                     success: function (data) {
-                        // console.log(data);
-                        $('.modal-body').html(data);
+                        $('.modal-body').html('<img src="data:image/png;base64, ' + data + '"/>');
+
+                        //ÇALIŞAN
+                        //$('.modal-body').html('<img src="{{url('/images/qrcodes/')}}'+ '/' + qrcode_idSlugUrl + '.png' +'" />');
                         $('.modal-title').html('<strong>QR Code: </strong>' + $('.sortable-'+qrcode_idSlugUrl).text());
                         $('#exampleModal').modal('show');
                     }

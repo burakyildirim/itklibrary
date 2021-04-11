@@ -51,6 +51,10 @@ Route::prefix('admin')->group(function () {
     // Kitap QRCode Routing
     Route::get('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'myqr'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
 
+//    Route::get('/qr-code-image', function () {
+//        return  QrCode::size(250)->format('png')->generate('Semih Duman', public_path('images/qrcodes/qrcode.png'));
+//    });
+
     // Rent Routing
     Route::resource('/rents', App\Http\Controllers\backend\RentsController::class)->middleware('KutuphaneYoneticisi');
     Route::post('/rents/check/{id}', [App\Http\Controllers\backend\RentsController::class, 'check'])->name('rents.Check')->middleware('KutuphaneYoneticisi');
