@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Symfony\Component\Console\Input\Input;
 use Transliterator;
 
@@ -25,7 +26,7 @@ class BooksController extends Controller
     {
         if (Auth::user()->role == 1) {
             $kitaplar = Books::with('library')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok','book_visStatus')
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->Paginate(7);
 
@@ -35,8 +36,8 @@ class BooksController extends Controller
                 ->get();
 
             $kitaplar = Books::
-                whereIn('libraries_id', $authUserLibraries)
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id','book_stok','book_visStatus')
+            whereIn('libraries_id', $authUserLibraries)
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')
                 ->paginate(7);
@@ -96,7 +97,7 @@ class BooksController extends Controller
             $file_name = null;
         }
 
-        $publishDate = DateTime::createFromFormat('d.m.Y',$request->book_publishDate);
+        $publishDate = DateTime::createFromFormat('d.m.Y', $request->book_publishDate);
 
         $book = Books::insert(
             [
@@ -177,9 +178,9 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $publishDate = DateTime::createFromFormat('d.m.Y',$request->book_publishDate);
+        $publishDate = DateTime::createFromFormat('d.m.Y', $request->book_publishDate);
         $bookSlug = $request->book_slug;
-        if($bookSlug==null){
+        if ($bookSlug == null) {
             $bookSlug = Str::slug($request->book_name);
         }
 
@@ -212,9 +213,8 @@ class BooksController extends Controller
                 ]
             );
 
-            $path='images/books/'.$request->old_file;
-            if (file_exists($path))
-            {
+            $path = 'images/books/' . $request->old_file;
+            if (file_exists($path)) {
                 @unlink(public_path($path));
             }
 
@@ -304,13 +304,38 @@ class BooksController extends Controller
             $output2 = '<ul class="dropdown-menu" style="display:block; position:relative">';
 
             foreach ($data2 as $row) {
-                $output2 .= '<li value="publisher" class="yazarLi"><a href="#">'.$row->book_publisher.'</a></li>';
+                $output2 .= '<li value="publisher" class="yazarLi"><a href="#">' . $row->book_publisher . '</a></li>';
             }
             $output2 .= '</ul>';
 
             return response()->json($output2);
         }
     }
+
+    public function myqr($id){
+        $kitap = Books::find($id);
+        $qrLink = url('/').'/kitap/'.$kitap->id.'/'.$kitap->book_slug;
+        $logoUrl = url('/images/itk_arma.png');
+
+        return QrCode::generate($qrLink);
+    }
+
+//    public function qrcode($id)
+//    {
+//        // Google API kullanarak QRCode Generate Ediyorum.
+//        $kitap = Books::find($id);
+//
+//        function qrCode($s, $w = 250, $h = 250){
+////            $u = 'https://chart.googleapis.com/chart?chs=%dx%d&cht=qr&chl=%s';
+////            $url = sprintf($u, $w, $h, $s);
+////            $url = myqr();
+////            return $url;
+//        }
+//
+////        $qr = qrCode(url('/').'/kitap/'.$kitap->id.'/'.$kitap->book_slug, 200, 200);
+////        $qrOutput = '<img class="img-fluid" src="'. $qr .'" style="width:100%;">';
+////        return response()->json($qrOutput);
+//    }
 
 
 }

@@ -1,6 +1,46 @@
 @extends('backend.layout')
 
 @section('content')
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .modal-body * {
+                visibility: visible;
+                overflow: visible;
+            }
+
+            .close {
+                visibility: hidden;
+            }
+            .modal-header {
+                visibility: visible;
+                overflow: visible;
+            }
+
+            .main-page *{
+                display: none;
+            }
+
+            .modal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin: 0;
+                padding: 0;
+                min-height: 550px;
+                visibility: visible;
+                overflow: visible !important; /* Remove scrollbar for printing. */
+            }
+
+            .modal-dialog {
+                visibility: visible !important;
+                overflow: visible !important; /* Remove scrollbar for printing. */
+            }
+        }
+    </style>
+
     <div class="content-header">
         <div class="container-fluid">
 
@@ -35,6 +75,7 @@
                                 <th style="text-align: center;">STOK ADEDİ</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="sortable">
@@ -47,13 +88,19 @@
                                             src="{{ $kitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$kitap->book_image}}"
                                             alt="" style="width:50px;">
                                     </td>
-                                    <td class="sortable">{{$kitap->book_name}}</td>
+                                    <td class="sortable sortable-{{$kitap->bookId}}">{{$kitap->book_name}}</td>
                                     <td>{{$kitap->book_author}}</td>
                                     <td>{{$kitap->book_publisher}}</td>
                                     <td>{{$kitap->formatted_date}}</td>
                                     <td>{{$kitap->library['libraries_name']}}</td>
                                     <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
                                     <td style="text-align: center;">{{$kitap->book_stok}}</td>
+
+                                    <td width="5">
+                                        <a href="javascript:void(0)" alt="QR Code Al">
+                                            <i id="@php echo $kitap->bookId @endphp" class="fa fa-qrcode"></i>
+                                        </a>
+                                    </td>
 
                                     <td width="5">
                                         <a href="{{route('books.edit',$kitap->bookId)}}" alt="Düzenle">
@@ -77,14 +124,64 @@
                     <div class="d-flex justify-content-center" style="margin-top:20px;">
                         {!! $kitaplar->links() !!}
                     </div>
+
+
+
                 </div>
             </div>
-
         </div>
     </div>
 
+    <!-- QRCode Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Yazdır</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {!! QrCode::format('png')->size(100)->generate(Request::url()) !!}
 
     <script type="text/javascript">
+        $(".fa-qrcode").click(function () {
+                qrcode_idSlugUrl = $(this).attr('id');
+                console.log('qr code ala bastın');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: qrcode_idSlugUrl,
+                        _method: 'GET'
+                    },
+                    url: "{{ route('books.qrcode','') }}/" + qrcode_idSlugUrl,
+                    success: function (data) {
+                        // console.log(data);
+                        $('.modal-body').html(data);
+                        $('.modal-title').html('<strong>QR Code: </strong>' + $('.sortable-'+qrcode_idSlugUrl).text());
+                        $('#exampleModal').modal('show');
+                    }
+                });
+        });
+
 
         $(".fa-trash").click(function () {
 

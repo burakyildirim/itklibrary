@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\backend\DefaultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::prefix('admin')->group(function () {
 
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
+//    Route::post('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'qrcode'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
+
+    // Kitap QRCode Routing
+    Route::get('/books/qrcode/{id}', [App\Http\Controllers\backend\BooksController::class, 'myqr'])->name('books.qrcode')->middleware('KutuphaneYoneticisi');
 
     // Rent Routing
     Route::resource('/rents', App\Http\Controllers\backend\RentsController::class)->middleware('KutuphaneYoneticisi');
