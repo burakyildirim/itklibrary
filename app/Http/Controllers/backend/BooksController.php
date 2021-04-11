@@ -31,6 +31,7 @@ class BooksController extends Controller
 
             $kitaplar = Books::with('library')
                 ->where('book_name','LIKE','%'.$request->q.'%')
+                ->orWhere('book_author','LIKE','%'.$request->q.'%')
                 ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->Paginate($paginationNumber);
@@ -42,6 +43,7 @@ class BooksController extends Controller
             $kitaplar = Books::
             whereIn('libraries_id', $authUserLibraries)
                 ->where('book_name','LIKE','%'.$request->q.'%')
+                ->orWhere('book_author','LIKE','%'.$request->q.'%')
                 ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')
