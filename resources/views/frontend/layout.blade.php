@@ -58,22 +58,43 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+{{--    <div class="container">--}}
     <div class="container">
+
     <h5 class="my-0 mr-md-auto font-weight-normal"><a class="brand-link" href="{{route('welcome.Index')}}">{{config('app.name')}}</a></h5>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('welcome.Index')}}">ANASAYFA</a>
+                </li>
 
-        </ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PROFİLİM
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Hesap Bilgilerim</a>
+                        <a class="dropdown-item" href="#">Favorilerim</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Rezervasyonlarım</a>
+                    </div>
+                </li>
+
+            </ul>
+
         @if (Route::has('login'))
             @auth
                 <span class="navbar-text">
                     <img style="width: 32px;" class="rounded-circle" src="@php echo Auth::user()->avatar == null ? asset('images/user_head.png') : Auth::user()->avatar @endphp" alt="">
                     <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Hoşgeldin, {{ Auth::user()->name }}.</a>
-                    Kütüphane Puanın <span class="badge badge-primary">{{Auth::user()->puan}}</span>
+
+                    <a href="#" class="btn btn-primary btn-sm" style="color:white; font-weight: bold;">
+                        PUAN <span class="badge badge-warning">{{Auth::user()->puan}}</span>
+                    </a>
 
                     <a href="{{ route('logout') }}" class="btn btn-sm btn-danger" style="color:white;"
                        onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
@@ -91,8 +112,9 @@
             @endauth
 
         @endif
+        </div>
     </div>
-    </div>
+{{--    </div>--}}
 </nav>
 
 
@@ -102,7 +124,7 @@
 
 </div>
 
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
+<footer class="pt-4 my-md-5 pt-md-5 border-top" style="z-index:-5;">
         <div class="col-12 col-md text-center">
             @auth()
                 @if((Auth::user()->role == 1 || Auth::user()->role == 3))

@@ -3,31 +3,64 @@
 
 @section('content')
     <style>
-        .yazarLi{
-            margin-left:10px;
+        .yazarLi {
+            margin-left: 10px;
             list-style-type: none;
         }
 
-        #book_name{
-            -webkit-box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
-            -moz-box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
-            box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.46);
+        #book_name {
+            -webkit-box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
+            -moz-box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
+            box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
         }
 
-        .display-4{
-            height:150px;
+        .display-4 {
+            height: 100px;
             line-height: 70px;
         }
+
+        #bookList {
+            display: none;
+            position: absolute;
+            border-left: 1px solid #7ebafa;
+            border-bottom: 1px solid #7ebafa;
+            border-right: 1px solid #7ebafa;
+            padding-right: 20px;
+            width: 100%;
+            background-color: white;
+            margin-top: -15px;
+            z-index: 5;
+            padding-right: 5px;
+            margin-left: -15px;
+            padding-top: 15px;
+            border-radius: 5px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            -webkit-box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
+            -moz-box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
+            box-shadow: 0px 3px 13px -2px rgba(0, 0, 0, 0.46);
+        }
+
+        #bookList ul {
+            padding-left: 0px;
+        }
+
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <img class="img-fluid" src="{{asset('backend/dist/img/itk_arma.png')}}" style="max-width: 120px;">
-        <h1 class="display-4"><span class="typewrite" data-period="2000" data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span class="wrap"></span></span></h1>
+        <h1 class="display-4"><span class="typewrite" data-period="2000"
+                                    data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span
+                    class="wrap"></span></span></h1>
+
         <p class="lead">Aradığınız kitabın hangi kütüphanelerimizde olduğunu öğrenmek için hızlı ve etkili bir araç.
             İstediğiniz kitap için rezervasyon yaptırabilir ve ilgili kütüphanemizden ödünç alabilirsiniz. Kitap
-            okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüller sizleri bekliyor! <span style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i class="fas fa-book-reader"></i></span></p>
+            okuyarak kazandığınız puanlarla sahip olabileceğiniz sürpriz ödüller sizleri bekliyor! <span
+                style="color:#cf352d;"><i class="fas fa-heart"></i></span> <span style="color:#2684b7;"><i
+                    class="fas fa-book-reader"></i></span></p>
     </div>
 
     <div class="col-lg-10 offset-lg-1">
@@ -35,16 +68,82 @@
             @csrf
             <div class="form-group row">
                 <div class="input-group">
-                    <input type="text" id="book_name" name="book_name" autocomplete="off" class="form-control form-control-lg" placeholder="Kitap yada yazar adı giriniz" autofocus>
+                    <input type="text" id="book_name" name="book_name" autocomplete="off"
+                           class="form-control form-control-lg" placeholder="Kitap yada yazar adı giriniz" autofocus>
                 </div>
             </div>
         </form>
-            <div id="bookList">
-            </div>
+        <div id="bookList">
+        </div>
     </div>
 
+{{--    <div class="row" style="margin-top:50px;">--}}
+{{--        <div class="col-lg-12">--}}
+{{--            <h1 class="display-4">Editörün Seçimi</h1>--}}
+{{--            <hr/>--}}
+{{--            <div class="card-deck">--}}
+{{--                <div class="card">--}}
+{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <h5 class="card-title">Card title</h5>--}}
+{{--                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to--}}
+{{--                            additional content. This content is a little bit longer.</p>--}}
+{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="card">--}}
+{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <h5 class="card-title">Card title</h5>--}}
+{{--                        <p class="card-text">This card has supporting text below as a natural lead-in to additional--}}
+{{--                            content.</p>--}}
+{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="card">--}}
+{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <h5 class="card-title">Card title</h5>--}}
+{{--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to--}}
+{{--                            additional content. This card has even longer content than the first to show that equal--}}
+{{--                            height--}}
+{{--                            action.</p>--}}
+{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+    <div class="row" style="margin-top:50px;">
+        <div class="col-lg-12">
+            <h1 class="display-4" style="margin-bottom: 0px;">Son Eklenen Kitaplar</h1>
+            <hr style=""/>
+
+            <div class="card-deck">
+                @foreach($sonEklenenKitaplar as $sonEklenenKitap)
+                    <div class="card">
+                        <img class="card-img-top"
+                             src="{{ $sonEklenenKitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$sonEklenenKitap->book_image}}"
+                             alt="Kitap Kapağı">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$sonEklenenKitap->book_name}}</h5>
+                            <p class="card-text">{!! substr(strip_tags($sonEklenenKitap->book_description),0,250).'...' !!}</p>
+{{--                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a class="btn btn-primary btn-md" href="">Kitap Sayfasına Git</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+
     <script>
-        var TxtType = function(el, toRotate, period) {
+        var TxtType = function (el, toRotate, period) {
             this.toRotate = toRotate;
             this.el = el;
             this.loopNum = 0;
@@ -54,7 +153,7 @@
             this.isDeleting = false;
         };
 
-        TxtType.prototype.tick = function() {
+        TxtType.prototype.tick = function () {
             var i = this.loopNum % this.toRotate.length;
             var fullTxt = this.toRotate[i];
 
@@ -64,12 +163,14 @@
                 this.txt = fullTxt.substring(0, this.txt.length + 1);
             }
 
-            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
 
             var that = this;
             var delta = 200 - Math.random() * 100;
 
-            if (this.isDeleting) { delta /= 2; }
+            if (this.isDeleting) {
+                delta /= 2;
+            }
 
             if (!this.isDeleting && this.txt === fullTxt) {
                 delta = this.period;
@@ -80,14 +181,14 @@
                 delta = 500;
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 that.tick();
             }, delta);
         };
 
-        window.onload = function() {
+        window.onload = function () {
             var elements = document.getElementsByClassName('typewrite');
-            for (var i=0; i<elements.length; i++) {
+            for (var i = 0; i < elements.length; i++) {
                 var toRotate = elements[i].getAttribute('data-type');
                 var period = elements[i].getAttribute('data-period');
                 if (toRotate) {
@@ -103,7 +204,7 @@
     </script>
 
     <script>
-        $(function(){
+        $(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,9 +212,9 @@
             });
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#bookSearchBox').keypress(
-                function(event){
+                function (event) {
                     if (event.which == '13') {
                         event.preventDefault();
                     }
@@ -134,7 +235,6 @@
                             _method: 'POST'
                         },
                         success: function (data) {
-
                             $('#bookList').fadeIn();
                             $('#bookList').html(data);
                         }
@@ -142,7 +242,7 @@
                 }
 
                 $('#book_name').on('focusout', function () {
-                    // $('#bookList').fadeOut();
+                    $('#bookList').fadeOut();
                 });
 
                 $(document).on('click', '#bookList li', function () {
