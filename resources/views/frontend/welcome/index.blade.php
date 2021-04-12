@@ -1,5 +1,5 @@
 @extends('frontend.layout')
-
+@section('title','#öncelikeğitim')
 
 @section('content')
     <style>

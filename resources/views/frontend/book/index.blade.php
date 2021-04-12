@@ -1,5 +1,5 @@
 @extends('frontend.layout')
-
+@section('title',$kitapDetay->book_name)
 
 @section('content')
     <style>
