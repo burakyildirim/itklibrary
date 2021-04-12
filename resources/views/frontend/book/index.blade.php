@@ -117,6 +117,7 @@
         </div>
 
         <div class="col-lg-12">
+            <hr/>
             @auth
                 <div id="disqus_thread"></div>
             @endauth
