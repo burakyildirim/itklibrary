@@ -46,13 +46,15 @@
         }
 
         .card:hover {
-            box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
-            -moz-box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
-            -webkit-box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
+            -webkit-box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
         }
 
         .card {
             border-color: #e9e4e4;
+            transition: 0.4s;
+
         }
 
     </style>
@@ -146,7 +148,7 @@
 
                         </div>
                         <div class="card-footer"
-                             style="padding:0px; border-top-right-radius:0px; border-top-left-radius:0px; ">
+                             style="padding:0px; border-top-right-radius:0px; border-top-left-radius:0px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px;">
                             <a class="btn btn-warning btn-lg"
                                style="width: 100%; border-top-right-radius:0px; border-top-left-radius:0px;"
                                href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug}}">Kitap
