@@ -45,6 +45,16 @@
             padding-left: 0px;
         }
 
+        .card:hover {
+            box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
+            -moz-box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
+            -webkit-box-shadow:0 0 5px #699,0 0 5px #969,0 0 5px #996,0 0 5px #669;
+        }
+
+        .card {
+            border-color: #e9e4e4;
+        }
+
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -77,43 +87,43 @@
         </div>
     </div>
 
-{{--    <div class="row" style="margin-top:50px;">--}}
-{{--        <div class="col-lg-12">--}}
-{{--            <h1 class="display-4">Editörün Seçimi</h1>--}}
-{{--            <hr/>--}}
-{{--            <div class="card-deck">--}}
-{{--                <div class="card">--}}
-{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="card-title">Card title</h5>--}}
-{{--                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to--}}
-{{--                            additional content. This content is a little bit longer.</p>--}}
-{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="card">--}}
-{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="card-title">Card title</h5>--}}
-{{--                        <p class="card-text">This card has supporting text below as a natural lead-in to additional--}}
-{{--                            content.</p>--}}
-{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="card">--}}
-{{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="card-title">Card title</h5>--}}
-{{--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to--}}
-{{--                            additional content. This card has even longer content than the first to show that equal--}}
-{{--                            height--}}
-{{--                            action.</p>--}}
-{{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="row" style="margin-top:50px;">--}}
+    {{--        <div class="col-lg-12">--}}
+    {{--            <h1 class="display-4">Editörün Seçimi</h1>--}}
+    {{--            <hr/>--}}
+    {{--            <div class="card-deck">--}}
+    {{--                <div class="card">--}}
+    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+    {{--                    <div class="card-body">--}}
+    {{--                        <h5 class="card-title">Card title</h5>--}}
+    {{--                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to--}}
+    {{--                            additional content. This content is a little bit longer.</p>--}}
+    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <div class="card">--}}
+    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+    {{--                    <div class="card-body">--}}
+    {{--                        <h5 class="card-title">Card title</h5>--}}
+    {{--                        <p class="card-text">This card has supporting text below as a natural lead-in to additional--}}
+    {{--                            content.</p>--}}
+    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <div class="card">--}}
+    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
+    {{--                    <div class="card-body">--}}
+    {{--                        <h5 class="card-title">Card title</h5>--}}
+    {{--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to--}}
+    {{--                            additional content. This card has even longer content than the first to show that equal--}}
+    {{--                            height--}}
+    {{--                            action.</p>--}}
+    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 
     <div class="row" style="margin-top:50px;">
         <div class="col-lg-12">
@@ -125,18 +135,22 @@
                     <div class="card">
                         <img class="card-img-top"
                              src="{{ $sonEklenenKitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$sonEklenenKitap->book_image}}"
-                             alt="Kitap Kapağı" style="height: 16vw; object-fit:cover;">
+                             alt="Kitap Kapağı" style="height: 22vw; object-fit:cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{$sonEklenenKitap->book_name}}</h5>
                             <p class="card-text text-muted">
                                 - {{$sonEklenenKitap->book_author}}
                             </p>
                             <p class="card-text">{!! substr(strip_tags($sonEklenenKitap->book_description),0,250).'...' !!}</p>
-{{--                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+                            {{--                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
 
                         </div>
-                        <div class="card-footer">
-                            <a class="btn btn-warning btn-md" style="width: 100%;" href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug}}">Kitap Sayfasına Git</a>
+                        <div class="card-footer"
+                             style="padding:0px; border-top-right-radius:0px; border-top-left-radius:0px; ">
+                            <a class="btn btn-warning btn-lg"
+                               style="width: 100%; border-top-right-radius:0px; border-top-left-radius:0px;"
+                               href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug}}">Kitap
+                                Sayfasına Git</a>
                         </div>
                     </div>
                 @endforeach
@@ -147,6 +161,10 @@
 
 
     <script>
+        // $('.card').mouseover(function () {
+        //     $(this).animate({marginLeft: '9px'}, 'slow');
+        // });
+
         var TxtType = function (el, toRotate, period) {
             this.toRotate = toRotate;
             this.el = el;
