@@ -125,14 +125,18 @@
                     <div class="card">
                         <img class="card-img-top"
                              src="{{ $sonEklenenKitap->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$sonEklenenKitap->book_image}}"
-                             alt="Kitap Kapağı">
+                             alt="Kitap Kapağı" style="height: 16vw; object-fit:cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{$sonEklenenKitap->book_name}}</h5>
+                            <p class="card-text text-muted">
+                                - {{$sonEklenenKitap->book_author}}
+                            </p>
                             <p class="card-text">{!! substr(strip_tags($sonEklenenKitap->book_description),0,250).'...' !!}</p>
 {{--                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+
                         </div>
-                        <div class="card-footer text-muted">
-                            <a class="btn btn-primary btn-md" href="">Kitap Sayfasına Git</a>
+                        <div class="card-footer">
+                            <a class="btn btn-warning btn-md" style="width: 100%;" href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug}}">Kitap Sayfasına Git</a>
                         </div>
                     </div>
                 @endforeach

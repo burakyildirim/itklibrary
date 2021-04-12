@@ -14,7 +14,7 @@ class WelcomeController extends Controller
         $sonKitaplar = Books::where('book_visStatus','=','1')
             ->with('library')
             ->orderBy('created_at','DESC')
-            ->select('id','book_slug','book_name','book_description')
+            ->select('id','book_slug','book_name','book_description','book_image','book_author')
             ->limit(3)
             ->get();
 
