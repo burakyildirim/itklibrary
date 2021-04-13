@@ -118,6 +118,11 @@
 
         <div class="col-lg-12">
             <hr/>
+            @guest
+                <div class="alert alert-info" role="alert">
+                    Yorum yapmak için lütfen <a href="{{route('login')}}">giriş</a> yapınız.<br/>
+                </div>
+                @endguest
             @auth
                 <div id="disqus_thread"></div>
             @endauth
