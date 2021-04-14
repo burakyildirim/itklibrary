@@ -64,9 +64,12 @@
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <img class="img-fluid" src="{{asset('/images/itk_kutuphane_logo.png')}}" style="max-width: 350px;">
-        <h1 class="display-5" style="font-weight: lighter;"><span class="typewrite" data-period="2000"
-                                    data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span
-                    class="wrap"></span></span></h1>
+        <h1 class="display-4" style="font-weight: lighter;">
+            <span class="typewrite" data-period="2000"
+                                    data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'>
+                <span class="wrap"></span>
+            </span>
+        </h1>
 
         <p class="lead">Aradığınız kitabın hangi kütüphanelerimizde olduğunu öğrenmek için hızlı ve etkili bir araç.
             İstediğiniz kitap için rezervasyon yaptırabilir ve ilgili kütüphanemizden ödünç alabilirsiniz. Kitap
