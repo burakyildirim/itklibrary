@@ -83,9 +83,9 @@
                         E-Kütüphane
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Nasıl puan kazanırım?</a>
-                        <a class="dropdown-item" href="#">Rezervasyon oluşturma</a>
-                        <a class="dropdown-item" href="#">Kitap ödünç alma ve teslim</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-star-half-alt"></i> Nasıl puan kazanırım?</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-folder-plus"></i> Rezervasyon oluşturma</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-book-reader"></i> Kitap ödünç alma ve teslim</a>
 
 {{--                        <div class="dropdown-divider"></div>--}}
                     </div>
@@ -99,10 +99,10 @@
                                 Profilim
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Hesap Bilgilerim</a>
-                                <a class="dropdown-item" href="#">Favorilerim</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Hesap Bilgilerim</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Favorilerim</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Rezervasyonlarım</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-folder"></i> Rezervasyonlarım</a>
                             </div>
                         </li>
                     @endauth
