@@ -39,6 +39,14 @@
     <!-- jQuery -->
     <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 
+
+    <!-- Popper -->
+    <script src="{{asset('backend/plugins/popper/popper.js')}}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
+
+
     <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
     <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
@@ -164,8 +172,7 @@
 </footer>
 
 
-<!-- jQuery -->
-<script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
+
 
 
 </body>

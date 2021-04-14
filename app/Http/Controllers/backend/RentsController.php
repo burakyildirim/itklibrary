@@ -115,13 +115,25 @@ class RentsController extends Controller
      */
     public function edit($id)
     {
-//        $libraries = Libraries::where('id', $id)->first();
-//
-//        $libraryAuthPersons = User::
-//        where('role','3')
-//            ->get();
-//
-//        return view('backend.libraries.edit')->with('libraries', $libraries)->with('libraryAuthPersons',$libraryAuthPersons);
+        $rent = Rents::where('id', $id)->with('book')->first();
+//        dd($rent);
+
+        if (!($rent->rent_status == 1 || $rent->rent_status== 2))
+        {
+            return view('backend.rents.index');
+        }
+
+        $users = User::
+            orderBy('name','ASC')
+            ->get();
+
+
+        // kitap görünürlük durumlarını döndürür.
+        $visStatus = Rents::RentStatusesEdit;
+
+//        dd($visStatus);
+
+        return view('backend.rents.edit')->with('users', $users)->with('rent',$rent)->with(compact('visStatus'));
     }
 
     /**
@@ -133,20 +145,17 @@ class RentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($id);
-//        $libraries = Libraries::where('id', $id)->update(
-//            [
-//                "libraries_name" => $request->libraries_name,
-//                "libraries_phone" => $request->libraries_phone,
-//                "libraries_address" => $request->libraries_address,
-//                "libraries_auth" => $request->libraries_auth
-//            ]);
-//
-//        if ($libraries) {
-//            return back()->with("success", "Güncelleme başarılı!");
-//        }
-//
-//        return back()->with("error", "Güncelleme başarısız!");
+        $rent = Rents::where('id', $id)->update(
+            [
+                "rentEndDate" => $request->rentEndDate
+            ]);
+
+        if ($rent) {
+            return back()->with("success", "Güncelleme başarılı!");
+        }
+
+
+        return back()->with("error", "Güncelleme başarısız!");
     }
 
     /**

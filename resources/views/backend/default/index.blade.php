@@ -91,7 +91,7 @@
                                     </td>
                                     <td width="5">
                                         {{--                                    {{route('libraries.edit',$library->id)}}--}}
-                                        <a class="btn btn-app fa-pen-{{$rent->id}}" href="javascript:void(0)">
+                                        <a class="btn btn-app fa-pen-{{$rent->id}}" href="{{route('rents.edit',$rent->id)}}">
                                             <i id="@php echo $rent->id @endphp" class="fa fa-pen text-primary"></i>Düzenle
                                         </a>
                                     </td>

@@ -37,7 +37,7 @@
 
                     </div>
                     <div class="table-responsive" style="margin-top:20px;">
-                        <table class="table table-striped" id="userTable">
+                        <table class="table table-striped table-hover" id="userTable">
                             <thead>
                             <tr>
                                 <th>RESİM</th>
@@ -84,7 +84,7 @@
                                     <td width="5">
                                         {{--                                    {{route('libraries.edit',$library->id)}}--}}
                                         @if($rent->rent_status==1)
-                                            <a href="javascript:void(0)" alt="Düzenle">
+                                            <a href="{{route('rents.edit',$rent->id)}}" alt="Düzenle">
                                                 <i id="@php echo $rent->id @endphp" class="fa fa-pen kalem-{{$rent->id}}"></i>
                                             </a>
                                         @endif

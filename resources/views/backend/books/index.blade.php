@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped" id="bookTable">
+                        <table class="table table-striped table-hover" id="bookTable">
                             <thead>
                             <tr>
                                 <th>KİTAP RESİM</th>

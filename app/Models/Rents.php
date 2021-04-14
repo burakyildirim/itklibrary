@@ -16,6 +16,11 @@ class Rents extends Model
         4 => 'Kitap Kütüphaneye Teslim Edilmedi'
     ];
 
+    public const RentStatusesEdit = [
+        1 => 'Kütüphaneci Onayı Bekliyor',
+        2 => 'Kitap Alıcıda'
+    ];
+
     public static function getRentStatusID($status)
     {
         return array_search($status, self::RentStatuses);

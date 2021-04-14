@@ -39,7 +39,9 @@
                 alt="" class="img-thumbnail">
             <hr>
             @auth
-                <strong>Bulunduğu Kütüphane:</strong> {{$kitapDetay->library['libraries_name']}}
+                <strong>Bulunduğu Kütüphane:</strong>
+                {{$kitapDetay->library['libraries_name']}}
+
                 <hr/>
                 @if($kitapDetay->book_rentStatus==1 && !$tarafimcaRezerve)
 
@@ -146,12 +148,14 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <script>
+
         $(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
         });
 
         $(document).ready(function () {
@@ -186,6 +190,10 @@
                     }).set('labels', {ok:'Rezerve Et', cancel:'İptal'})
             })
         });
+
+    </script>
+
+    <script type="text/javascript">
 
     </script>
 

@@ -16,51 +16,55 @@
                         </a>
 
                     </div>
-                    <table class="table table-striped" id="userTable">
-                        <thead>
-                        <tr>
-                            <th>KULLANICI ADI</th>
-                            <th>E-MAİL</th>
-                            <th>ROL</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="sortable">
-
-                        @foreach($data['users'] as $user)
-                            <tr id="item-{{$user->id}}">
-                                <td class="sortable">{{$user['name']}}</td>
-                                <td>{{$user['email']}}</td>
-                                <td>{{\App\Models\User::Roles[$user['role']]}}</td>
-
-                                <td width="5">
-                                    <a href="{{route('users.edit',$user->id)}}" alt="Düzenle">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                </td>
-
-
-                                <td width="5">
-                                    @if($user->id != '2' && $user->id != '1')
-                                        <a href="javascript:void(0)" alt="Sil">
-                                            <i id="@php echo $user->id @endphp" class="fa fa-trash"></i>
-                                        </a>
-                                    @endif
-                                </td>
-
-
-                                <td width="5">
-                                    <a href="javascript:void(0)" alt="Parola Sıfırla">
-                                        <i id="@php echo $user->id @endphp" class="fa fa-key"></i>
-                                    </a>
-                                </td>
-
+                    <div class="table-responsive" style="margin-top:20px;">
+                        <table class="table table-striped table-hover" id="userTable">
+                            <thead>
+                            <tr>
+                                <th>KULLANICI ADI</th>
+                                <th>E-MAİL</th>
+                                <th>KÜTÜPHANE PUANI</th>
+                                <th>ROL</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="sortable">
+
+                            @foreach($data['users'] as $user)
+                                <tr id="item-{{$user->id}}">
+                                    <td class="sortable">{{$user['name']}}</td>
+                                    <td>{{$user['email']}}</td>
+                                    <td>{{$user['puan']}}</td>
+                                    <td>{{\App\Models\User::Roles[$user['role']]}}</td>
+
+                                    <td width="5">
+                                        <a href="{{route('users.edit',$user->id)}}" alt="Düzenle">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td width="5">
+                                        @if($user->id != '2' && $user->id != '1')
+                                            <a href="javascript:void(0)" alt="Sil">
+                                                <i id="@php echo $user->id @endphp" class="fa fa-trash"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+
+
+                                    <td width="5">
+                                        <a href="javascript:void(0)" alt="Parola Sıfırla">
+                                            <i id="@php echo $user->id @endphp" class="fa fa-key"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -90,9 +94,9 @@
                             id: destroy_id,
                             _method: 'DELETE'
                         },
-                        url: "{{ route('users.destroy','') }}/"+destroy_id,
+                        url: "{{ route('users.destroy','') }}/" + destroy_id,
                         success: function (data) {
-                            $("#item-"+destroy_id).remove();
+                            $("#item-" + destroy_id).remove();
                             alertify.success(data);
                             //setTimeout(location.reload.bind(location), 1500);
                         }
