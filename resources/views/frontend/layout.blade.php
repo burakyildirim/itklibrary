@@ -85,8 +85,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Nasıl puan kazanırım?</a>
                         <a class="dropdown-item" href="#">Rezervasyon oluşturma</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Kitap ödünç alma ve teslim</a>
+
+{{--                        <div class="dropdown-divider"></div>--}}
                     </div>
                 </li>
 
@@ -95,7 +96,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                PROFİLİM
+                                Profilim
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Hesap Bilgilerim</a>
