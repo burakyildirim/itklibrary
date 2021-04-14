@@ -83,7 +83,7 @@
                                     </td>
                                     <td width="5">
                                         {{--                                    {{route('libraries.edit',$library->id)}}--}}
-                                        @if($rent->rent_status==1)
+                                        @if($rent->rent_status==1 || $rent->rent_status==2)
                                             <a href="{{route('rents.edit',$rent->id)}}" alt="Düzenle">
                                                 <i id="@php echo $rent->id @endphp" class="fa fa-pen kalem-{{$rent->id}}"></i>
                                             </a>

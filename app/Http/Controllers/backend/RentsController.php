@@ -7,6 +7,7 @@ use App\Models\Books;
 use App\Models\Libraries;
 use App\Models\Rents;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -147,7 +148,7 @@ class RentsController extends Controller
     {
         $rent = Rents::where('id', $id)->update(
             [
-                "rentEndDate" => $request->rentEndDate,
+                "rentEndDate" => DateTime::createFromFormat('d.m.Y', $request->rentEndDate),
                 "rent_status" => $request->rent_status,
                 "updated_at" => now()
             ]);
