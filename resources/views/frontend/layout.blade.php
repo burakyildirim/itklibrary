@@ -62,8 +62,11 @@
     {{--    <div class="container">--}}
     <div class="container">
 
-        <h5 class="my-0 mr-md-auto font-weight-normal"><a class="brand-link"
-                                                          href="{{route('welcome.Index')}}">{{config('app.name')}}</a>
+        <h5 class="my-0 mr-md-auto font-weight-normal">
+            <a class="brand-link" href="{{route('welcome.Index')}}">
+                {{--                {{config('app.name')}}--}}
+                <img src="{{asset('/images/itk_kutuphane_logo.png')}}" style="width: 120px;"/>
+            </a>
         </h5>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,9 +74,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('welcome.Index')}}">ANASAYFA</a>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="{{route('welcome.Index')}}">ANASAYFA</a>--}}
+{{--                </li>--}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        E-Kütüphane
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Nasıl puan kazanırım?</a>
+                        <a class="dropdown-item" href="#">Rezervasyon oluşturma</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Kitap ödünç alma ve teslim</a>
+                    </div>
                 </li>
+
                 @if (Route::has('login'))
                     @auth
                         <li class="nav-item dropdown">
@@ -95,7 +111,7 @@
 
             @if (Route::has('login'))
                 @auth
-                    <span class="navbar-text">
+                <span class="navbar-text">
                     <img style="width: 32px;" class="rounded-circle"
                          src="@php echo Auth::user()->avatar == null ? asset('images/user_head.png') : Auth::user()->avatar @endphp"
                          alt="">
@@ -114,10 +130,10 @@
                     </form>
                 </span>
                 @else
-                    <span class="navbar-text">
-                    <a class="btn btn-danger" style="color:white;" href="{{route('login')}}">Giriş Yap</a>
-                    <a class="btn btn-primary" style="color:white;" href="{{route('register')}}">Üye Ol</a>
-                </span>
+                    <span class="navbar-text"  style="float:right;">
+                        <a class="btn btn-danger" style="color:white;" href="{{route('login')}}">Giriş Yap</a>
+                        <a class="btn btn-primary" style="color:white;" href="{{route('register')}}">Üye Ol</a>
+                    </span>
                 @endauth
 
             @endif

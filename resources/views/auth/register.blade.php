@@ -1,3 +1,4 @@
+@section('title','Üye Ol')
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

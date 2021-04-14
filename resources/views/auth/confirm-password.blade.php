@@ -1,3 +1,4 @@
+@section('title','Parola Doğrulama')
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

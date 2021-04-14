@@ -104,6 +104,12 @@ class BooksController extends Controller
             $file_name = null;
         }
 
+//        $bookSlug = Str::slug($request->book_name);
+//        $slugExists = Books::where('book_slug',Str::slug($request->book_name))->exists();
+//        if ($slugExists){
+//            $bookSlug = $request->book_slug.'-'.mt_rand(1000000000, 9999999999);
+//        }
+
         $publishDate = DateTime::createFromFormat('d.m.Y', $request->book_publishDate);
 
         $book = Books::insert(
@@ -190,6 +196,7 @@ class BooksController extends Controller
         if ($bookSlug == null) {
             $bookSlug = Str::slug($request->book_name);
         }
+
 
         if ($request->hasFile('book_image')) {
             $request->validate([

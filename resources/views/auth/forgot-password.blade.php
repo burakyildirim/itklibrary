@@ -1,3 +1,4 @@
+@section('title','Şifremi Unuttum')
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

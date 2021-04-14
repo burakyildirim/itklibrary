@@ -1,3 +1,4 @@
+@section('title','E-Posta Doğrulama')
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

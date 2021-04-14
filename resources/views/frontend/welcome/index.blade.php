@@ -63,7 +63,7 @@
 
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <img class="img-fluid" src="{{asset('backend/dist/img/itk_arma.png')}}" style="max-width: 120px;">
+        <img class="img-fluid" src="{{asset('/images/itk_kutuphane_logo.png')}}" style="max-width: 450px;">
         <h1 class="display-4"><span class="typewrite" data-period="2000"
                                     data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'><span
                     class="wrap"></span></span></h1>
@@ -129,7 +129,7 @@
 
     <div class="row" style="margin-top:50px;">
         <div class="col-lg-12">
-            <h1 class="display-4" style="margin-bottom: 0px;">Son Eklenen Kitaplar</h1>
+            <h1 class="display-5" style="margin-bottom: 0px; font-weight:lighter;">Son Eklenen Kitaplar</h1>
             <hr style=""/>
 
             <div class="card-deck">
