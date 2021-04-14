@@ -147,7 +147,8 @@ class RentsController extends Controller
     {
         $rent = Rents::where('id', $id)->update(
             [
-                "rentEndDate" => $request->rentEndDate
+                "rentEndDate" => $request->rentEndDate,
+                "rent_status" => $request->rent_status
             ]);
 
         if ($rent) {
