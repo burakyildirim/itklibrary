@@ -61,6 +61,10 @@
             font-weight: bold;
             border-radius: 5px;
         }
+
+        {{--body{--}}
+        {{--    background-image: url('{{asset('/images/dust_scratches.png')}}');--}}
+        {{--}--}}
     </style>
 
 </head>
@@ -107,10 +111,10 @@
                                 Profilim
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Hesap Bilgilerim</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Favorilerim</a>
+                                <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-user-circle"></i> Hesap Bilgilerim</a>
+                                <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-heart"></i> Favorilerim</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-folder"></i> Rezervasyonlarım</a>
+                                <a class="dropdown-item" href="{{route('profile.Reservations')}}"><i class="fa fa-folder"></i> Rezervasyonlarım</a>
                             </div>
                         </li>
                     @endauth
