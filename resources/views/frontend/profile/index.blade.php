@@ -4,7 +4,7 @@
 @section('sidebar_menu')
     <div class="list-group">
         <a href="{{route('profile.Index')}}" class="list-group-item list-group-item-action active">
-            <i class="fa fa-folder"></i> Rezervasyonlarım
+            <i class="fa fa-user-circle"></i> Hesap Bilgilerim
         </a>
         <button type="button" class="list-group-item list-group-item-action">
             <i class="fa fa-heart"></i> Favorilerim
