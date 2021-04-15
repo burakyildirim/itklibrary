@@ -20,8 +20,8 @@ use Symfony\Component\Console\Input\Input;
 
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
 
-Route::get('/profile', [App\Http\Controllers\frontend\ProfileController::class, 'index'])->name('profile.Index');
-Route::get('/reservations', [App\Http\Controllers\frontend\ProfileController::class, 'reservations'])->name('profile.Reservations');
+Route::get('/profile', [App\Http\Controllers\frontend\ProfileController::class, 'index'])->middleware('auth')->name('profile.Index');
+Route::get('/reservations', [App\Http\Controllers\frontend\ProfileController::class, 'reservations'])->middleware('auth')->name('profile.Reservations');
 
 
 Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeController::class, 'kitapAra'])->name('welcome.kitapAra');
