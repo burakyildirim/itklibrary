@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\Input;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+| alooo
 */
 
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
