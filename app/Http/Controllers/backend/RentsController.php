@@ -38,12 +38,13 @@ class RentsController extends Controller
         $quer = $request->q;
 
         $data['rents'] = Rents::
-            whereIn('books_id',$kitaplar)
-            ->whereHas('user', function($que) use ($quer){
-                $que->where('name', 'LIKE', '%'.$quer.'%');
+            whereHas('user', function($que) use ($quer, $kitaplar){
+                $que->where('name', 'LIKE', '%'.$quer.'%')
+                ->whereIn('books_id',$kitaplar);
             })
-            ->orWhereHas('book', function($que) use ($quer){
-                $que->where('book_name', 'LIKE', '%'.$quer.'%');
+            ->orWhereHas('book', function($que) use ($quer, $kitaplar){
+                $que->where('book_name', 'LIKE', '%'.$quer.'%')
+                    ->whereIn('books_id',$kitaplar);
             })
             ->select('rents.*')
             ->orderby('rent_status','ASC')

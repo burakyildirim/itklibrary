@@ -39,15 +39,22 @@ class BooksController extends Controller
             $authUserLibraries = Libraries::where('libraries_auth', Auth::id())
                 ->select('id')
                 ->get();
+//            dd($authUserLibraries);
+
 
             $kitaplar = Books::
-            whereIn('libraries_id', $authUserLibraries)
-                ->where('book_name','LIKE','%'.$request->q.'%')
-                ->orWhere('book_author','LIKE','%'.$request->q.'%')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus', 'book_raf','book_sira')
+                where(function ($y) use ($request, $authUserLibraries){
+                    $y->where('book_name', 'LIKE','%'.$request->q.'%')->whereIn('libraries_id', $authUserLibraries);
+                })
+                    ->orWhere(function ($w) use($request, $authUserLibraries){
+                    $w->where('book_author', 'LIKE','%'.$request->q.'%')->whereIn('libraries_id', $authUserLibraries);
+                })
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'books.id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus', 'book_raf','book_sira')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')
                 ->paginate($paginationNumber);
+
+//            dd($kitaplar);
         }
 
         return view('backend.books.index')->with('kitaplar', $kitaplar);
