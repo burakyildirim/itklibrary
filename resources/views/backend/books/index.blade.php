@@ -45,6 +45,8 @@
                                 <th>KÜTÜPHANE</th>
                                 <th>GÖRÜNÜR MÜ?</th>
                                 <th style="text-align: center;">STOK ADEDİ</th>
+                                <th style="text-align: center;">R</th>
+                                <th style="text-align: center;">S</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -67,6 +69,12 @@
                                     <td>{{$kitap->library['libraries_name']}}</td>
                                     <td>{{\App\Models\Books::VisStatus[$kitap->book_visStatus]}}</td>
                                     <td style="text-align: center;">{{$kitap->book_stok}}</td>
+                                    <td style="text-align: center; font-weight: bold; color:red;">
+                                        <span class="badge badge-primary" style="font-size: 17px;">{{$kitap->book_raf}}</span>
+                                    </td>
+                                    <td style="text-align: center; font-weight: bold; color:blue;">
+                                        <span class="badge badge-danger" style="font-size: 17px;">{{$kitap->book_sira}}</span>
+                                    </td>
 
                                     <td width="5">
                                         <a href="javascript:void(0)" alt="QR Code Al">

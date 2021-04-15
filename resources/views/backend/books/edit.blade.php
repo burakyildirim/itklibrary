@@ -152,6 +152,33 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <label>Kitap Raf</label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <select class="custom-select" id="inputGroupSelect02" name="book_raf">
+                                            @foreach(\App\Models\Books::Rafs as $raf)
+                                                <option {{$books->book_raf == $raf ? 'selected' : ''}} value="@php echo $raf @endphp">@php echo $raf @endphp</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Raf Sıra</label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <select class="custom-select" id="inputGroupSelect02" name="book_sira">
+                                            @foreach(\App\Models\Books::Siras as $sira)
+                                                <option {{$books->book_sira == $sira ? 'selected' : ''}} value="@php echo $sira @endphp">@php echo $sira @endphp</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>Kitap SLUG</label>
                             <div class="row">

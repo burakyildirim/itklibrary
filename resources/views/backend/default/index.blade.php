@@ -56,6 +56,8 @@
                                     <th>ALICI</th>
                                     <th class="text-center">BAŞLANGIÇ TARİHİ</th>
                                     <th class="text-center">BİTİŞ TARİHİ</th>
+                                    <th class="text-center">R</th>
+                                    <th class="text-center">S</th>
                                     <th>DURUM</th>
                                     <th></th>
                                     <th></th>
@@ -81,6 +83,12 @@
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
                                     <td width="170"
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td style="text-align: center; font-weight: bold; color:red;">
+                                        <span class="badge badge-primary" style="font-size: 17px;">{{$rent['book']->book_raf}}</span>
+                                    </td>
+                                    <td style="text-align: center; font-weight: bold; color:blue;">
+                                        <span class="badge badge-danger" style="font-size: 17px;">{{$rent['book']->book_sira}}</span>
+                                    </td>
                                     <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">
@@ -135,6 +143,8 @@
                                     <th>ALICI</th>
                                     <th class="text-center">BAŞLANGIÇ TARİHİ</th>
                                     <th class="text-center">BİTİŞ TARİHİ</th>
+                                    <th class="text-center">R</th>
+                                    <th class="text-center">S</th>
                                     <th>REZ. DURUMU</th>
                                     <th></th>
                                 @endif
@@ -158,6 +168,12 @@
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
                                     <td width="170"
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td style="text-align: center; font-weight: bold; color:red;">
+                                        <span class="badge badge-primary" style="font-size: 17px;">{{$rent['book']->book_raf}}</span>
+                                    </td>
+                                    <td style="text-align: center; font-weight: bold; color:blue;">
+                                        <span class="badge badge-danger" style="font-size: 17px;">{{$rent['book']->book_sira}}</span>
+                                    </td>
                                     <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">
@@ -202,6 +218,8 @@
                                     <th>ALICI</th>
                                     <th class="text-center">BAŞLANGIÇ TARİHİ</th>
                                     <th class="text-center">BİTİŞ TARİHİ</th>
+                                    <th class="text-center">R</th>
+                                    <th class="text-center">S</th>
                                     <th>REZ. DURUMU</th>
                                     <th></th>
                                 @endif
@@ -225,6 +243,12 @@
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>
                                     <td width="170"
                                         class="text-center">{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>
+                                    <td style="text-align: center; font-weight: bold; color:red;">
+                                        <span class="badge badge-primary" style="font-size: 17px;">{{$rent['book']->book_raf}}</span>
+                                    </td>
+                                    <td style="text-align: center; font-weight: bold; color:blue;">
+                                        <span class="badge badge-danger" style="font-size: 17px;">{{$rent['book']->book_sira}}</span>
+                                    </td>
                                     <td id="tdRentStatus-{{$rent->id}}">{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>
 
                                     <td width="5">

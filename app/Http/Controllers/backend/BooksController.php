@@ -32,7 +32,7 @@ class BooksController extends Controller
             $kitaplar = Books::with('library')
                 ->where('book_name','LIKE','%'.$request->q.'%')
                 ->orWhere('book_author','LIKE','%'.$request->q.'%')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus', 'book_raf','book_sira')
                 ->orderBy('book_name', 'ASC')
                 ->Paginate($paginationNumber);
         } else {
@@ -44,7 +44,7 @@ class BooksController extends Controller
             whereIn('libraries_id', $authUserLibraries)
                 ->where('book_name','LIKE','%'.$request->q.'%')
                 ->orWhere('book_author','LIKE','%'.$request->q.'%')
-                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus')
+                ->select(DB::raw('DATE_FORMAT(book_publishDate, "%Y") as formatted_date'), 'id as bookId', 'book_name', 'book_image', 'book_author', 'book_publisher', 'libraries_id', 'book_stok', 'book_visStatus', 'book_raf','book_sira')
                 ->orderBy('book_name', 'ASC')
                 ->with('library')
                 ->paginate($paginationNumber);
@@ -128,6 +128,8 @@ class BooksController extends Controller
                 "book_updatedBy" => Auth::id(),
                 "book_stok" => $request->book_stok,
                 "book_slug" => Str::slug($request->book_name),
+                "book_raf" => $request->book_raf,
+                "book_sira" => $request->book_sira,
                 "book_isbn" => $request->book_isbn,
                 "created_at" => now(),
                 "updated_at" => now()
@@ -220,6 +222,8 @@ class BooksController extends Controller
                     "book_language" => $request->book_language,
                     "libraries_id" => $request->libraries_id,
                     "book_slug" => $bookSlug,
+                    "book_raf" => $request->book_raf,
+                    "book_sira" => $request->book_sira,
                     "book_isbn" => $request->book_isbn,
                     "book_stok" => $request->book_stok,
                     "book_updatedBy" => Auth::id(),
@@ -249,6 +253,8 @@ class BooksController extends Controller
                     "book_language" => $request->book_language,
                     "book_stok" => $request->book_stok,
                     "book_slug" => $bookSlug,
+                    "book_raf" => $request->book_raf,
+                    "book_sira" => $request->book_sira,
                     "book_isbn" => $request->book_isbn,
                     "libraries_id" => $request->libraries_id,
                     "book_updatedBy" => Auth::id(),

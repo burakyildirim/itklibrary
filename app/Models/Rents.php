@@ -31,6 +31,6 @@ class Rents extends Model
     }
 
     public function book(){
-        return $this->belongsTo(Books::class, 'books_id')->select('id', 'book_name', 'book_image','book_author','book_stok','book_language','book_slug');
+        return $this->belongsTo(Books::class, 'books_id')->select('id', 'book_name', 'book_image','book_author','book_stok','book_language','book_slug','book_raf','book_sira');
     }
 }
