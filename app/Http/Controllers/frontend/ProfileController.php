@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function index(){
         $userProfile = Auth::user();
 
-        return view('frontend.profile.Index')->with('userProfile',$userProfile);
+        return view('frontend.profile.index')->with('userProfile',$userProfile);
     }
 
     public function reservations(){
