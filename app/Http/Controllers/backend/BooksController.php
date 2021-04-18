@@ -57,6 +57,16 @@ class BooksController extends Controller
 //            dd($kitaplar);
         }
 
+
+//        $site = 'https://www.idefix.com/Kitap/Hayvan-Ciftligi/Edebiyat/Roman/Dunya-Roman/urunno=0000000105409';
+//        $veri = file_get_contents($site);
+//        preg_match_all("@<a href=\"javascript:\" class=\"showZoomable ImageZoom\">(.*?)</a>@is",$veri,$kitapResim);
+//        preg_match_all("@data-src=\"(.*?)\"@is",$kitapResim[1][0],$kitapResimLink);
+//        $idefixImage = file_get_contents($kitapResimLink[1][0]);
+//        $kitapUzanti = explode(".",$kitapResimLink[1][0]);
+//
+//        dd($kitapUzanti[count($kitapUzanti)-1]);
+
         return view('backend.books.index')->with('kitaplar', $kitaplar);
     }
 
@@ -85,6 +95,51 @@ class BooksController extends Controller
         return view('backend.books.create', compact('visStatus'), compact('languages'))->with('userLibraries', $authUserLibraries);
     }
 
+    public function kitapYurduSearch($link){
+        $site2 = rawurldecode($link);
+        $site = $site2;
+        $veri = file_get_contents($site);
+
+        preg_match_all('@<div class="product-description">(.*?)</div>@is', $veri, $aciklama);
+        preg_match_all('@<h1 class="mt0" style="margin-bottom: 10px !important;">(.*?)</h1>@is', $veri, $kitapAdi);
+        preg_match_all("@<div class=\"publisher\"><span>Yayınevi</span>(.*?)</div>@is",$veri,$publisher);
+
+        // idefix den kitap resimlerinin çekilmesi //
+        preg_match_all("@<a href=\"javascript:\" class=\"showZoomable ImageZoom\">(.*?)</a>@is",$veri,$kitapResim);
+        preg_match_all("@data-src=\"(.*?)\"@is",$kitapResim[1][0],$kitapResimLink);
+        // idefix den kitap resimlerinin çekilmesi //
+
+        $metin = explode('<div class="row">',$aciklama[1][0]);
+
+        $siteBasligi = preg_match_all("@<title>(.*?)</title>@is",$veri,$title);
+        $yazarAdi = explode('-',$title[1][0]);
+        $sonKitapAdi = explode(',',$yazarAdi[0]);
+        $sonSonKitapAdi = trim($sonKitapAdi[0]);
+        $sonSonYazarAdi = trim($sonKitapAdi[1]);
+
+        $publisherAdi = explode('>',$publisher[1][0]);
+        $sonSonYayineviAdi = trim(explode('<',$publisherAdi[1])[0]);
+
+//        $search  = array('&uuml;', '&ccedil;', '&Ouml;', 'D', 'E');
+//        $replace = array('ü', 'ç', 'Ö', 'E', 'F');
+
+        $idefixImage = file_get_contents($kitapResimLink[1][0]);
+        $kitapUzanti = explode(".",$kitapResimLink[1][0]);
+
+        $dosyaAdi = uniqid().'.'.$kitapUzanti[count($kitapUzanti)-1];
+        file_put_contents(public_path('images/books/'.$dosyaAdi), $idefixImage);
+
+        return response()->json([
+            'metin' => $metin,
+            'kitapAdi' => $sonSonKitapAdi,
+            'yazarAdi' => $sonSonYazarAdi,
+            'yayineviAdi' => $sonSonYayineviAdi,
+            'kitapResimLink' => $kitapResimLink,
+            'dosyaAdi' => $dosyaAdi,
+            'kitapResimUzanti' => $kitapUzanti[count($kitapUzanti)-1]
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -108,7 +163,11 @@ class BooksController extends Controller
                 'book_author' => 'required'
             ]);
 
-            $file_name = null;
+            if ($request->hiddenResimDosyasi!=null){
+                $file_name = $request->hiddenResimDosyasi;
+            }else{
+                $file_name = null;
+            }
         }
 
 //        $bookSlug = Str::slug($request->book_name);

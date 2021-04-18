@@ -23,7 +23,7 @@
                                 <label>Kitap Adı</label>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input class="form-control" type="text" name="book_name" autocomplete="off" required>
+                                        <input class="form-control" id="book_name" type="text" name="book_name" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                 <label>ISBN Numarası</label>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input class="form-control" type="number" name="book_isbn" autocomplete="off" required>
+                                        <input class="form-control" type="number" name="book_isbn" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input class="form-control" type="text" name="book_publishDate" autocomplete="off" class="publishDate"
-                                               data-provide="datepicker" data-date-format="dd.mm.yyyy">
+                                               data-provide="datepicker" data-date-format="dd.mm.yyyy" required>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <label>Kitap Görseli</label>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <input class="form-control-file" name="book_image" type="file">
+                                        <input class="form-control-file" name="book_image" id="kitap_gorselBox" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -176,6 +176,20 @@
                             CKEDITOR.replace('editor1');
                         </script>
 
+                        <div class="form-group" style="margin-top:30px;">
+                            <div align="left" class="card-footer">
+                                İdefix Link:<input class="form-control" type="text" id="kitapYurduLinkBox" name="kitap_link">
+                            </div>
+                            <div class="card-footer">
+                                <img alt="" width="170px" id="idefixKitapResim">
+                                <input type="hidden" id="idefixHiddenResimName" name="hiddenResimDosyasi">
+                            </div>
+                            <div align="right" class="card-footer">
+                                <a id="btnBilgiCek" href="javascript:void(0)" >VERİLERİ ÇEK</a>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group" style="margin-top:30px;">
                             <div align="right" class="card-footer">
@@ -203,6 +217,54 @@
             });
 
             $(document).ready(function(){
+                $('#btnBilgiCek').click(function () {
+
+                    alertify.confirm('Kitap bilgilerini idefix adresinden çekmek istediğinize emin misiniz?', 'idefix üzerinden çekilen verilerin doğruluğunu mutlaka kontrol edin!',
+                        function () {
+                            var bookKitapYurduLink = $('#kitapYurduLinkBox').val();
+                            // console.log(bookKitapYurduLink);
+
+                            $.ajax({
+                                url: "{{ route('books.KitapYurduSearchName','') }}/"+bookKitapYurduLink,
+                                type: 'get',
+                                ContentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+                                dataType:'json',
+                                data: {
+                                    token: $('meta[name="csrf-token"]').attr('content'),
+                                    link: bookKitapYurduLink
+                                },
+                                success: function (data) {
+                                    CKEDITOR.instances.editor1.setData(data['metin'][0]);
+                                    // var kitabinAdi = ;
+                                    // var yazarinAdi = ;
+                                    // var yayinEviAdi = ;
+
+                                    $('#book_name').val(data['kitapAdi']);
+                                    $('#book_author').val(data['yazarAdi']);
+                                    $('#book_publisher').val(data['yayineviAdi']);
+
+                                    // console.log(data['kitapResimLink'][1][0]);
+                                    $('#idefixKitapResim').attr("src", data['kitapResimLink'][1][0]);
+
+                                    $('#idefixHiddenResimName').val(data['dosyaAdi']);
+                                    $('#kitap_gorselBox').prop('disabled', true);
+
+                                    // console.log(data[1].split("<li>")[2].split("<a class=\"bold authorr\" href=\"/Yazar/gulseren-budayicioglu/s=265093\">")[1].split("</a>")[0]);
+                                    // setTimeout(function () {
+                                    //     location.reload();
+                                    // }, 200);
+                                },
+                                failed: function (data) {
+                                    alertify.error(data);
+                                    console.log(data);
+                                },
+                            })
+                        },
+                        function () {
+                            alertify.error('Rezervasyon işlemi gerçekleştirilmedi!');
+                        }).set('labels', {ok:'Verileri Çek', cancel:'İptal'})
+                });
+
                 $('#book_author').keyup(function(){
                     var query = $(this).val();
                     if(query != '')

@@ -53,6 +53,10 @@ Route::prefix('admin')->group(function () {
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
 
+    // Kitap Routing
+//    Route::get('/books/getKitapYurduData/{link}', [App\Http\Controllers\backend\BooksController::class, 'kitapYurduSearch'])->where('link', '.*')->name('books.KitapYurduSearchName')->middleware('KutuphaneYoneticisi');
+    Route::get('/books/getKitapYurduData/{link}', [App\Http\Controllers\backend\BooksController::class, 'kitapYurduSearch'])->where('link', '.*')->name('books.KitapYurduSearchName')->middleware('KutuphaneYoneticisi');
+
     // Kitap Arama
     Route::any('/books{q?}',[\App\Http\Controllers\backend\BooksController::class, 'index'])->name('books.Search')->middleware('KutuphaneYoneticisi');
 
