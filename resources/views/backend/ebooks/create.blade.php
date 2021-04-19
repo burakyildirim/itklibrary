@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Flipbook Dosyası(ZIP)</label>
+                            <label>Flipbook Dosyası(Sıkıştırılmış ZIP)</label>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <input class="form-control" type="file" name="ebook_file">

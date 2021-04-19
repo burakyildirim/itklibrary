@@ -32,7 +32,7 @@ class EBooksController extends Controller
             if (file_exists(public_path('zips/'.$fileName))){
                 @unlink(public_path('zips/'.$fileName));
             }
-
+//
 //            rename(public_path('zips/'.$randomFileName.'/files/page'),public_path('zips/'.$randomFileName.'/files/mobile'));
 //            rename(public_path('zips/'.$randomFileName.'/files/extfiles'),public_path('zips/'.$randomFileName.'/files/mobile-ext'));
 
