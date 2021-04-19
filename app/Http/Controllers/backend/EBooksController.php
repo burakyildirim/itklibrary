@@ -27,18 +27,17 @@ class EBooksController extends Controller
             $request->ebook_file->move(public_path('zips/'),$fileName);
 
             $zip = Zip::open(public_path('zips/'.$fileName));
-            $folderAdi = explode('.',$fileName);
             $zip->extract(public_path('zips/'.$randomFileName.'/'));
 
             if (file_exists(public_path('zips/'.$fileName))){
                 @unlink(public_path('zips/'.$fileName));
             }
 
-            rename(public_path('zips/'.$randomFileName.'/files/page'),public_path('zips/'.$randomFileName.'/files/mobile'));
-            rename(public_path('zips/'.$randomFileName.'/files/extfiles'),public_path('zips/'.$randomFileName.'/files/mobile-ext'));
+//            rename(public_path('zips/'.$randomFileName.'/files/page'),public_path('zips/'.$randomFileName.'/files/mobile'));
+//            rename(public_path('zips/'.$randomFileName.'/files/extfiles'),public_path('zips/'.$randomFileName.'/files/mobile-ext'));
 
-            File::copy(public_path('zips/ebookFiles/index.php'), public_path('zips/'.$randomFileName.'/index.html'));
-            File::copyDirectory(public_path('zips/ebookFiles/mobile'), public_path('zips/'.$randomFileName.'/mobile'));
+//            File::copy(public_path('zips/ebookFiles/index.php'), public_path('zips/'.$randomFileName.'/index.html'));
+//            File::copyDirectory(public_path('zips/ebookFiles/mobile'), public_path('zips/'.$randomFileName.'/mobile'));
         }
 
         $ebookInsert = EBooks::insert([
