@@ -21,6 +21,9 @@ use Symfony\Component\Console\Input\Input;
 
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
 
+Route::get('/dijitalyayinlar', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
+Route::get('/dijitalyayinlar/{id}', [App\Http\Controllers\frontend\EBookController::class, 'show'])->name('frontend.ebooks.show');
+
 Route::get('/profile', [App\Http\Controllers\frontend\ProfileController::class, 'index'])->middleware('auth')->name('profile.Index');
 Route::get('/reservations', [App\Http\Controllers\frontend\ProfileController::class, 'reservations'])->middleware('auth')->name('profile.Reservations');
 
@@ -80,6 +83,7 @@ Route::prefix('admin')->group(function () {
     // e kitaplar routing
     Route::get('/ebooks', [App\Http\Controllers\backend\EBooksController::class, 'index'])->name('ebooks.index');
     Route::get('/ebooks/create', [App\Http\Controllers\backend\EBooksController::class, 'create'])->name('ebooks.create');
+    Route::post('/ebooks', [App\Http\Controllers\backend\EBooksController::class, 'store'])->name('ebooks.store');
 
     // logout için kullandığım root
     Route::post('/logout', [\App\Http\Controllers\backend\UserController::class, 'logout'])->name('users.logout');

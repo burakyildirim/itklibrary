@@ -11,13 +11,13 @@
                 </div>
                 <div class="card-body">
 {{--                    {{route('libraries.store')}}--}}
-                    <form action="route('ebooks.store')" method="post" enctype="multipart/form-data">
+                    <form action="{{route('ebooks.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>E-Kitap Adı</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input class="form-control" type="text" name="ebook_name">
+                                    <input class="form-control" type="text" name="ebooks_name">
                                 </div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             <label>Sınıf Seviyeleri</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input class="form-control" type="text" name="ebook_seviye">
+                                    <input class="form-control" type="text" name="ebooks_seviye">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <label>Açıklama</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <textarea class="form-control" name="ebook_aciklama" id="editor1">
+                                    <textarea class="form-control" name="ebooks_description" id="editor1">
                                             </textarea>
                                 </div>
                             </div>

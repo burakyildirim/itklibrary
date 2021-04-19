@@ -98,8 +98,8 @@
                         <a class="dropdown-item" href="#"><i class="fa fa-star-half-alt"></i> Nasıl puan kazanırım?</a>
                         <a class="dropdown-item" href="#"><i class="fa fa-folder-plus"></i> Rezervasyon oluşturma</a>
                         <a class="dropdown-item" href="#"><i class="fa fa-book-reader"></i> Kitap ödünç alma ve teslim</a>
-
-{{--                        <div class="dropdown-divider"></div>--}}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{route('frontend.ebooks.index')}}"><i class="fa fa-atlas"></i> İTK Dijital Yayınlar <span class="badge badge-danger">YENİ!</span></a>
                     </div>
                 </li>
 
