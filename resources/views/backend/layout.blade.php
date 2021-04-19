@@ -195,6 +195,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('ebooks.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-atlas"></i>
+                            <p>
+                                E-Kitap Yönetimi
+                            </p>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

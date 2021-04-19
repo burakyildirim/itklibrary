@@ -77,6 +77,11 @@ Route::prefix('admin')->group(function () {
     // Textbox içerisinde eski yayınevlerini arama Routing
     Route::post('/books/yayineviAra', [\App\Http\Controllers\backend\BooksController::class, 'yayineviAra'])->name('books.yayineviAra')->middleware('KutuphaneYoneticisi');;
 
+    // e kitaplar routing
+    Route::get('/ebooks', [App\Http\Controllers\backend\EBooksController::class, 'index'])->name('ebooks.index');
+    Route::get('/ebooks/create', [App\Http\Controllers\backend\EBooksController::class, 'create'])->name('ebooks.create');
+
+    // logout için kullandığım root
     Route::post('/logout', [\App\Http\Controllers\backend\UserController::class, 'logout'])->name('users.logout');
 });
 

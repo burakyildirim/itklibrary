@@ -136,7 +136,7 @@
 
     {{--    {{Imagick::getVersion()}}--}}
     {{--    {!!QrCode::size(250)->format('png')->generate("buraaaaak", public_path('images/qrcodes/deneme.png'))!!}--}}
-    <script type="text/javascript" src="{{asset('backend/custom/js/printThis.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('backend/custom/js/printThis.js')}}"></script>--}}
 
     <script type="text/javascript">
         function printDiv() {
