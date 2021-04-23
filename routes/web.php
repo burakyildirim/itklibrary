@@ -16,17 +16,17 @@ use Symfony\Component\Console\Input\Input;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-| alooo
+|
 */
 
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
 
 Route::get('/dijitalyayinlar', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
-Route::get('/dijitalyayinlar/{id}', [App\Http\Controllers\frontend\EBookController::class, 'show'])->name('frontend.ebooks.show');
+Route::get('/dijitalyayinlar/{slug?}', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
+Route::get('/dijitalyayinlar/goster/{id}', [App\Http\Controllers\frontend\EBookController::class, 'show'])->name('frontend.ebooks.show');
 
 Route::get('/profile', [App\Http\Controllers\frontend\ProfileController::class, 'index'])->middleware('auth')->name('profile.Index');
 Route::get('/reservations', [App\Http\Controllers\frontend\ProfileController::class, 'reservations'])->middleware('auth')->name('profile.Reservations');
-
 
 Route::post('/welcome/kitapAra', [\App\Http\Controllers\frontend\WelcomeController::class, 'kitapAra'])->name('welcome.kitapAra');
 

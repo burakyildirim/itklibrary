@@ -52,9 +52,9 @@
 
                                     <tr id="item-{{$digitalBook->id}}">
                                         <td>
-{{--                                            <img--}}
-{{--                                                src="{{ $rent['book']->book_image == null ?  url('/images/books/default.jpg'): url('/images/books')."/".$rent['book']->book_image}}"--}}
-{{--                                                alt="" style="width:30px;">--}}
+                                            <img
+                                                src="{{ $digitalBook->ebooks_image == null ?  url('/images/books/default.jpg'): url('/images/ebooks')."/".$digitalBook->ebooks_image}}"
+                                                alt="" style="width:30px;">
                                         </td>
                                         <td>{{$digitalBook->ebooks_name}}</td>
 
