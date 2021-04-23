@@ -10,24 +10,33 @@
                     <h5 class="m-0">E-Kitap Yükle</h5>
                 </div>
                 <div class="card-body">
-{{--                    {{route('libraries.store')}}--}}
+                    {{--                    {{route('libraries.store')}}--}}
                     <form action="{{route('ebooks.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group">
-                            <label>E-Kitap Adı</label>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input class="form-control" type="text" name="ebooks_name">
+                        <div class="row">
+                            <div class="col">
+                                <label>Dijital Yayın Adı</label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input class="form-control" type="text" name="ebooks_name">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col">
+                                <label>Sınıf Seviyesi</label><br/>
 
-                        <div class="form-group">
-                            <label>Sınıf Seviyeleri</label>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input class="form-control" type="text" name="ebooks_seviye">
-                                </div>
+{{--                                <select name="ebooks_levels" class="form-control" multiple>--}}
+{{--                                    @foreach($classLevels as $classLevel)--}}
+{{--                                        <option value="{{ $classLevel->id }}">{{ $classLevel->levelName }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+
+                                @foreach($classLevels as $classLevel)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="levels_ebook[]" id="inlineCheckbox-{{ $classLevel->id }}" value="{{ $classLevel->id }}">
+                                        <label class="form-check-label" for="inlineCheckbox-{{ $classLevel->id }}">{{ $classLevel->levelName }}</label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
 
@@ -41,25 +50,36 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Flipbook Dosyası(Sıkıştırılmış ZIP)</label>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input class="form-control" type="file" name="ebook_file">
+                        <div class="row">
+                            <div class="col">
+                                <label>Flipbook Dosyası(Sıkıştırılmış ZIP)</label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input class="form-control" type="file" name="ebook_file">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Dijital Yayın Görseli (250x400)</label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input class="form-control" type="file" name="ebook_image">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+
                         <script>
-                            CKEDITOR.replace( 'editor1' );
+                            CKEDITOR.replace('editor1');
                         </script>
 
 
-                            <div class="form-group" style="margin-top:30px;">
-                                <div align="right" class="card-footer">
-                                    <button type="submit" class="btn btn-success">Ekle</button>
-                                </div>
+                        <div class="form-group" style="margin-top:30px;">
+                            <div align="right" class="card-footer">
+                                <button type="submit" class="btn btn-success">Ekle</button>
                             </div>
+                        </div>
 
                     </form>
                 </div>

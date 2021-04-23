@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEBooksTable extends Migration
+class CreateDigitalBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('e_books', function (Blueprint $table) {
+        Schema::create('digital_books', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->text('unique_key');
@@ -30,6 +30,6 @@ class CreateEBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('e_books');
+        Schema::dropIfExists('digital_books');
     }
 }

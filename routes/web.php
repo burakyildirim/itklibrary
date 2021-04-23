@@ -81,9 +81,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/books/yayineviAra', [\App\Http\Controllers\backend\BooksController::class, 'yayineviAra'])->name('books.yayineviAra')->middleware('KutuphaneYoneticisi');;
 
     // e kitaplar routing
-    Route::get('/ebooks', [App\Http\Controllers\backend\EBooksController::class, 'index'])->name('ebooks.index');
-    Route::get('/ebooks/create', [App\Http\Controllers\backend\EBooksController::class, 'create'])->name('ebooks.create');
-    Route::post('/ebooks', [App\Http\Controllers\backend\EBooksController::class, 'store'])->name('ebooks.store');
+    Route::get('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'index'])->name('ebooks.index');
+    Route::get('/ebooks/create', [App\Http\Controllers\backend\DigitalBooksController::class, 'create'])->name('ebooks.create');
+    Route::post('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'store'])->name('ebooks.store');
+
+    Route::delete('/ebooks/{ebook}', [App\Http\Controllers\backend\DigitalBooksController::class, 'destroy'])->name('ebooks.destroy');
 
     // logout için kullandığım root
     Route::post('/logout', [\App\Http\Controllers\backend\UserController::class, 'logout'])->name('users.logout');
