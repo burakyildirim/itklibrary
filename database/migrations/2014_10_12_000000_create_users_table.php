@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(3);
             $table->integer('puan')->default(0);
             $table->string('email')->unique();
-            $table->text('tcno')->unique()->nullable();
+            $table->text('tcno',11)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
