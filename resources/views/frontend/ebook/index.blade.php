@@ -14,7 +14,7 @@
 
 {{--        <a href="#" class="list-group-item list-group-item-action">--}}
 {{--            <i class="fa fa-star"></i> Favori Dijital Kitaplarım--}}
-{{--        </a>--}}
+{{--      s  </a>--}}
 
     </div>
 @endsection
