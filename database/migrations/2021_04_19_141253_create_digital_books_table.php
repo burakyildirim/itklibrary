@@ -18,6 +18,7 @@ class CreateDigitalBooksTable extends Migration
             $table->timestamps();
             $table->text('unique_key');
             $table->string('ebooks_name');
+            $table->string('ebooks_slug');
             $table->text('ebooks_description');
             $table->text('ebooks_image')->nullable();
         });

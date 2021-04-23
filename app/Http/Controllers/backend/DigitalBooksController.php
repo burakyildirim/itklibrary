@@ -8,6 +8,7 @@ use App\Models\Levels;
 use App\Models\EBooks;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Zip;
 
 class DigitalBooksController extends Controller
@@ -81,6 +82,7 @@ class DigitalBooksController extends Controller
         $ebook->unique_key = $randomFileName;
         $ebook->ebooks_name = $request->ebooks_name;
         $ebook->ebooks_description = $request->ebooks_description;
+        $ebook->ebooks_slug = Str::slug($request->ebooks_name);
         $ebook->ebooks_image = null;
         $ebook->save();
 
