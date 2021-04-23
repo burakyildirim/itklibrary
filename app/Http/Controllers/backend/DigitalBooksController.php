@@ -67,6 +67,19 @@ class DigitalBooksController extends Controller
             $request->ebook_image->move(public_path('images/ebooks/'),$fileName);
         }
 
+        if ($request->hasFile('ebook_file')) {
+            $fileName2 = $randomFileName.'.'.$request->ebook_file->getClientOriginalExtension();
+            $request->ebook_file->move(public_path('zips/'),$fileName2);
+
+            $zip2 = Zip::open(public_path('zips/' . $fileName2));
+            $zip2->extract(public_path('zips/' . $randomFileName . '/'));
+
+            $zip2->close();
+            if (File::exists(public_path('zips/' . $fileName2))) {
+                File::delete(public_path('zips/' . $fileName2));
+            }
+        }
+
         $ebook = new DigitalBooks();
         $ebook->unique_key = $randomFileName;
         $ebook->ebooks_name = $request->ebooks_name;
