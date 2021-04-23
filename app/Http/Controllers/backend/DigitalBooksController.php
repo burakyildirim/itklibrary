@@ -57,7 +57,7 @@ class DigitalBooksController extends Controller
             'ebooks_description' => ['required', 'string'],
             // The user should select at least one categorya
             'levels_ebook' => ['required', 'array', 'min:1'],
-            // 'ebooks_levels.*' => ['required', 'integer', 'exists:e_books,id'],
+            // 'ebooks_levels.*' => ['required', 'integer', 'exists:e_books,id'], aa
         ]);
 
         $ebook_image = null;
