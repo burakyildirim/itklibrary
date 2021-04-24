@@ -57,7 +57,7 @@ class BookController extends Controller
 
         if ($myReservationCount > 2){
             $baslik = 'Rezervasyon işlemi gerçekleştirilemedi! :(';
-            $metin = '<p class="text-danger">Kütüphaneden aynı anda en fazla 3 kitap ödünç alabilirsiniz(ya da rezervasyon isteğinde bulunabilirsiniz). Yeni rezervasyon isteğinde bulunmadan önce bir kitabınızı teslim etmelisiniz.</p>';
+            $metin = '<p class="text-danger">Kütüphaneden aynı anda en fazla 3 kitap ödünç alabilirsiniz(ya da rezervasyon isteğinde bulunabilirsiniz). Yeni rezervasyon isteğinde bulunmadan önce bir kitabınızı teslim etmelisiniz.</p><br/>Bknz. <a href="/reservations">Rezervasyonlarım</a>';
             return response()->json([
                 'baslik' => $baslik,
                 'metin' => $metin,
