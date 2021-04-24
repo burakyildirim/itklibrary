@@ -11,7 +11,7 @@
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div class="row" style="margin-top:30px;">
+    <div class="row" style="padding-top:30px;">
         @auth
             @if($tarafimcaRezerve)
                 <div class="col-lg-12">

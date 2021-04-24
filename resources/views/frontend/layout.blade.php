@@ -67,64 +67,74 @@
         {{--}--}}
     </style>
 
+    <style>
+        body{
+            background-image: url('{{asset('images/bg_bogy.jpg')}}');
+            transition: 5500ms ease-in;
+        }
+    </style>
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    {{--    <div class="container">--}}
-    <div class="container">
+<div class="container" style="padding:0px;-webkit-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
+-moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
+box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{--    <div class="container">--}}
+        <div class="container" >
 
-        <h5 class="my-0 mr-md-auto font-weight-normal">
-            <a class="brand-link" href="{{route('welcome.Index')}}">
-                {{--                {{config('app.name')}}--}}
-                <img src="{{asset('/images/itk_kutuphane_logo.png')}}" style="width: 120px;"/>
-            </a>
-        </h5>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{route('welcome.Index')}}">ANASAYFA</a>--}}
-{{--                </li>--}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        E-Kütüphane
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class="fa fa-star-half-alt"></i> Nasıl puan kazanırım?</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-folder-plus"></i> Rezervasyon oluşturma</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-book-reader"></i> Kitap ödünç alma ve teslim</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{route('frontend.ebooks.index')}}"><i class="fa fa-atlas"></i> İTK Dijital Yayınlar <span class="badge badge-danger">YENİ!</span></a>
-                    </div>
-                </li>
+            <h5 class="my-0 mr-md-auto font-weight-normal">
+                <a class="brand-link" href="{{route('welcome.Index')}}">
+                    {{--                {{config('app.name')}}--}}
+                    <img src="{{asset('/images/itk_kutuphane_logo.png')}}" style="width: 120px;"/>
+                </a>
+            </h5>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    {{--                <li class="nav-item">--}}
+                    {{--                    <a class="nav-link" href="{{route('welcome.Index')}}">ANASAYFA</a>--}}
+                    {{--                </li>--}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            E-Kütüphane
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#"><i class="fa fa-star-half-alt"></i> Nasıl puan kazanırım?</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-folder-plus"></i> Rezervasyon oluşturma</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-book-reader"></i> Kitap ödünç alma ve teslim</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('frontend.ebooks.index')}}"><i class="fa fa-atlas"></i> İTK Dijital Yayınlar <span class="badge badge-danger">YENİ!</span></a>
+                        </div>
+                    </li>
+
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Profilim
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-user-circle"></i> Hesap Bilgilerim</a>
+                                    <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-heart"></i> Favorilerim</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('profile.Reservations')}}"><i class="fa fa-folder"></i> Rezervasyonlarım</a>
+                                </div>
+                            </li>
+                        @endauth
+                    @endif
+
+                </ul>
 
                 @if (Route::has('login'))
                     @auth
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Profilim
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-user-circle"></i> Hesap Bilgilerim</a>
-                                <a class="dropdown-item" href="{{route('profile.Index')}}"><i class="fa fa-heart"></i> Favorilerim</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('profile.Reservations')}}"><i class="fa fa-folder"></i> Rezervasyonlarım</a>
-                            </div>
-                        </li>
-                    @endauth
-                @endif
-
-            </ul>
-
-            @if (Route::has('login'))
-                @auth
-                <span class="navbar-text">
+                        <span class="navbar-text">
                     <img style="width: 32px;" class="rounded-circle"
                          src="@php echo Auth::user()->avatar == null ? asset('images/user_head.png') : Auth::user()->avatar @endphp"
                          alt="">
@@ -142,42 +152,62 @@
                         {{ csrf_field() }}
                     </form>
                 </span>
-                @else
-                    <span class="navbar-text"  style="float:right;">
+                    @else
+                        <span class="navbar-text"  style="float:right;">
                         <a class="btn btn-danger" style="color:white;" href="{{route('login')}}">Giriş Yap</a>
                         <a class="btn btn-primary" style="color:white;" href="{{route('register')}}">Üye Ol</a>
                     </span>
-                @endauth
+                    @endauth
 
-            @endif
+                @endif
+            </div>
         </div>
-    </div>
-    {{--    </div>--}}
-</nav>
+        {{--    </div>--}}
+    </nav>
+</div>
 
 
-<div class="container">
+<div class="container" style="background-color:#fff; padding-bottom: 30px;-webkit-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
+-moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
+box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
+
+
+
     @yield('content')
 
+    <footer class="pt-4 pt-md-5 mt-2 border-top" style="z-index:-5; background-color: #fff; height: 90px;">
+        <div class="col-12 col-md text-center">
+            @auth()
+                @if((Auth::user()->role == 1 || Auth::user()->role == 3))
+                    <a href="{{route('admin.Index')}}" class="btn btn-sm btn-danger">Yönetici Paneli</a>
+
+                @endif
+            @endauth
+            <small class="d-block mb-3 text-muted">&copy; 2021 İTK Bilişim Teknolojileri Bölümü | Powered by
+                brkyldrm</small>
+        </div>
+    </footer>
 
 </div>
 
-<footer class="pt-4 my-md-5 pt-md-5 border-top" style="z-index:-5;">
-    <div class="col-12 col-md text-center">
-        @auth()
-            @if((Auth::user()->role == 1 || Auth::user()->role == 3))
-                <a href="{{route('admin.Index')}}" class="btn btn-sm btn-danger">Yönetici Paneli</a>
-                <br><br><br>
-            @endif
-        @endauth
-        <small class="d-block mb-3 text-muted">&copy; 2021 İTK Bilişim Teknolojileri Bölümü | Powered by
-            brkyldrm</small>
-    </div>
-</footer>
-
-
-
-
+{{--<script>--}}
+{{--    var backgrounds = [];--}}
+{{--    backgrounds[0] = '../images/alchemy.gif';--}}
+{{--    backgrounds[1] = '../images/bg_bogy.jpg';--}}
+{{--    backgrounds[2] = '../images/design-tools.jpg';--}}
+{{--    var currentIndex=0;--}}
+{{--    var body = $('body');--}}
+{{--    setInterval(function () {--}}
+{{--        body.css({--}}
+{{--            'backgroundImage': "url('" + backgrounds[currentIndex] + "')"--}}
+{{--        });--}}
+{{--        if (currentIndex>2) {--}}
+{{--            currentIndex = 0;--}}
+{{--        } else {--}}
+{{--            currentIndex++;--}}
+{{--        }--}}
+{{--    }, 14000);--}}
+{{--</script>--}}
 
 </body>
 
