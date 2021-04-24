@@ -175,6 +175,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('ebooks.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-atlas"></i>
+                                <p>
+                                    Dijital Yayın Yönetimi
+                                </p>
+                            </a>
+                        </li>
                     @endif
 
                     <li class="nav-item">
@@ -191,15 +200,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <i class="nav-icon fas fa-book-reader"></i>
                             <p>
                                 Kitap Rezervasyon
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{route('ebooks.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-atlas"></i>
-                            <p>
-                                Dijital Yayın Yönetimi
                             </p>
                         </a>
                     </li>

@@ -48,10 +48,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/settings/update/{id}', [App\Http\Controllers\backend\SettingsController::class, 'update'])->name('settings.Update')->middleware('admin');
 
     // Kullanıcı Routing
-    Route::resource('/users', App\Http\Controllers\backend\UserController::class)->middleware('admin');;
+    Route::resource('/users', App\Http\Controllers\backend\UserController::class)->middleware('admin');
 
     // Kütüphane Routing
-    Route::resource('/libraries', App\Http\Controllers\backend\LibrariesController::class)->middleware('admin');;
+    Route::resource('/libraries', App\Http\Controllers\backend\LibrariesController::class)->middleware('admin');
 
     // Kitap Routing
     Route::resource('/books', App\Http\Controllers\backend\BooksController::class)->middleware('KutuphaneYoneticisi');
@@ -81,9 +81,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/books/yayineviAra', [\App\Http\Controllers\backend\BooksController::class, 'yayineviAra'])->name('books.yayineviAra')->middleware('KutuphaneYoneticisi');;
 
     // e kitaplar routing
-    Route::get('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'index'])->name('ebooks.index');
-    Route::get('/ebooks/create', [App\Http\Controllers\backend\DigitalBooksController::class, 'create'])->name('ebooks.create');
-    Route::post('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'store'])->name('ebooks.store');
+    Route::get('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'index'])->name('ebooks.index')->middleware('admin');
+    Route::get('/ebooks/create', [App\Http\Controllers\backend\DigitalBooksController::class, 'create'])->name('ebooks.create')->middleware('admin');
+    Route::post('/ebooks', [App\Http\Controllers\backend\DigitalBooksController::class, 'store'])->name('ebooks.store')->middleware('admin');
 
     Route::delete('/ebooks/{ebook}', [App\Http\Controllers\backend\DigitalBooksController::class, 'destroy'])->name('ebooks.destroy');
 
