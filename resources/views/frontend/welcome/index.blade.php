@@ -46,9 +46,9 @@
         }
 
         .card:hover {
-            -webkit-box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
-            -moz-box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 11px -2px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 0px 0px 11px -2px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 0px 11px -2px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 11px -2px rgba(0, 0, 0, 0.75);
         }
 
         .card {
@@ -57,6 +57,47 @@
 
         }
 
+        .shelf_head {
+            height: 39px;
+            background: url('{{asset('images/shelf_head_bg2.jpg')}}') top left no-repeat;
+            background-size: 100%;
+
+        }
+
+        .books_long_slider_w {
+            margin-top: -4px;
+            background: url('{{asset('images/shelf_bg.jpg')}}') top left repeat;
+            background-size: 100%;
+            padding: 20px 8px;
+            height: 610px;
+            margin-bottom: 25px;
+        }
+
+        ul.books_long_slider {
+        }
+
+        .books_long_slider li {
+            float: left;
+            display: block;
+            position: relative;
+            height: 157px;
+            width: 120px;
+            margin-bottom: 52px;
+            text-align: center;
+        }
+
+        .books_long_slider li img {
+            box-shadow: 0px -4px 18px #332000;
+            position: absolute;
+            bottom: 0px;
+            left: 12px;
+            width:90px;
+            transition: 300ms;
+        }
+
+        .books_long_slider li img:hover {
+            bottom: 10px;
+        }
 
     </style>
 
@@ -67,7 +108,7 @@
         <img class="img-fluid" src="{{asset('/images/itk_kutuphane_logo.png')}}" style="max-width: 350px;">
         <h1 class="display-4" style="font-weight: lighter; font-size: 45px;">
             <span class="typewrite" data-period="2000"
-                                    data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'>
+                  data-type='["{{config('app.name')}}","Hoşgeldin!","Welcome!","Benvenuto!","Bienvenue!","Willkommen!"]'>
                 <span class="wrap"></span>
             </span>
         </h1>
@@ -93,44 +134,6 @@
         </div>
     </div>
 
-    {{--    <div class="row" style="margin-top:50px;">--}}
-    {{--        <div class="col-lg-12">--}}
-    {{--            <h1 class="display-4">Editörün Seçimi</h1>--}}
-    {{--            <hr/>--}}
-    {{--            <div class="card-deck">--}}
-    {{--                <div class="card">--}}
-    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-    {{--                    <div class="card-body">--}}
-    {{--                        <h5 class="card-title">Card title</h5>--}}
-    {{--                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to--}}
-    {{--                            additional content. This content is a little bit longer.</p>--}}
-    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="card">--}}
-    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-    {{--                    <div class="card-body">--}}
-    {{--                        <h5 class="card-title">Card title</h5>--}}
-    {{--                        <p class="card-text">This card has supporting text below as a natural lead-in to additional--}}
-    {{--                            content.</p>--}}
-    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="card">--}}
-    {{--                    <img class="card-img-top" src="..." alt="Card image cap">--}}
-    {{--                    <div class="card-body">--}}
-    {{--                        <h5 class="card-title">Card title</h5>--}}
-    {{--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to--}}
-    {{--                            additional content. This card has even longer content than the first to show that equal--}}
-    {{--                            height--}}
-    {{--                            action.</p>--}}
-    {{--                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-
     <div class="row" style="margin-top:50px;">
         <div class="col-lg-12">
             <h1 class="display-5" style="margin-bottom: 0px; font-weight:lighter;">Son Eklenen Kitaplar</h1>
@@ -153,7 +156,7 @@
                         </div>
                         <div class="card-footer"
                              style="padding:0px; border-top-right-radius:0px; border-top-left-radius:0px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px;">
-                             <a class="btn btn-warning btn-lg"
+                            <a class="btn btn-warning btn-lg"
                                style="width: 100%; border-top-right-radius:0px; border-top-left-radius:0px;"
                                href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug.'#disqus_thread'}}">Kitap
                                 Sayfasına Git</a>
@@ -164,9 +167,33 @@
         </div>
     </div>
 
+    <div class="row d-none d-sm-block" style="margin-top:50px;">
+        <div class="col-lg-12">
+            <h1 class="display-5" style="margin-bottom: 0px; font-weight:lighter; text-align: right;">İTK Dijital
+                Yayınlar</h1>
+            <hr style=""/>
+
+            <div class="col-lg-12" style="padding: 0px;">
+                <div class="shelf_head"></div>
+                <div class="books_long_slider_w">
+                    <ul class="books_long_slider">
+                        @foreach($sonDijitalYayinlar as $dijitalYayin)
+                            <li>
+                                <a href="{{route('frontend.ebooks.show','').'/'.$dijitalYayin->unique_key}}"
+                                   title="{{$dijitalYayin->ebooks_name}} - @foreach($dijitalYayin->levels as $level) {{$level->levelName}}, @endforeach">
+                                    <img src="{{ $dijitalYayin->ebooks_image == null ?  url('/images/books/default.jpg'): url('/images/ebooks')."/".$dijitalYayin->ebooks_image}}"></a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script id="dsq-count-scr" src="//itklibrary.disqus.com/count.js" async></script>
 
     <script>
+
         // $('.card').mouseover(function () {
         //     $(this).animate({marginLeft: '9px'}, 'slow');
         // });

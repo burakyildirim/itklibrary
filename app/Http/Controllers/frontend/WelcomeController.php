@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Books;
+use App\Models\DigitalBooks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,9 @@ class WelcomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('frontend.welcome.index')->with('sonEklenenKitaplar',$sonKitaplar);
+        $sonDijitalYayinlar = DigitalBooks::with('levels')->limit('21')->get();
+
+        return view('frontend.welcome.index')->with('sonEklenenKitaplar',$sonKitaplar)->with('sonDijitalYayinlar',$sonDijitalYayinlar);
     }
 
     public function kitapAra(Request $request)
