@@ -40,6 +40,7 @@
     <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 
 
+
     <!-- Popper -->
     <script src="{{asset('backend/plugins/popper/popper.js')}}"></script>
 
@@ -47,8 +48,6 @@
     <script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
 
 
-    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
-    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
     <!-- ALERTIFY JS VE CSS DOSYALARI -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -208,6 +207,13 @@ box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
 {{--        }--}}
 {{--    }, 14000);--}}
 {{--</script>--}}
+
+
+<!-- jQuery UI CSS Dosyaları -->
+<script src="{{asset('backend/plugins/jquery-ui/jquery-ui.css')}}"></script>
+
+<!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+<script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
 </body>
 

@@ -99,6 +99,15 @@
             bottom: 10px;
         }
 
+        .books_long_slider li img {
+            box-shadow: 0px -4px 18px #332000;
+            position: absolute;
+            bottom: 0px;
+            left: 12px;
+            width:90px;
+            transition: 300ms;
+        }
+
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -169,11 +178,14 @@
 
     <div class="row d-none d-sm-block" style="margin-top:50px;">
         <div class="col-lg-12">
+
             <h1 class="display-5" style="margin-bottom: 0px; font-weight:lighter; text-align: right;">İTK Dijital
                 Yayınlar</h1>
             <hr style=""/>
 
             <div class="col-lg-12" style="padding: 0px;">
+
+
                 <div class="shelf_head"></div>
                 <div class="books_long_slider_w">
                     <ul class="books_long_slider">
@@ -182,7 +194,10 @@
                                 <a href="{{route('frontend.ebooks.show','').'/'.$dijitalYayin->unique_key}}"
                                    title="{{$dijitalYayin->ebooks_name}} - @foreach($dijitalYayin->levels as $level) {{$level->levelName}}, @endforeach">
                                     <img src="{{ $dijitalYayin->ebooks_image == null ?  url('/images/books/default.jpg'): url('/images/ebooks')."/".$dijitalYayin->ebooks_image}}"></a>
+
+
                             </li>
+
                         @endforeach
                     </ul>
                 </div>
