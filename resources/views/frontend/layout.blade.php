@@ -39,14 +39,17 @@
     <!-- jQuery -->
     <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 
+    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.css')}}"></script>
 
+    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
     <!-- Popper -->
     <script src="{{asset('backend/plugins/popper/popper.js')}}"></script>
 
     <!-- Bootstrap -->
     <script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>
-
 
 
     <!-- ALERTIFY JS VE CSS DOSYALARI -->
@@ -170,8 +173,6 @@ box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
 -moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
 box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
 
-
-
     @yield('content')
 
     <footer class="pt-4 pt-md-5 mt-2 border-top" style="z-index:-5; background-color: #fff; height: 90px;">
@@ -188,32 +189,6 @@ box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
     </footer>
 
 </div>
-
-{{--<script>--}}
-{{--    var backgrounds = [];--}}
-{{--    backgrounds[0] = '../images/alchemy.gif';--}}
-{{--    backgrounds[1] = '../images/bg_bogy.jpg';--}}
-{{--    backgrounds[2] = '../images/design-tools.jpg';--}}
-{{--    var currentIndex=0;--}}
-{{--    var body = $('body');--}}
-{{--    setInterval(function () {--}}
-{{--        body.css({--}}
-{{--            'backgroundImage': "url('" + backgrounds[currentIndex] + "')"--}}
-{{--        });--}}
-{{--        if (currentIndex>2) {--}}
-{{--            currentIndex = 0;--}}
-{{--        } else {--}}
-{{--            currentIndex++;--}}
-{{--        }--}}
-{{--    }, 14000);--}}
-{{--</script>--}}
-
-
-<!-- jQuery UI CSS Dosyaları -->
-<script src="{{asset('backend/plugins/jquery-ui/jquery-ui.css')}}"></script>
-
-<!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
-<script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
 </body>
 

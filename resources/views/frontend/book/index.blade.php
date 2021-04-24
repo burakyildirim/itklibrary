@@ -45,9 +45,10 @@
                 <hr/>
                 @if($kitapDetay->book_rentStatus==1 && !$tarafimcaRezerve)
 
-                    <form method="POST">
+                    <form method="GET">
                         @csrf
                         <input type="hidden" name="xxxxx" id="xxxxx" value="66">
+                        <input type="hidden" id="hidden_slug" value="{{$kitapDetay->book_slug}}">
 {{--                        <button id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success" onclick="javascript:void(0)" style="width: 100%;">Rezerve Et</button>--}}
 
                         <a id="btnRezerve" value="{{$kitapDetay->id}}" class="btn btn-lg btn-success"
@@ -165,23 +166,23 @@
                 alertify.confirm('Rezervasyon yapmak istediğinize emin misiniz?', 'Bu kitap için rezervasyon yaptırdığınızda 2 haftalık bir ödünç alma sürecini başlatmış olursunuz ve kitabın bulunduğu kütüphanedeki sorumlu personel ile iletişime geçip hem işleminizi onaylatmalı hem de kitabı teslim almalısınız.<br/><br/><p class="text-info">Teslim tarihinizde değişiklik yapmak isterseniz kütüphane görevlisine bilgi vermeyi unutmayınız!</p>',
                     function () {
                         var bookId = $('#btnRezerve').attr('value');
+                        var bookSlug = $('#hidden_slug').attr('value');
 
                         $.ajax({
-                            url: "{{ route('books.Reservation','') }}/" + bookId + "/",
+                            url: "{{ url('/reservation') }}" + "/" + bookId + "/" + bookSlug,
                             type: 'GET',
                             dataType: 'json',
                             data: {
                                 token: $('meta[name="csrf-token"]').attr('content'),
                             },
                             success: function (data) {
-                                console.log(data);
-                                setTimeout(function () {
-                                    location.reload();
-                                }, 200);
+                                alertify.alert(data['baslik'],data['metin'],function(){
+                                    setTimeout(location.reload.bind(location), 500);
+                                }).set('labels', {ok:'Tamam'});
+
                             },
                             failed: function (data) {
-                                alertify.error(data);
-                                console.log(data);
+                                alertify.confirm(data,'Kitap rezervasyonu yapılamadı.<br/><br/><p class="text-warning">Beklenmeyen bir hata oluştu! Site yöneticisi ile iletişime geçin.</p>');
                             },
                         })
                     },
@@ -193,9 +194,8 @@
 
     </script>
 
-    <script type="text/javascript">
-
-    </script>
+    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
 @endsection
 

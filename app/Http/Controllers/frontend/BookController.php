@@ -41,12 +41,27 @@ class BookController extends Controller
         }
     }
 
-    public function bookRez($id){
-        $kitap = Books::find($id);
+    public function bookRez($id, $slug=null){
+        $kitap = Books::where('id',$id)->where('book_slug',$slug)->first();
         $myReservation =  Rents::where('books_id',$id)->where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->exists();
+        $myReservationCount = Rents::where('users_id',Auth::id())->whereIn('rent_status',['1','2','4'])->count();
 
         if ($myReservation){
-            return response()->json('Bu kitap için rezervasyonunuz bulunuyor!');
+            $baslik = 'Rezervasyon işlemi gerçekleştirilemedi! :(';
+            $metin = '<p class="text-danger">Bu kitap için zaten rezervasyonunuz bulunuyor! Kitabı teslim etmeden aynı kitap için rezervasyon oluşturamazsınız.</p>';
+            return response()->json([
+                'baslik' => $baslik,
+                'metin' => $metin,
+            ]);
+        }
+
+        if ($myReservationCount > 2){
+            $baslik = 'Rezervasyon işlemi gerçekleştirilemedi! :(';
+            $metin = '<p class="text-danger">Kütüphaneden aynı anda en fazla 3 kitap ödünç alabilirsiniz(ya da rezervasyon isteğinde bulunabilirsiniz). Yeni rezervasyon isteğinde bulunmadan önce bir kitabınızı teslim etmelisiniz.</p>';
+            return response()->json([
+                'baslik' => $baslik,
+                'metin' => $metin,
+                ]);
         }
 
         if ($kitap->book_stok==0){
@@ -68,7 +83,12 @@ class BookController extends Controller
 
             $kitap->decrement('book_stok',1);
 
-            return response()->json('Rezervasyon işlemi başarılı!');
+            $baslik = 'Rezervasyon işlemi başarılı! :)';
+            $metin = '<p class="text-success">Rezervasyon isteğiniz başarıyla oluşturuldu. Şimdi sıra kitabın bulunduğu kütüphanenin görevlisi ile iletişime geçip kitabınızı teslim almanızda.<br><br> Keyifli okumalar!</p>';
+            return response()->json([
+                'baslik' => $baslik,
+                'metin' => $metin,
+            ]);
         }else{
             $rentIstek = DB::table('rents')
                 ->insert([
@@ -82,7 +102,12 @@ class BookController extends Controller
 
             $kitap->decrement('book_stok',1);
 
-            return response()->json('Rezervasyon işlemi başarılı!');
+            $baslik = 'Rezervasyon işlemi başarılı! :)';
+            $metin = '<p class="text-success">Rezervasyon isteğiniz başarıyla oluşturuldu. Şimdi sıra kitabın bulunduğu kütüphanenin görevlisi ile iletişime geçip kitabınızı teslim almanızda.<br><br> Keyifli okumalar!</p>';
+            return response()->json([
+                'baslik' => $baslik,
+                'metin' => $metin,
+            ]);
         }
 
         return response()->json('Rezervasyon işlemi başarısız!');

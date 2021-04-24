@@ -36,7 +36,7 @@ Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController:
 
 Route::get('/kitap/{id}/{slug}', [App\Http\Controllers\frontend\BookController::class, 'index'])->name('books.DetaySayfa');
 
-Route::get('/reservation/{id}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
+Route::get('/reservation/{id}/{slug}', [App\Http\Controllers\frontend\BookController::class, 'bookRez'])->name('books.Reservation');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DefaultController::class, 'index'])->name('admin.Index')->middleware('KutuphaneYoneticisi');;
