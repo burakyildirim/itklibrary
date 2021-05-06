@@ -13,4 +13,9 @@ class DigitalBooks extends Model
     {
         return $this->belongsToMany(Levels::class, 'level_digital_book', 'digital_book_id', 'level_id');
     }
+
+    public function branches()
+    {
+        return $this->belongsToMany(Branches::class, 'branch_digital_book', 'digital_book_id', 'branch_id');
+    }
 }

@@ -40,6 +40,7 @@
                                     <th>RESİM</th>
                                     <th>DİJİTAL YAYIN ADI</th>
                                     <th>SINIF SEVİYESİ</th>
+                                    <th>BRANŞ</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -60,9 +61,15 @@
 
                                         <td>
                                             @foreach($digitalBook->levels as $level)
-                                                <span class="badge badge-primary">{{$level->levelName}}</span>
+                                                <span class="badge badge-warning">{{$level->levelName}}</span>
 
                                                 @endforeach
+                                        </td>
+
+                                        <td>
+                                            @foreach($digitalBook->branches as $branch)
+                                                <span class="badge badge-info">{{$branch->branch_name}}</span>
+                                            @endforeach
                                         </td>
 
                                         <td width="5">

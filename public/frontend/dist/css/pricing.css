@@ -1,20 +1,85 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .container {
-  max-width: 960px;
+    max-width: 960px;
 }
 
 .pricing-header {
-  max-width: 700px;
+    max-width: 700px;
+}
+
+
+/* Dijital Yayınlar CSS Start */
+
+.card.digitalBook {
+    margin-bottom: 15px;
+    min-height: 632px;
 }
 
 .card-deck .card {
-  min-width: 220px;
+    min-width: 220px;
 }
+
+.card-text.digitalBook {
+    font-size: 12px;
+    text-align: justify;
+}
+
+.card-footer.digitalBook {
+    padding: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+}
+
+.card-footer.digitalBook a {
+    width: 100%;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.form-check-inline.digitalBook {
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.form-check-label.digitalBook {
+    margin-bottom: 1px;
+}
+
+.digitalBookBranchesFilter {
+    height: 250px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.digitalBookBranchesFilter::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.digitalBookBranchesFilter::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.digitalBookBranchesFilter::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+/* Dijital Yayınlar CSS End */

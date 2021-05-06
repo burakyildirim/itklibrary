@@ -7,7 +7,7 @@
 
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h5 class="m-0">E-Kitap Yükle</h5>
+                    <h5 class="m-0">Dijital Yayın Yükle</h5>
                 </div>
                 <div class="card-body">
                     {{--                    {{route('libraries.store')}}--}}
@@ -40,7 +40,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col">
+                                <label>Dijital Yayın Branş</label><br/>
+
+                                @foreach($digitalBookBranches as $digitalBookBranch)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="branches_ebook[]" id="inlineBranchesCheckbox-{{ $digitalBookBranch->id }}" value="{{ $digitalBookBranch->id }}">
+                                        <label class="form-check-label" for="inlineBranchesCheckbox-{{ $digitalBookBranch->id }}">{{ $digitalBookBranch->branch_name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px;">
                             <label>Açıklama</label>
                             <div class="row">
                                 <div class="col-lg-12">

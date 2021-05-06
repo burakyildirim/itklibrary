@@ -64,7 +64,7 @@ class Books extends Model
         '16' =>'16',
         '17' =>'17',
         '18' =>'18',
-        '19' =>'20',
+        '19' =>'19',
     ];
 
     public const VisStatus = [

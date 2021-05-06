@@ -16,7 +16,6 @@ class CreateLevelDigitalBookTable extends Migration
         Schema::create('level_digital_book', function (Blueprint $table) {
             $table->integer('level_id');
 //            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
-
             $table->integer('digital_book_id');
 //            $table->foreign('digital_book_id')->references('id')->on('digital_books')->onDelete('cascade');
         });

@@ -30,6 +30,8 @@ class CreateBooksTable extends Migration
             $table->integer('book_stok')->default('1');
             $table->text('book_slug');
             $table->string('book_isbn');
+            $table->string('book_raf')->default('A');
+            $table->string('book_sira')->default('1');
             $table->integer('book_createdBy');
             $table->integer('book_updatedBy');
         });

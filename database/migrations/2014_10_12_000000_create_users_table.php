@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('google_id',255)->nullable();
+            $table->text('avatar')->nullable();
         });
     }
 

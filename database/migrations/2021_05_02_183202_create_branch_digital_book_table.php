@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLevelsTable extends Migration
+class CreateBranchDigitalBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('levelName',100);
-            $table->string('level_slug');
+        Schema::create('branch_digital_book', function (Blueprint $table) {
+            $table->integer('branch_id');
+            $table->integer('digital_book_id');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('branch_digital_book');
     }
 }

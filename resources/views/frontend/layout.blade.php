@@ -75,17 +75,15 @@
             transition: 5500ms ease-in;
         }
     </style>
-
 </head>
 <body>
 
 <div class="container" style="padding:0px;-webkit-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
 -moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
 box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left:0px; padding-right: 10px;">
         {{--    <div class="container">--}}
         <div class="container" >
-
             <h5 class="my-0 mr-md-auto font-weight-normal">
                 <a class="brand-link" href="{{route('welcome.Index')}}">
                     {{--                {{config('app.name')}}--}}
@@ -131,7 +129,6 @@ box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
                             </li>
                         @endauth
                     @endif
-
                 </ul>
 
                 @if (Route::has('login'))

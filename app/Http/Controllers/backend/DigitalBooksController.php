@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branches;
 use App\Models\DigitalBooks;
 use App\Models\Levels;
 use App\Models\EBooks;
@@ -46,7 +47,9 @@ class DigitalBooksController extends Controller
     public function create(){
         $classLevels = Levels::orderBy('id','ASC')->get();
 
-        return view('backend.ebooks.create', compact('classLevels', $classLevels));
+        $digitalBookBranches = Branches::orderBy('branch_name','ASC')->get();
+
+        return view('backend.ebooks.create', compact('classLevels', $classLevels), compact('digitalBookBranches', $digitalBookBranches));
     }
 
     public function store(Request $request){
@@ -57,6 +60,8 @@ class DigitalBooksController extends Controller
             'ebooks_description' => ['required', 'string'],
             // The user should select at least one categorya
             'levels_ebook' => ['required', 'array', 'min:1'],
+            'branches_ebook' => ['required', 'array', 'min:1'],
+
             // 'ebooks_levels.*' => ['required', 'integer', 'exists:e_books,id'], aa
         ]);
 
@@ -89,6 +94,7 @@ class DigitalBooksController extends Controller
         $ebook->save();
 
         $ebook->levels()->attach($request->levels_ebook);
+        $ebook->branches()->attach($request->branches_ebook);
 
         return back()->with("success", "Dijital yayın ekleme işlemi başarılı!");
     }
