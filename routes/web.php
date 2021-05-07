@@ -22,7 +22,7 @@ use Symfony\Component\Console\Input\Input;
 Route::get('/', [App\Http\Controllers\frontend\WelcomeController::class, 'index'])->name('welcome.Index');
 
 Route::get('/dijitalyayinlar', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
-Route::get('/dijitalyayinlar/{seviye?}/{brans?}', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
+//Route::get('/dijitalyayinlar/{seviye?}/{brans?}', [App\Http\Controllers\frontend\EBookController::class, 'index'])->name('frontend.ebooks.index');
 Route::get('/dijitalyayinlar/goster/{id}', [App\Http\Controllers\frontend\EBookController::class, 'show'])->name('frontend.ebooks.show');
 
 Route::get('/profile', [App\Http\Controllers\frontend\ProfileController::class, 'index'])->middleware('auth')->name('profile.Index');
