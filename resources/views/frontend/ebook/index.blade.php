@@ -1,6 +1,17 @@
 @extends('frontend.sidebar_layout')
 
 
+@section('breadcrumb')
+    <div class="col-lg-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('welcome.Index')}}">Anasayfa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dijital Yayınlar</li>
+            </ol>
+        </nav>
+    </div>
+@endsection
+
 @section('sidebar_menu')
 
     <form method="GET" action="{{route('frontend.ebooks.index')}}">

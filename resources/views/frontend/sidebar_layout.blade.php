@@ -3,8 +3,11 @@
 @section('title','Profil Sayfası')
 
 @section('content')
+    <div class="row" style="padding-top:16px;">
+        @yield('breadcrumb')
+    </div>
 
-    <div class="row" style="padding-top:30px;">
+    <div class="row" style="padding-top:0px;">
         <div class="col-lg-3" style="margin-bottom:30px;">
             @yield('sidebar_menu')
         </div>

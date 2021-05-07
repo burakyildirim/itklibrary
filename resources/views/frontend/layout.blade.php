@@ -166,6 +166,7 @@ box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
 -moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);
 box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.74);">
 
+
     @yield('content')
 
     <footer class="pt-4 pt-md-5 mt-2 border-top" style="z-index:-5; background-color: #fff; height: 90px;">
