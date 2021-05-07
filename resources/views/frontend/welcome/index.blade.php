@@ -165,7 +165,7 @@
                         </div>
                         <div class="card-footer"
                              style="padding:0px; border-top-right-radius:0px; border-top-left-radius:0px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px;">
-                            <a class="btn btn-warning btn-lg"
+                            <a class="btn btn-warning btn-md"
                                style="width: 100%; border-top-right-radius:0px; border-top-left-radius:0px;"
                                href="{{url('kitap').'/'.$sonEklenenKitap->id.'/'.$sonEklenenKitap->book_slug.'#disqus_thread'}}">Kitap
                                 Sayfasına Git</a>
@@ -204,8 +204,6 @@
             </div>
         </div>
     </div>
-
-    <script id="dsq-count-scr" src="//itklibrary.disqus.com/count.js" async></script>
 
     <script>
 

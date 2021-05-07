@@ -3,45 +3,51 @@
 
 @section('sidebar_menu')
 
-    <h1 class="display-5" style="font-weight: lighter;">Branş</h1>
-    <hr/>
-    <div class="digitalBookBranchesFilter">
-        @foreach($allDigitalBookBranches as $bookBranch)
+    <form method="GET" action="{{route('frontend.ebooks.index')}}">
+        @csrf
+        <h1 class="display-5" style="font-weight: lighter;">Branş</h1>
+        <hr/>
+        <div class="digitalBookBranchesFilter">
+            @foreach($allDigitalBookBranches as $bookBranch)
+                <div class="form-check form-check-inline digitalBook">
+                    <input class="form-check-input" type="checkbox" name="brans[]"
+                           id="{{ $bookBranch->branch_slug }}" value="{{ $bookBranch->id }}"
+                           @if(is_array(request('brans')) && in_array($bookBranch->id,request('brans'))) checked @endif>
+
+                    <label class="form-check-label digitalBook"
+                           for="{{ $bookBranch->branch_slug }}">{{ $bookBranch->branch_name }}</label>
+                </div>
+            @endforeach
+        </div>
+
+        <h1 class="display-5" style="font-weight: lighter; margin-top:15px;">Seviye</h1>
+        <hr/>
+
+        @foreach($allClassLevels as $classLevel)
             <div class="form-check form-check-inline digitalBook">
-                <input class="form-check-input" type="checkbox" name="levels_ebook[]"
-                       id="inlineCheckbox-{{ $bookBranch->id }}" value="{{ $bookBranch->id }}">
+                <input class="form-check-input" type="checkbox" name="seviye[]"
+                       id="{{ $classLevel->level_slug }}" value="{{ $classLevel->id }}"
+                       @if(is_array(request('seviye')) && in_array($classLevel->id,request('seviye'))) checked @endif>
                 <label class="form-check-label digitalBook"
-                       for="inlineCheckbox-{{ $bookBranch->id }}">{{ $bookBranch->branch_name }}</label>
+                       for="{{ $classLevel->level_slug }}">{{ $classLevel->levelName }}</label>
             </div>
         @endforeach
-    </div>
 
-    <h1 class="display-5" style="font-weight: lighter; margin-top:15px;">Seviye</h1>
-    <hr/>
-
-    @foreach($allClassLevels as $classLevel)
-        <div class="form-check form-check-inline digitalBook">
-            <input class="form-check-input" type="checkbox" name="levels_ebook[]"
-                   id="inlineCheckbox-{{ $classLevel->id }}" value="{{ $classLevel->id }}">
-            <label class="form-check-label digitalBook"
-                   for="inlineCheckbox-{{ $classLevel->id }}">{{ $classLevel->levelName }}</label>
-        </div>
-    @endforeach
-
-    {{--        @foreach($allClassLevels as $classLevel)--}}
-    {{--            <a href="{{url('dijitalyayinlar/'.$classLevel->level_slug)}}" class="list-group-item list-group-item-action">--}}
-    {{--                <i class="fa fa-school"></i> {{$classLevel->levelName}}--}}
-    {{--            </a>--}}
-    {{--        @endforeach--}}
-
+        <button type="submit" class="btn btn-lg btn-success" style="width: 100%; margin-top:20px;">Filtrele</button>
+    </form>
 
 @endsection
 
 @section('sidebar_content')
     <h1 class="display-5" style="font-weight: lighter;">İTK Dijital Yayınları</h1>
     <hr/>
-    {{--        <div class="card-deck">--}}
     <div class="row">
+        @if(count($allEbooks)==0)
+            <div class="col-lg-12">
+                Seçtiğiniz kriterlerde bir dijital yayın bulunamadı! :(
+            </div>
+        @endif
+
         @foreach($allEbooks as $ebook)
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="card digitalBook">
@@ -67,11 +73,24 @@
             </div>
         @endforeach
     </div>
-    {{--        </div>--}}
 
-    {{-- Pagination --}}
+    {{-- Sayfalama --}}
     <div class="d-flex justify-content-center" style="margin-top:20px;">
         {!! $allEbooks->links() !!}
     </div>
+
+    <script>
+
+        {{--        $(document).ready(function () {--}}
+        {{--            $('#btnFiltrele').click(function () {--}}
+        {{--                var branchArray = $.map($('input[name="branches_ebook"]:checked'), function (c) {--}}
+        {{--                    return c.value;--}}
+        {{--                });--}}
+
+        {{--                // console.log(array);--}}
+        {{--               {{ http_build_query(array('seviye' => branchArray)) }};--}}
+        {{--            })--}}
+        {{--        });--}}
+    </script>
 @endsection
 

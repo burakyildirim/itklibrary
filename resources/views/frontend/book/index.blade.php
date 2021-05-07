@@ -91,72 +91,30 @@
             <hr/>
 
             <div class="col-lg-12">{!!$kitapDetay->book_description!!}</div>
-{{--            @if($allrents!=null)--}}
-{{--                <div class="col-lg-12">--}}
-{{--                    <table class="table table-striped">--}}
-{{--                        <thead>--}}
-{{--                        <tr>--}}
-{{--                            <th scope="col">#</th>--}}
-{{--                            <th scope="col">Başl. Tar.</th>--}}
-{{--                            <th scope="col">Bitiş Tar.</th>--}}
-{{--                            <th scope="col">Durumu</th>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                        <tbody>--}}
-{{--                        @foreach($allrents as $rent)--}}
-{{--                            <tr>--}}
-{{--                                <td>1--}}
-{{--                                </th>--}}
-{{--                                <td>{{date('d.m.Y',strtotime($rent->rentStartDate))}}</td>--}}
-{{--                                <td>{{date('d.m.Y',strtotime($rent->rentEndDate))}}</td>--}}
-{{--                                <td>{{\App\Models\Rents::RentStatuses[$rent->rent_status]}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
 
-{{--                        </tbody>--}}
-{{--                    </table>--}}
+        </div>
+
+{{--        <div class="col-lg-12">--}}
+{{--            <hr/>--}}
+{{--            @guest--}}
+{{--                <div class="alert alert-info" role="alert">--}}
+{{--                    Yorum yapmak için lütfen <a href="{{route('login')}}">giriş</a> yapınız.<br/>--}}
 {{--                </div>--}}
-{{--            @endif--}}
-        </div>
+{{--                @endguest--}}
+{{--            @auth--}}
 
-        <div class="col-lg-12">
-            <hr/>
-            @guest
-                <div class="alert alert-info" role="alert">
-                    Yorum yapmak için lütfen <a href="{{route('login')}}">giriş</a> yapınız.<br/>
-                </div>
-                @endguest
-            @auth
-                <div id="disqus_thread"></div>
-            @endauth
-        </div>
+{{--            @endauth--}}
+{{--        </div>--}}
 
     </div>
-    <script>
-        /**
-         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        var disqus_config = function () {
-        this.page.url = '{{Request::url()}}';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = '{{$kitapDetay->id}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://itklibrary.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <script>
 
+    <script>
         $(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
         });
 
         $(document).ready(function () {

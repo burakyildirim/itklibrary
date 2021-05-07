@@ -11,21 +11,50 @@ use Illuminate\Http\Request;
 
 class EBookController extends Controller
 {
-    public function index($slug = null)
+    public function index(Request $request)
     {
         $allDigitalBookBranches = Branches::orderBy('id', 'ASC')->get();
         $allClassLevels = Levels::orderBy('id', 'ASC')->get();
 
-        if ($slug != null) {
+        $requestLevels = $request['seviye'];
+        $requestBranches = $request['brans'];
+
+//        dd($requestLevels);
+
+        if ($request['seviye'] != null && $request['brans'] != null) {
             $allEbooks = DigitalBooks::with('levels')
-                ->whereHas('levels', function ($q) use ($slug) {
-                    $q->where('level_slug', $slug);
-                })->orderBy('id', 'DESC')->paginate(12);
-        } else {
+                ->with('branches')
+                ->orderBy('id', 'DESC')
+                ->whereHas('levels', function ($l) use ($requestLevels) {
+                    $l->whereIn('id', $requestLevels);
+                })
+                ->whereHas('branches', function ($b) use ($requestBranches) {
+                    $b->whereIn('id', $requestBranches);
+                })
+                ->paginate(12);
+        }elseif($request['seviye'] != null){
+            $allEbooks = DigitalBooks::with('levels')
+                ->with('branches')
+                ->orderBy('id', 'DESC')
+                ->whereHas('levels', function ($l) use ($requestLevels) {
+                    $l->whereIn('id', $requestLevels);
+                })->paginate(12);
+        }elseif($request['brans'] != null){
+            $allEbooks = DigitalBooks::with('levels')
+                ->with('branches')
+                ->orderBy('id', 'DESC')
+                ->whereHas('branches', function ($b) use ($requestBranches) {
+                    $b->whereIn('id', $requestBranches);
+                })->paginate(12);
+        }else{
             $allEbooks = DigitalBooks::orderBy('id', 'DESC')->paginate(12);
         }
 
-        return view('frontend.ebook.index', compact('allEbooks', $allEbooks))->with('allClassLevels', $allClassLevels)->with('allDigitalBookBranches', $allDigitalBookBranches);
+
+
+        return view('frontend.ebook.index', compact('allEbooks', $allEbooks))
+            ->with('allClassLevels', $allClassLevels)
+            ->with('allDigitalBookBranches', $allDigitalBookBranches);
     }
 
     public function show($id)
