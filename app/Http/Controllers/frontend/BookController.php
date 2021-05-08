@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Books;
 use App\Models\Rents;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,8 @@ class BookController extends Controller
         $kitap = Books::where('book_slug','=',$slug)->where('id',$id)->where('book_visStatus','=','1')
             ->with('library')
             ->first();
+
+        $sorumlu = User::where('id',$kitap->library['libraries_auth'])->select('name')->first();
 
         if ($kitap==null) return back();
 
@@ -37,6 +40,7 @@ class BookController extends Controller
 //                ->with('allrents', $allrents)
                 ->with('tarafimcaRezerve', $isReservatedByMe)
                 ->with('myrentdetails', $reservation)
+                ->with('sorumlu', $sorumlu)
                 ->with('mostNearDeliveryDate', $mostNearDeliveryDate);
         }
     }

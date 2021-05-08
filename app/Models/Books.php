@@ -111,7 +111,7 @@ class Books extends Model
     }
 
     public function library(){
-        return $this->belongsTo(Libraries::class, 'libraries_id')->select('id', 'libraries_name');
+        return $this->belongsTo(Libraries::class, 'libraries_id')->select('id', 'libraries_name','libraries_auth', 'libraries_phone');
     }
 
     public function rent(){

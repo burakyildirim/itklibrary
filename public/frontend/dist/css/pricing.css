@@ -62,24 +62,30 @@ html {
     overflow-x: hidden;
 }
 
-.digitalBookBranchesFilter::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+.digitalBookBranchesFilter::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
 
-.digitalBookBranchesFilter::-webkit-scrollbar
-{
+.digitalBookBranchesFilter::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
 }
 
-.digitalBookBranchesFilter::-webkit-scrollbar-thumb
-{
+.digitalBookBranchesFilter::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .3);
     background-color: #555;
 }
 
 /* Dijital Yayınlar CSS End */
+
+
+/* Normal Kitaplar CSS Başlangıç */
+
+.tooltip-inner {
+    text-align: left !important;
+}
+
+/* Normal Kitaplar CSS Bitiş */
