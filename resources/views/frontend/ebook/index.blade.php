@@ -50,7 +50,7 @@
 @endsection
 
 @section('sidebar_content')
-    <h1 class="display-5" style="font-weight: lighter;">İTK Dijital Yayınları</h1>
+    <h1 class="display-5" style="font-weight: lighter;">İTK Dijital Yayınları ({{count($allEbooks)}})</h1>
     <hr/>
     <div class="row">
         @if(count($allEbooks)==0)
