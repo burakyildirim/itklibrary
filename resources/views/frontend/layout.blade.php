@@ -40,13 +40,14 @@
     <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 
     <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
-    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.css')}}"></script>
+    {{--    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.css')}}"></script>--}}
 
-    <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
-    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>
+        <!-- jQuery UI -- Sortable ve Autocomplete işlemleri için -->
+    {{--    <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.js')}}"></script>--}}
 
-    <!-- Popper -->
-    <script src="{{asset('backend/plugins/popper/popper.js')}}"></script>
+        <!-- Popper -->
+    {{--    <script src="{{asset('backend/plugins/popper/popper.js')}}"></script>--}}
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
 
     <!-- Bootstrap -->
     <script src="{{asset('frontend/dist/js/bootstrap.js')}}"></script>

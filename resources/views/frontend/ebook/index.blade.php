@@ -91,17 +91,27 @@
     </div>
 
     <script>
+        $(document).ready(function () {
+            var branslarDiv = $('.digitalBookBranchesFilter'), orjOrder = branslarDiv.children();
 
-        {{--        $(document).ready(function () {--}}
-        {{--            $('#btnFiltrele').click(function () {--}}
-        {{--                var branchArray = $.map($('input[name="branches_ebook"]:checked'), function (c) {--}}
-        {{--                    return c.value;--}}
-        {{--                });--}}
+            bransCheckSirala();
+            branslarDiv.on("click", ":checkbox", function() {
+                bransCheckSirala();
+            })
 
-        {{--                // console.log(array);--}}
-        {{--               {{ http_build_query(array('seviye' => branchArray)) }};--}}
-        {{--            })--}}
-        {{--        });--}}
+            function bransCheckSirala(){
+                    var i, checked = document.createDocumentFragment(),
+                        unchecked = document.createDocumentFragment();
+                    for (i = 0; i < orjOrder.length; i++) {
+                        if (orjOrder[i].getElementsByTagName("input")[0].checked) {
+                            checked.appendChild(orjOrder[i]);
+                        } else {
+                            unchecked.appendChild(orjOrder[i]);
+                        }
+                    }
+                    branslarDiv.append(checked).append(unchecked);
+            }
+        });
     </script>
 @endsection
 
