@@ -37,6 +37,16 @@
             <hr/>
             <div class="col-lg-12">
                 {!! $ebookDetay->ebooks_description !!}
+
+                <p>
+                    @foreach($ebookDetay->levels as $level)
+                        <span class="badge badge-warning">{{$level->levelName}}</span>
+                    @endforeach
+                    <br/>
+                    @foreach($ebookDetay->branches as $branch)
+                        <span class="badge badge-info">{{$branch->branch_name}}</span>
+                    @endforeach
+                </p>
             </div>
         </div>
     </div>
