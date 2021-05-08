@@ -31,23 +31,23 @@ class EBookController extends Controller
                 ->whereHas('branches', function ($b) use ($requestBranches) {
                     $b->whereIn('id', $requestBranches);
                 })
-                ->paginate(12);
+                ->paginate(6);
         }elseif($request['seviye'] != null){
             $allEbooks = DigitalBooks::with('levels')
                 ->with('branches')
                 ->orderBy('id', 'DESC')
                 ->whereHas('levels', function ($l) use ($requestLevels) {
                     $l->whereIn('id', $requestLevels);
-                })->paginate(12);
+                })->paginate(6);
         }elseif($request['brans'] != null){
             $allEbooks = DigitalBooks::with('levels')
                 ->with('branches')
                 ->orderBy('id', 'DESC')
                 ->whereHas('branches', function ($b) use ($requestBranches) {
                     $b->whereIn('id', $requestBranches);
-                })->paginate(12);
+                })->paginate(6);
         }else{
-            $allEbooks = DigitalBooks::orderBy('id', 'DESC')->paginate(12);
+            $allEbooks = DigitalBooks::orderBy('id', 'DESC')->paginate(6);
         }
 
 
