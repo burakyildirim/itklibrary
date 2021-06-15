@@ -60,7 +60,10 @@ class WelcomeController extends Controller
 
             $loopSayi = 0;
             foreach ($data2 as $row) {
-                $output2 .= '<li value="publisher" class="yazarLi"><a href="kitap/' . $row->id .'/'. $row->book_slug .'' . '">' . $row->book_name . '</a>' . '<span style="">' . ' (' . $row->library['libraries_name'] . ')' . '</span>' . '</li>';
+                $output2 .= '<li value="publisher" class="yazarLi"><a href="kitap/' . $row->id .'/'. $row->book_slug .'' . '">' . $row->book_name . '</a>' . '<span style="">' . ' (' . $row->book_author . ')' . '<p class="text-muted" style="font-size:11px;">' .$row->library['libraries_name'] . '</p>' . '</span>' . '</li>';
+
+//                library['libraries_name']
+
                 if ($loopSayi!=$data2->count()-1){
                     $output2 .= '<hr/>';
                 }
